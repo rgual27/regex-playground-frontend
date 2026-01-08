@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist/regex-playground-frontend/browser",
+  "framework": "angular",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
