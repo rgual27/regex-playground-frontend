@@ -84,12 +84,13 @@ import { NotificationService } from '../../services/notification.service';
             [class.btn-secondary]="currentTier === 'PRO'"
             (click)="subscribe('PRO')"
             [disabled]="loading || currentTier === 'PRO'"
-            style="pointer-events: auto; cursor: pointer;">
+            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000;">
             <span *ngIf="currentTier === 'PRO'">{{ 'pricing.currentPlan' | translate }}</span>
             <span *ngIf="currentTier !== 'PRO'">
               {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
             </span>
           </button>
+          <p style="font-size: 10px; color: red;">DEBUG: disabled={{loading || currentTier === 'PRO'}}, loading={{loading}}, currentTier={{currentTier}}</p>
           <p class="trial-note" *ngIf="currentTier !== 'PRO'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
 
@@ -119,12 +120,13 @@ import { NotificationService } from '../../services/notification.service';
             [class.btn-secondary]="currentTier === 'TEAM'"
             (click)="subscribe('TEAM')"
             [disabled]="loading || currentTier === 'TEAM'"
-            style="pointer-events: auto; cursor: pointer;">
+            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000;">
             <span *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</span>
             <span *ngIf="currentTier !== 'TEAM'">
               {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
             </span>
           </button>
+          <p style="font-size: 10px; color: red;">DEBUG: disabled={{loading || currentTier === 'TEAM'}}, loading={{loading}}, currentTier={{currentTier}}</p>
           <p class="trial-note" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
       </div>
