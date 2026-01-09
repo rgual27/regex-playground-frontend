@@ -155,6 +155,9 @@ import { ExportModalComponent } from '../export-modal/export-modal.component';
         <div class="card actions-section">
           <h2>{{ 'common.actions' | translate }}</h2>
           <div class="action-buttons">
+            <button class="btn btn-secondary w-full" (click)="clearAll()" title="Clear all fields and start fresh">
+              🔄 {{ 'common.clear' | translate }}
+            </button>
             <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">
               💾 {{ loadedPattern ? 'Update Pattern' : ('common.savePattern' | translate) }}
             </button>
@@ -416,6 +419,17 @@ export class RegexTesterComponent implements OnInit {
     this.pattern = pattern;
     this.testString = testString;
     this.testPattern();
+  }
+
+  clearAll() {
+    this.pattern = '';
+    this.testString = '';
+    this.flags = { i: false, m: false, s: false };
+    this.flagsString = '';
+    this.result = null;
+    this.loadedPattern = null;
+    this.saveMessage = '';
+    this.notificationService.success('All fields cleared');
   }
 
   async savePattern() {
