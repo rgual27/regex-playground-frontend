@@ -23,7 +23,7 @@ import { RouterLink } from '@angular/router';
         <!-- Pattern Input Section -->
         <div class="card pattern-section">
           <div class="section-header">
-            <h3>Regular Expression</h3>
+            <h2>Regular Expression</h2>
             <div class="flags">
               <label class="flag-label">
                 <input type="checkbox" [(ngModel)]="flags.i" (change)="onFlagsChange()">
@@ -65,7 +65,7 @@ import { RouterLink } from '@angular/router';
         <!-- Test String Section -->
         <div class="card test-section">
           <div class="section-header">
-            <h3>Test String</h3>
+            <h2>Test String</h2>
             <div class="match-counter" *ngIf="result && result.isValid">
               <span [class.has-matches]="result.matchCount! > 0">
                 {{ result.matchCount }} {{ result.matchCount === 1 ? 'match' : 'matches' }}
@@ -100,7 +100,7 @@ import { RouterLink } from '@angular/router';
 
         <!-- Quick Reference Section -->
         <div class="card reference-section">
-          <h3>Quick Reference</h3>
+          <h2>Quick Reference</h2>
           <div class="reference-grid">
             <div class="reference-item" (click)="insertPattern('\\d')">
               <code>\\d</code>
@@ -147,7 +147,7 @@ import { RouterLink } from '@angular/router';
 
         <!-- Actions Section -->
         <div class="card actions-section">
-          <h3>Actions</h3>
+          <h2>Actions</h2>
           <div class="action-buttons">
             <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">💾 Save Pattern</button>
             <button class="btn btn-secondary w-full" [disabled]="true">📤 Share</button>
@@ -161,7 +161,7 @@ import { RouterLink } from '@angular/router';
 
       <!-- Common Patterns Section -->
       <div class="card common-patterns">
-        <h3>Common Patterns</h3>
+        <h2>Common Patterns</h2>
         <div class="patterns-grid">
           <div class="pattern-card" (click)="loadPattern(emailPattern, 'test&#64;example.com')">
             <strong>📧 Email</strong>

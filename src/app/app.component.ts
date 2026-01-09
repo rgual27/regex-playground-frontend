@@ -101,13 +101,14 @@ import { AuthService } from './services/auth.service';
       font-weight: 500;
       padding: 0.5rem 0;
       border-bottom: 2px solid transparent;
-      transition: all 0.2s;
+      transition: transform 0.2s, opacity 0.2s;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
       color: var(--primary-color);
-      border-bottom-color: var(--primary-color);
+      border-bottom: 2px solid var(--primary-color);
+      transform: translateY(-1px);
     }
 
     .nav-actions {
@@ -133,7 +134,8 @@ import { AuthService } from './services/auth.service';
       background-color: var(--bg-primary);
       border-top: 1px solid var(--border-color);
       padding: 2rem 0;
-      margin-top: 4rem;
+      margin-top: auto;
+      min-height: 80px;
     }
 
     .footer .container {
