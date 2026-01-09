@@ -35,7 +35,12 @@ import { NotificationService } from '../../services/notification.service';
             <li>❌ {{ 'pricing.free.features.6' | translate }}</li>
             <li>❌ {{ 'pricing.free.features.7' | translate }}</li>
           </ul>
-          <button class="btn btn-secondary w-full" disabled>{{ 'pricing.currentPlan' | translate }}</button>
+          <button
+            class="btn w-full btn-secondary"
+            [disabled]="currentTier === 'FREE'">
+            <span *ngIf="currentTier === 'FREE'">{{ 'pricing.currentPlan' | translate }}</span>
+            <span *ngIf="currentTier !== 'FREE'">{{ 'pricing.getStarted' | translate }}</span>
+          </button>
         </div>
 
         <!-- Pro Plan -->
