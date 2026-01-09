@@ -30,7 +30,7 @@ import { NotificationService } from '../../services/notification.service';
             <button class="modal-close" (click)="closeNewPatternModal()">&times;</button>
           </div>
           <div class="modal-body">
-            <form (ngSubmit)="createPattern()">
+            <form (ngSubmit)="createPattern()" #patternForm="ngForm">
               <div class="form-group">
                 <label for="patternName">{{ 'library.patternName' | translate }}</label>
                 <input
@@ -83,16 +83,15 @@ import { NotificationService } from '../../services/notification.service';
                   <span>{{ 'library.makePublic' | translate }}</span>
                 </label>
               </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="closeNewPatternModal()">
-                  {{ 'common.cancel' | translate }}
-                </button>
-                <button type="submit" class="btn btn-primary" [disabled]="!newPattern.name || !newPattern.pattern">
-                  {{ 'common.save' | translate }}
-                </button>
-              </div>
             </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeNewPatternModal()">
+              {{ 'common.cancel' | translate }}
+            </button>
+            <button type="button" class="btn btn-primary" (click)="createPattern()" [disabled]="!newPattern.name || !newPattern.pattern">
+              {{ 'common.save' | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -344,6 +343,83 @@ import { NotificationService } from '../../services/notification.service';
     .new-pattern-modal {
       max-width: 600px;
       width: 90%;
+    }
+
+    .modal-content {
+      background: var(--bg-primary);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.3s ease-out;
+      overflow: hidden;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-primary);
+
+      h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      transition: all 0.2s;
+      line-height: 1;
+
+      &:hover {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+      }
+    }
+
+    .modal-body {
+      padding: 24px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
     }
 
     .form-group {

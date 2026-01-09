@@ -234,13 +234,6 @@ export class RegexTesterComponent implements OnInit {
     if (patternToLoad) {
       this.loadPatternFromLibrary(patternToLoad);
     }
-
-    // Listen for pattern loaded from library (backup method)
-    this.patternService.selectedPattern$.subscribe(pattern => {
-      if (pattern) {
-        this.loadPatternFromLibrary(pattern);
-      }
-    });
   }
 
   private loadPatternFromLibrary(pattern: RegexPattern) {
@@ -261,8 +254,11 @@ export class RegexTesterComponent implements OnInit {
       this.updateFlagsString();
     }
 
-    this.testPattern();
-    this.notificationService.success(`Pattern "${pattern.name}" loaded successfully!`);
+    // Test pattern after a short delay to ensure UI is ready
+    setTimeout(() => {
+      this.testPattern();
+      this.notificationService.success(`Pattern "${pattern.name}" loaded successfully!`);
+    }, 100);
   }
 
   onPatternChange() {
