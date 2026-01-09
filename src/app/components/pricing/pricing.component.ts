@@ -385,21 +385,30 @@ export class PricingComponent implements OnInit {
   }
 
   subscribe(tier: string) {
+    console.log('Subscribe button clicked! Tier:', tier, 'Billing:', this.billingPeriod);
+    console.log('Is authenticated:', this.authService.isAuthenticated);
+
     if (!this.authService.isAuthenticated) {
+      console.log('User not authenticated, showing warning');
       this.notificationService.warning('Please login or register to subscribe');
       return;
     }
 
+    console.log('Starting checkout session creation...');
     this.loading = true;
     this.selectedTier = tier;
 
     this.subscriptionService.createCheckoutSession(tier, this.billingPeriod).subscribe({
       next: (response) => {
+        console.log('Checkout session created successfully:', response);
+        console.log('Redirecting to:', response.url);
         window.location.href = response.url;
       },
       error: (error) => {
         console.error('Error creating checkout session:', error);
-        this.notificationService.error(error.error?.message || 'Failed to create checkout session. Please try again.');
+        console.error('Error details:', error.error);
+        console.error('Error status:', error.status);
+        this.notificationService.error(error.error?.message || error.error?.error || 'Failed to create checkout session. Please try again.');
         this.loading = false;
         this.selectedTier = '';
       }
