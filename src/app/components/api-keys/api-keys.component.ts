@@ -159,11 +159,11 @@ import { TranslateModule } from '@ngx-translate/core';
           <pre><code>curl -X POST https://api.regexplayground.com/v1/patterns/test \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
-  -d '{
-    "pattern": "\\\\d{3}-\\\\d{4}",
+  -d '{{ '{' }}
+    "pattern": "\\\\d{{ '{' }}3{{ '}' }}-\\\\d{{ '{' }}4{{ '}' }}",
     "testString": "Call me at 555-1234",
     "flags": "g"
-  }'</code></pre>
+  {{ '}' }}'</code></pre>
         </div>
 
         <div class="docs-link">
