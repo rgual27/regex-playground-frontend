@@ -97,8 +97,8 @@ import { AuthService } from './services/auth.service';
     }
 
     .nav-links a {
-      color: var(--text-secondary);
-      font-weight: 500;
+      color: #334155;
+      font-weight: 600;
       padding: 0.5rem 0;
       border-bottom: 2px solid transparent;
       transition: transform 0.2s, opacity 0.2s;
@@ -106,8 +106,8 @@ import { AuthService } from './services/auth.service';
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: var(--primary-color);
-      border-bottom: 2px solid var(--primary-color);
+      color: #1E40AF;
+      border-bottom: 2px solid #3B82F6;
       transform: translateY(-1px);
     }
 
@@ -135,13 +135,15 @@ import { AuthService } from './services/auth.service';
       border-top: 1px solid var(--border-color);
       padding: 2rem 0;
       margin-top: auto;
-      min-height: 80px;
+      height: 120px;
+      flex-shrink: 0;
     }
 
     .footer .container {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 100%;
     }
 
     .footer-links {
