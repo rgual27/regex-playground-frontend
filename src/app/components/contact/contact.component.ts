@@ -114,13 +114,13 @@ import { ContactService } from '../../services/contact.service';
           <div class="card social-card">
             <h3>🌐 Follow Us</h3>
             <div class="social-links">
-              <a href="https://github.com" target="_blank" class="social-link">
+              <a href="https://github.com/rgual27" target="_blank" rel="noopener noreferrer" class="social-link">
                 <span>GitHub</span>
               </a>
-              <a href="https://twitter.com" target="_blank" class="social-link">
-                <span>Twitter</span>
+              <a href="https://x.com/RGBCuba" target="_blank" rel="noopener noreferrer" class="social-link">
+                <span>X (Twitter)</span>
               </a>
-              <a href="https://linkedin.com" target="_blank" class="social-link">
+              <a href="https://www.linkedin.com/in/rafael-gual-borges-a0ab03128/" target="_blank" rel="noopener noreferrer" class="social-link">
                 <span>LinkedIn</span>
               </a>
             </div>

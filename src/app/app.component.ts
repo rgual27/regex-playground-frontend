@@ -52,10 +52,10 @@ import { AuthService } from './services/auth.service';
         <div class="container">
           <p>© 2025 Regex Playground. Built with ❤️ for developers.</p>
           <div class="footer-links">
-            <a href="#">About</a>
-            <a href="#">Docs</a>
-            <a href="#">GitHub</a>
-            <a href="#">Contact</a>
+            <a routerLink="/contact">Contact</a>
+            <a href="https://github.com/rgual27" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://x.com/RGBCuba" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+            <a href="https://www.linkedin.com/in/rafael-gual-borges-a0ab03128/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
       </footer>
