@@ -3,10 +3,34 @@
   "buildCommand": "npm install && npm run build",
   "outputDirectory": "dist/regex-playground-frontend/browser",
   "framework": "angular",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "regexplayground.com"
+        }
+      ],
+      "destination": "https://www.regexplayground.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
     }
   ],
   "env": {
