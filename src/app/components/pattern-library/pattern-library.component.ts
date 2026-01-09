@@ -193,6 +193,13 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
 
               <div class="form-group" *ngIf="(userTier === 'PRO' || userTier === 'TEAM') && folders.length > 0">
                 <label for="editFolder">📁 {{ 'library.folder' | translate }}</label>
+                <div style="font-size: 0.75rem; padding: 0.5rem; background: #fee; margin-bottom: 0.5rem;">
+                  <strong>DEBUG:</strong> editingPattern.folderId = {{ editingPattern.folderId }} ({{ getType(editingPattern.folderId) }})
+                  <br>
+                  <span *ngFor="let f of folders">
+                    Folder "{{ f.name }}": id={{ f.id }} ({{ getType(f.id) }}) |
+                  </span>
+                </div>
                 <select
                   id="editFolder"
                   [(ngModel)]="editingPattern.folderId"
@@ -200,7 +207,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
                   class="form-control">
                   <option [ngValue]="null">{{ 'library.noFolder' | translate }}</option>
                   <option *ngFor="let folder of folders" [ngValue]="folder.id">
-                    📁 {{ folder.name }}
+                    📁 {{ folder.name }} (id={{ folder.id }})
                   </option>
                 </select>
               </div>
@@ -752,6 +759,10 @@ export class PatternLibraryComponent implements OnInit {
 
   getFolderById(folderId: number): Folder | undefined {
     return this.folders.find(f => f.id === folderId);
+  }
+
+  getType(value: any): string {
+    return typeof value;
   }
 
   ngOnInit() {
