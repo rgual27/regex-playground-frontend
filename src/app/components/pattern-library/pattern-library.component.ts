@@ -4,6 +4,8 @@ import { RouterLink } from '@angular/router';
 import { PatternService, RegexPattern } from '../../services/pattern.service';
 import { AuthService } from '../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { ModalService } from '../../services/modal.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-pattern-library',
@@ -255,7 +257,9 @@ export class PatternLibraryComponent implements OnInit {
 
   constructor(
     private patternService: PatternService,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalService: ModalService,
+    private notificationService: NotificationService
   ) {}
 
   get isAuthenticated(): boolean {
@@ -286,18 +290,26 @@ export class PatternLibraryComponent implements OnInit {
     });
   }
 
-  deletePattern(id: number) {
-    if (!confirm('Are you sure you want to delete this pattern?')) {
+  async deletePattern(id: number) {
+    const confirmed = await this.modalService.confirm(
+      'Delete Pattern',
+      'Are you sure you want to delete this pattern? This action cannot be undone.',
+      'Delete',
+      'Cancel'
+    );
+
+    if (!confirmed) {
       return;
     }
 
     this.patternService.deletePattern(id).subscribe({
       next: () => {
         this.patterns = this.patterns.filter(p => p.id !== id);
+        this.notificationService.success('Pattern deleted successfully');
       },
       error: (error) => {
         console.error('Error deleting pattern:', error);
-        alert('Failed to delete pattern. Please try again.');
+        this.notificationService.error('Failed to delete pattern. Please try again.');
       }
     });
   }

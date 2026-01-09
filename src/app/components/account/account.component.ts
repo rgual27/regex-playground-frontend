@@ -4,6 +4,8 @@ import { AuthService } from '../../services/auth.service';
 import { SubscriptionService } from '../../services/subscription.service';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ModalService } from '../../services/modal.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-account',
@@ -287,7 +289,9 @@ export class AccountComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
-    private router: Router
+    private router: Router,
+    private modalService: ModalService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -324,24 +328,31 @@ export class AccountComponent implements OnInit {
   }
 
   manageBilling() {
-    alert('Redirecting to Stripe billing portal...\nThis feature will be implemented with Stripe Customer Portal.');
+    this.notificationService.info('Redirecting to Stripe billing portal...\nThis feature will be implemented with Stripe Customer Portal.');
   }
 
-  cancelSubscription() {
-    if (!confirm('Are you sure you want to cancel your subscription? You will lose access to premium features at the end of your billing period.')) {
+  async cancelSubscription() {
+    const confirmed = await this.modalService.confirm(
+      'Cancel Subscription',
+      'Are you sure you want to cancel your subscription? You will lose access to premium features at the end of your billing period.',
+      'Yes, Cancel',
+      'No, Keep'
+    );
+
+    if (!confirmed) {
       return;
     }
 
     this.loading = true;
     this.subscriptionService.cancelSubscription().subscribe({
       next: () => {
-        alert('Subscription cancelled successfully.');
+        this.notificationService.success('Subscription cancelled successfully.');
         this.loadSubscriptionInfo();
         this.loading = false;
       },
       error: (error) => {
         console.error('Error cancelling subscription:', error);
-        alert(error.error?.message || 'Failed to cancel subscription. Please try again.');
+        this.notificationService.error(error.error?.message || 'Failed to cancel subscription. Please try again.');
         this.loading = false;
       }
     });

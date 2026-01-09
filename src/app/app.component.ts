@@ -5,11 +5,13 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
+import { NotificationComponent } from './components/notification/notification.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AuthComponent, TranslateModule, LanguageSwitcherComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AuthComponent, TranslateModule, LanguageSwitcherComponent, NotificationComponent, ModalComponent],
   template: `
     <div class="app-container">
       <header class="header">
@@ -65,6 +67,8 @@ import { LanguageSwitcherComponent } from './components/language-switcher/langua
     </div>
 
     <app-auth></app-auth>
+    <app-notification></app-notification>
+    <app-modal></app-modal>
   `,
   styles: [`
     .app-container {

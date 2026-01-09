@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SubscriptionService } from '../../services/subscription.service';
 import { AuthService } from '../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-pricing',
@@ -251,7 +252,8 @@ export class PricingComponent implements OnInit {
 
   constructor(
     private subscriptionService: SubscriptionService,
-    private authService: AuthService
+    private authService: AuthService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -273,7 +275,7 @@ export class PricingComponent implements OnInit {
 
   subscribe(tier: string) {
     if (!this.authService.isAuthenticated) {
-      alert('Please login or register to subscribe');
+      this.notificationService.warning('Please login or register to subscribe');
       return;
     }
 
@@ -286,7 +288,7 @@ export class PricingComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error creating checkout session:', error);
-        alert(error.error?.message || 'Failed to create checkout session. Please try again.');
+        this.notificationService.error(error.error?.message || 'Failed to create checkout session. Please try again.');
         this.loading = false;
         this.selectedTier = '';
       }

@@ -8,6 +8,8 @@ import { debounceTime, Subject } from 'rxjs';
 
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ModalService } from '../../services/modal.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-regex-tester',
@@ -213,7 +215,9 @@ export class RegexTesterComponent implements OnInit {
   constructor(
     private regexService: RegexService,
     private patternService: PatternService,
-    private authService: AuthService
+    private authService: AuthService,
+    private modalService: ModalService,
+    private notificationService: NotificationService
   ) {}
 
   get isAuthenticated(): boolean {
@@ -282,12 +286,20 @@ export class RegexTesterComponent implements OnInit {
     this.testPattern();
   }
 
-  savePattern() {
+  async savePattern() {
     if (!this.pattern) {
       return;
     }
 
-    const patternName = prompt('Enter a name for this pattern:');
+    const patternName = await this.modalService.prompt(
+      'Save Pattern',
+      'Enter a name for this pattern:',
+      'My regex pattern',
+      '',
+      'Save',
+      'Cancel'
+    );
+
     if (!patternName) {
       return;
     }
@@ -302,14 +314,10 @@ export class RegexTesterComponent implements OnInit {
 
     this.patternService.savePattern(newPattern).subscribe({
       next: () => {
-        this.saveMessage = 'Pattern saved successfully!';
-        this.saveMessageType = 'success';
-        setTimeout(() => this.saveMessage = '', 3000);
+        this.notificationService.success('Pattern saved successfully!');
       },
       error: (error) => {
-        this.saveMessage = error.error?.message || 'Failed to save pattern. Please try again.';
-        this.saveMessageType = 'error';
-        setTimeout(() => this.saveMessage = '', 5000);
+        this.notificationService.error(error.error?.message || 'Failed to save pattern. Please try again.');
       }
     });
   }
