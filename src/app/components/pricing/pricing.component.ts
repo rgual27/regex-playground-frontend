@@ -32,9 +32,9 @@ import { NotificationService } from '../../services/notification.service';
       </div>
 
       <div class="pricing-grid">
-        <!-- Free Plan -->
-        <div class="pricing-card" [class.current]="currentTier === 'FREE'" *ngIf="!tierLoading">
-          <div class="plan-badge" *ngIf="currentTier === 'FREE'">{{ 'pricing.currentPlan' | translate }}</div>
+        <!-- Free Plan - Only show if user is FREE -->
+        <div class="pricing-card" [class.current]="currentTier === 'FREE'" *ngIf="!tierLoading && currentTier === 'FREE'">
+          <div class="plan-badge">{{ 'pricing.currentPlan' | translate }}</div>
           <h3>{{ 'pricing.free.title' | translate }}</h3>
           <div class="price">
             <span class="amount">$0</span>
@@ -50,11 +50,8 @@ import { NotificationService } from '../../services/notification.service';
             <li>❌ {{ 'pricing.free.features.6' | translate }}</li>
             <li>❌ {{ 'pricing.free.features.7' | translate }}</li>
           </ul>
-          <button
-            class="btn w-full btn-secondary"
-            [disabled]="currentTier === 'FREE'">
-            <span *ngIf="currentTier === 'FREE'">{{ 'pricing.currentPlan' | translate }}</span>
-            <span *ngIf="currentTier !== 'FREE'">{{ 'pricing.getStarted' | translate }}</span>
+          <button class="btn w-full btn-secondary" disabled>
+            <span>{{ 'pricing.currentPlan' | translate }}</span>
           </button>
         </div>
 
@@ -79,22 +76,16 @@ import { NotificationService } from '../../services/notification.service';
             <li>❌ {{ 'pricing.pro.features.7' | translate }}</li>
           </ul>
           <button
-            *ngIf="currentTier !== 'PRO'"
-            class="btn w-full btn-primary"
+            class="btn w-full"
+            [class.btn-primary]="currentTier !== 'PRO'"
+            [class.btn-secondary]="currentTier === 'PRO'"
             (click)="subscribe('PRO')"
-            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000; background: #3b82f6 !important; opacity: 1 !important;">
-            <span>
-              {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : 'UPGRADE TO PRO (CLICK ME!)' }}
+            [disabled]="loading || currentTier === 'PRO'">
+            <span *ngIf="currentTier === 'PRO'">{{ 'pricing.currentPlan' | translate }}</span>
+            <span *ngIf="currentTier !== 'PRO'">
+              {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
             </span>
           </button>
-          <button
-            *ngIf="currentTier === 'PRO'"
-            class="btn w-full btn-secondary"
-            disabled
-            style="cursor: not-allowed;">
-            <span>{{ 'pricing.currentPlan' | translate }}</span>
-          </button>
-          <p style="font-size: 10px; color: red;">DEBUG: loading={{loading}}, currentTier={{currentTier}}</p>
           <p class="trial-note" *ngIf="currentTier !== 'PRO'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
 
@@ -119,29 +110,18 @@ import { NotificationService } from '../../services/notification.service';
             <li>✅ {{ 'pricing.team.features.7' | translate }}</li>
           </ul>
           <button
-            id="team-button"
-            class="btn w-full btn-primary"
-            onclick="alert('ONCLICK WORKS!'); console.log('onclick fired')"
+            class="btn w-full"
+            [class.btn-primary]="currentTier !== 'TEAM'"
+            [class.btn-secondary]="currentTier === 'TEAM'"
             (click)="subscribe('TEAM')"
-            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 10000 !important; background: #3b82f6 !important; opacity: 1 !important; border: 5px solid red !important;">
-            <span>
-              CLICK THIS TEAM BUTTON!
+            [disabled]="loading || currentTier === 'TEAM'">
+            <span *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</span>
+            <span *ngIf="currentTier !== 'TEAM'">
+              {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
             </span>
           </button>
-          <p style="font-size: 10px; color: red;">DEBUG: Was disabled={{loading || currentTier === 'TEAM'}}, loading={{loading}}, currentTier={{currentTier}}</p>
           <p class="trial-note" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
-      </div>
-
-      <!-- DEBUG: Test button -->
-      <div style="text-align: center; margin: 2rem 0; padding: 2rem; background: #fee; border: 2px solid #f00;">
-        <h3 style="color: #f00;">DEBUG MODE - Test Button</h3>
-        <button (click)="testButton()" style="padding: 1rem 2rem; font-size: 1.2rem; background: #f00; color: white; border: none; cursor: pointer; border-radius: 8px;">
-          CLICK ME TO TEST
-        </button>
-        <p>tierLoading: {{ tierLoading }}</p>
-        <p>currentTier: {{ currentTier }}</p>
-        <p>loading: {{ loading }}</p>
       </div>
 
       <div class="faq-section">
@@ -378,69 +358,44 @@ export class PricingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('Pricing component initialized');
-    console.log('Is authenticated:', this.authService.isAuthenticated);
-    console.log('Initial tierLoading:', this.tierLoading);
-    console.log('Initial currentTier:', this.currentTier);
-
     if (this.authService.isAuthenticated) {
       this.loadCurrentPlan();
     } else {
       this.currentTier = 'FREE';
       this.tierLoading = false;
-      console.log('Not authenticated, set to FREE. tierLoading:', this.tierLoading);
     }
   }
 
   loadCurrentPlan() {
-    console.log('Loading current plan...');
     this.tierLoading = true;
     this.subscriptionService.getSubscriptionStatus().subscribe({
       next: (response) => {
-        console.log('Subscription status loaded:', response);
         this.currentTier = response.tier || 'FREE';
         this.tierLoading = false;
-        console.log('Final tierLoading:', this.tierLoading, 'currentTier:', this.currentTier);
       },
       error: (error) => {
         console.error('Error loading subscription status:', error);
         this.currentTier = 'FREE';
         this.tierLoading = false;
-        console.log('Error - set tierLoading:', this.tierLoading);
       }
     });
   }
 
-  testButton() {
-    alert('TEST BUTTON WORKS! Angular is running correctly.');
-    console.log('Test button clicked - Angular is working!');
-  }
-
   subscribe(tier: string) {
-    alert('Button clicked! Tier: ' + tier);
-    console.log('Subscribe button clicked! Tier:', tier, 'Billing:', this.billingPeriod);
-    console.log('Is authenticated:', this.authService.isAuthenticated);
-
     if (!this.authService.isAuthenticated) {
-      console.log('User not authenticated, showing warning');
       this.notificationService.warning('Please login or register to subscribe');
       return;
     }
 
-    console.log('Starting checkout session creation...');
     this.loading = true;
     this.selectedTier = tier;
 
     this.subscriptionService.createCheckoutSession(tier, this.billingPeriod).subscribe({
       next: (response) => {
-        console.log('Checkout session created successfully:', response);
-        console.log('Redirecting to:', response.url);
         window.location.href = response.url;
       },
       error: (error) => {
         console.error('Error creating checkout session:', error);
-        console.error('Error details:', error.error);
-        console.error('Error status:', error.status);
         this.notificationService.error(error.error?.message || error.error?.error || 'Failed to create checkout session. Please try again.');
         this.loading = false;
         this.selectedTier = '';
