@@ -129,6 +129,17 @@ import { NotificationService } from '../../services/notification.service';
         </div>
       </div>
 
+      <!-- DEBUG: Test button -->
+      <div style="text-align: center; margin: 2rem 0; padding: 2rem; background: #fee; border: 2px solid #f00;">
+        <h3 style="color: #f00;">DEBUG MODE - Test Button</h3>
+        <button (click)="testButton()" style="padding: 1rem 2rem; font-size: 1.2rem; background: #f00; color: white; border: none; cursor: pointer; border-radius: 8px;">
+          CLICK ME TO TEST
+        </button>
+        <p>tierLoading: {{ tierLoading }}</p>
+        <p>currentTier: {{ currentTier }}</p>
+        <p>loading: {{ loading }}</p>
+      </div>
+
       <div class="faq-section">
         <h2>{{ 'pricing.faq.title' | translate }}</h2>
         <div class="faq-grid">
@@ -363,27 +374,42 @@ export class PricingComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('Pricing component initialized');
+    console.log('Is authenticated:', this.authService.isAuthenticated);
+    console.log('Initial tierLoading:', this.tierLoading);
+    console.log('Initial currentTier:', this.currentTier);
+
     if (this.authService.isAuthenticated) {
       this.loadCurrentPlan();
     } else {
       this.currentTier = 'FREE';
       this.tierLoading = false;
+      console.log('Not authenticated, set to FREE. tierLoading:', this.tierLoading);
     }
   }
 
   loadCurrentPlan() {
+    console.log('Loading current plan...');
     this.tierLoading = true;
     this.subscriptionService.getSubscriptionStatus().subscribe({
       next: (response) => {
+        console.log('Subscription status loaded:', response);
         this.currentTier = response.tier || 'FREE';
         this.tierLoading = false;
+        console.log('Final tierLoading:', this.tierLoading, 'currentTier:', this.currentTier);
       },
       error: (error) => {
         console.error('Error loading subscription status:', error);
         this.currentTier = 'FREE';
         this.tierLoading = false;
+        console.log('Error - set tierLoading:', this.tierLoading);
       }
     });
+  }
+
+  testButton() {
+    alert('TEST BUTTON WORKS! Angular is running correctly.');
+    console.log('Test button clicked - Angular is working!');
   }
 
   subscribe(tier: string) {
