@@ -64,8 +64,9 @@ import { NotificationService } from '../../services/notification.service';
           <div class="plan-badge pro" *ngIf="currentTier !== 'PRO'">{{ 'pricing.mostPopular' | translate }}</div>
           <h3>{{ 'pricing.pro.title' | translate }}</h3>
           <div class="price">
-            <span class="amount">$7</span>
-            <span class="period">{{ 'pricing.pro.period' | translate }}</span>
+            <span class="amount">${{ billingPeriod === 'monthly' ? '7' : '67' }}</span>
+            <span class="period">{{ billingPeriod === 'monthly' ? '/month' : '/year' }}</span>
+            <span class="savings" *ngIf="billingPeriod === 'annual'">Save $17/year</span>
           </div>
           <ul class="features">
             <li>✅ {{ 'pricing.pro.features.0' | translate }}</li>
@@ -97,8 +98,9 @@ import { NotificationService } from '../../services/notification.service';
           <div class="plan-badge" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.bestValue' | translate }}</div>
           <h3>{{ 'pricing.team.title' | translate }}</h3>
           <div class="price">
-            <span class="amount">$25</span>
-            <span class="period">{{ 'pricing.team.period' | translate }}</span>
+            <span class="amount">${{ billingPeriod === 'monthly' ? '25' : '240' }}</span>
+            <span class="period">{{ billingPeriod === 'monthly' ? '/month' : '/year' }}</span>
+            <span class="savings" *ngIf="billingPeriod === 'annual'">Save $60/year</span>
           </div>
           <ul class="features">
             <li>✅ {{ 'pricing.team.features.0' | translate }}</li>
@@ -269,11 +271,22 @@ import { NotificationService } from '../../services/notification.service';
 
     .price {
       margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
       .amount {
         font-size: 3rem;
         font-weight: 700;
         color: var(--primary-color);
+      }
+
+      .savings {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #10b981;
+        font-weight: 600;
       }
 
       .period {
