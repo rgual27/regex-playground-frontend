@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact',
@@ -292,21 +293,29 @@ export class ContactComponent {
   successMessage = '';
   errorMessage = '';
 
+  constructor(private contactService: ContactService) {}
+
   onSubmit() {
     this.loading = true;
     this.successMessage = '';
     this.errorMessage = '';
 
-    // Simulate form submission
-    setTimeout(() => {
-      this.successMessage = 'Thank you for your message! We\'ll get back to you within 24 hours.';
-      this.loading = false;
-      this.formData = {
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      };
-    }, 1500);
+    this.contactService.sendContactMessage(this.formData).subscribe({
+      next: (response) => {
+        this.successMessage = response.message;
+        this.loading = false;
+        this.formData = {
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        };
+      },
+      error: (error) => {
+        console.error('Error sending message:', error);
+        this.errorMessage = error.error?.error || 'Failed to send message. Please try again later or email us directly at rgb.for.business@gmail.com';
+        this.loading = false;
+      }
+    });
   }
 }
