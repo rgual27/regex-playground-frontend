@@ -154,12 +154,23 @@ import { ExportModalComponent } from '../export-modal/export-modal.component';
         <div class="card actions-section">
           <h2>{{ 'common.actions' | translate }}</h2>
           <div class="action-buttons">
-            <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">💾 {{ 'common.savePattern' | translate }}</button>
+            <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">
+              💾 {{ loadedPattern ? 'Update Pattern' : ('common.savePattern' | translate) }}
+            </button>
+            <button
+              class="btn btn-secondary w-full"
+              (click)="savePatternAsNew()"
+              [disabled]="!pattern || !isAuthenticated"
+              *ngIf="loadedPattern"
+              title="Save as a new pattern (duplicate)">
+              📋 Save as New
+            </button>
             <button class="btn btn-secondary w-full" [disabled]="true">📤 {{ 'common.share' | translate }}</button>
             <button class="btn btn-secondary w-full" (click)="openExportModal()" [disabled]="!pattern">💻 {{ 'common.exportCode' | translate }}</button>
             <button class="btn btn-primary w-full" routerLink="/pricing" *ngIf="showUpgradeButton">⭐ {{ 'common.upgradeToPro' | translate }}</button>
           </div>
           <p *ngIf="!isAuthenticated" class="text-sm text-secondary">{{ 'common.loginToSave' | translate }}</p>
+          <p *ngIf="loadedPattern" class="text-sm text-info">✏️ Editing: {{ loadedPattern.name }}</p>
           <p *ngIf="saveMessage" [class]="saveMessageType === 'success' ? 'text-success' : 'text-error'">{{ saveMessage }}</p>
         </div>
       </div>
@@ -205,6 +216,9 @@ export class RegexTesterComponent implements OnInit {
   flagsString: string = '';
   result: RegexTestResponse | null = null;
   loading: boolean = false;
+
+  // Track loaded pattern for updates
+  loadedPattern: RegexPattern | null = null;
 
   // Common patterns
   emailPattern = '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}';
@@ -269,6 +283,9 @@ export class RegexTesterComponent implements OnInit {
   }
 
   private loadPatternFromLibrary(pattern: RegexPattern) {
+    // Store the loaded pattern so we can update it instead of creating a duplicate
+    this.loadedPattern = pattern;
+
     this.pattern = pattern.pattern;
     this.testString = pattern.testString || '';
 
@@ -359,10 +376,92 @@ export class RegexTesterComponent implements OnInit {
       return;
     }
 
+    // If we have a loaded pattern, update it instead of creating new
+    if (this.loadedPattern && this.loadedPattern.id) {
+      const confirmed = await this.modalService.confirm(
+        'Update Pattern',
+        `Do you want to update "${this.loadedPattern.name}"? A new version will be saved in history.`,
+        'Update',
+        'Cancel'
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const updatedPattern: RegexPattern = {
+        ...this.loadedPattern,
+        pattern: this.pattern,
+        testString: this.testString,
+        flags: this.flagsString,
+        description: this.result?.explanation || this.loadedPattern.description || ''
+      };
+
+      this.patternService.updatePattern(this.loadedPattern.id!, updatedPattern).subscribe({
+        next: () => {
+          this.notificationService.success('Pattern updated successfully! Previous version saved to history.');
+          this.loadedPattern = updatedPattern; // Update the loaded pattern reference
+        },
+        error: (error) => {
+          console.error('Error updating pattern:', error);
+          this.notificationService.error(error.error?.message || 'Failed to update pattern. Please try again.');
+        }
+      });
+    } else {
+      // Create new pattern
+      const patternName = await this.modalService.prompt(
+        'Save Pattern',
+        'Enter a name for this pattern:',
+        'My regex pattern',
+        '',
+        'Save',
+        'Cancel'
+      );
+
+      if (!patternName) {
+        return;
+      }
+
+      const newPattern: RegexPattern = {
+        name: patternName,
+        pattern: this.pattern,
+        testString: this.testString,
+        flags: this.flagsString,
+        description: this.result?.explanation || '',
+        isPublic: false
+      };
+
+      this.patternService.savePattern(newPattern).subscribe({
+        next: (savedPattern) => {
+          this.notificationService.success('Pattern saved successfully!');
+          this.loadedPattern = savedPattern; // Track the newly saved pattern
+        },
+        error: (error) => {
+          console.error('Error saving pattern:', error);
+          if (error.status === 403) {
+            this.notificationService.error('Authentication failed. Please login again.');
+          } else {
+            this.notificationService.error(error.error?.message || 'Failed to save pattern. Please try again.');
+          }
+        }
+      });
+    }
+  }
+
+  async savePatternAsNew() {
+    if (!this.pattern) {
+      return;
+    }
+
+    if (!this.isAuthenticated) {
+      this.notificationService.warning('Please login to save patterns');
+      return;
+    }
+
     const patternName = await this.modalService.prompt(
-      'Save Pattern',
-      'Enter a name for this pattern:',
-      'My regex pattern',
+      'Save as New Pattern',
+      'Enter a name for this new pattern:',
+      this.loadedPattern?.name ? `${this.loadedPattern.name} (copy)` : 'My regex pattern',
       '',
       'Save',
       'Cancel'
@@ -382,8 +481,9 @@ export class RegexTesterComponent implements OnInit {
     };
 
     this.patternService.savePattern(newPattern).subscribe({
-      next: () => {
-        this.notificationService.success('Pattern saved successfully!');
+      next: (savedPattern) => {
+        this.notificationService.success('Pattern saved as new successfully!');
+        this.loadedPattern = savedPattern; // Now tracking the new pattern
       },
       error: (error) => {
         console.error('Error saving pattern:', error);
