@@ -26,10 +26,13 @@ import { AuthService } from './services/auth.service';
               <a routerLink="/pricing" routerLinkActive="active">
                 Pricing
               </a>
+              <a routerLink="/contact" routerLinkActive="active">
+                Contact
+              </a>
             </div>
             <div class="nav-actions">
               <ng-container *ngIf="currentUser$ | async as user; else guestMenu">
-                <span class="user-info">{{ user.fullName }}</span>
+                <a routerLink="/account" class="btn btn-secondary">My Account</a>
                 <button class="btn btn-secondary" (click)="logout()">Logout</button>
               </ng-container>
               <ng-template #guestMenu>

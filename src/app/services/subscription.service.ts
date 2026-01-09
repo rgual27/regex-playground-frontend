@@ -19,7 +19,11 @@ export class SubscriptionService {
     );
   }
 
-  cancelSubscription(): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/api/subscriptions/cancel`, {});
+  getSubscriptionStatus(): Observable<{ tier: string }> {
+    return this.http.get<{ tier: string }>(`${this.apiUrl}/api/subscriptions/status`);
+  }
+
+  cancelSubscription(): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/api/subscriptions/cancel`, {});
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubscriptionService } from '../../services/subscription.service';
 import { AuthService } from '../../services/auth.service';
@@ -16,8 +16,8 @@ import { AuthService } from '../../services/auth.service';
 
       <div class="pricing-grid">
         <!-- Free Plan -->
-        <div class="pricing-card">
-          <div class="plan-badge">CURRENT PLAN</div>
+        <div class="pricing-card" [class.current]="currentTier === 'FREE'">
+          <div class="plan-badge" *ngIf="currentTier === 'FREE'">CURRENT PLAN</div>
           <h3>Free</h3>
           <div class="price">
             <span class="amount">$0</span>
@@ -37,8 +37,9 @@ import { AuthService } from '../../services/auth.service';
         </div>
 
         <!-- Pro Plan -->
-        <div class="pricing-card featured">
-          <div class="plan-badge pro">MOST POPULAR</div>
+        <div class="pricing-card featured" [class.current]="currentTier === 'PRO'">
+          <div class="plan-badge pro" *ngIf="currentTier === 'PRO'">CURRENT PLAN</div>
+          <div class="plan-badge pro" *ngIf="currentTier !== 'PRO'">MOST POPULAR</div>
           <h3>Pro</h3>
           <div class="price">
             <span class="amount">$7</span>
@@ -61,8 +62,9 @@ import { AuthService } from '../../services/auth.service';
         </div>
 
         <!-- Team Plan -->
-        <div class="pricing-card">
-          <div class="plan-badge">BEST VALUE</div>
+        <div class="pricing-card" [class.current]="currentTier === 'TEAM'">
+          <div class="plan-badge" *ngIf="currentTier === 'TEAM'">CURRENT PLAN</div>
+          <div class="plan-badge" *ngIf="currentTier !== 'TEAM'">BEST VALUE</div>
           <h3>Team</h3>
           <div class="price">
             <span class="amount">$25</span>
@@ -241,14 +243,32 @@ import { AuthService } from '../../services/auth.service';
     }
   `]
 })
-export class PricingComponent {
+export class PricingComponent implements OnInit {
   loading = false;
   selectedTier: string = '';
+  currentTier: string = 'FREE';
 
   constructor(
     private subscriptionService: SubscriptionService,
     private authService: AuthService
   ) {}
+
+  ngOnInit() {
+    if (this.authService.isAuthenticated) {
+      this.loadCurrentPlan();
+    }
+  }
+
+  loadCurrentPlan() {
+    this.subscriptionService.getSubscriptionStatus().subscribe({
+      next: (response) => {
+        this.currentTier = response.tier || 'FREE';
+      },
+      error: (error) => {
+        console.error('Error loading subscription status:', error);
+      }
+    });
+  }
 
   subscribe(tier: string) {
     if (!this.authService.isAuthenticated) {
