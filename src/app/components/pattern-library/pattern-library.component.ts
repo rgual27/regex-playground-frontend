@@ -24,6 +24,33 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
         <button class="btn btn-primary" (click)="openNewPatternModal()">+ {{ 'library.newPattern' | translate }}</button>
       </div>
 
+      <!-- Folder Filter -->
+      <div class="folder-filter" *ngIf="(userTier === 'PRO' || userTier === 'TEAM') && folders.length > 0">
+        <label>📁 Filter by folder:</label>
+        <div class="folder-chips">
+          <button
+            class="folder-chip"
+            [class.active]="selectedFolderFilter === null"
+            (click)="selectedFolderFilter = null">
+            All Patterns ({{ patterns.length }})
+          </button>
+          <button
+            class="folder-chip"
+            [class.active]="selectedFolderFilter === 'no-folder'"
+            (click)="selectedFolderFilter = 'no-folder'">
+            📂 No Folder ({{ getPatternsInFolder(null).length }})
+          </button>
+          <button
+            *ngFor="let folder of folders"
+            class="folder-chip"
+            [class.active]="selectedFolderFilter === folder.id"
+            [style.border-color]="folder.color"
+            (click)="selectedFolderFilter = folder.id">
+            📁 {{ folder.name }} ({{ getPatternsInFolder(folder.id).length }})
+          </button>
+        </div>
+      </div>
+
       <!-- New Pattern Modal -->
       <div class="modal-overlay" *ngIf="showNewPatternModal" (click)="closeNewPatternModal()">
         <div class="modal-content new-pattern-modal" (click)="$event.stopPropagation()">
@@ -225,8 +252,8 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
         </div>
       </div>
 
-      <div class="patterns-grid" *ngIf="isAuthenticated && patterns.length > 0">
-        <div class="pattern-card" *ngFor="let pattern of patterns">
+      <div class="patterns-grid" *ngIf="isAuthenticated && filteredPatterns.length > 0">
+        <div class="pattern-card" *ngFor="let pattern of filteredPatterns">
           <div class="pattern-header">
             <h3>{{ pattern.name }}</h3>
             <div class="pattern-actions">
@@ -238,6 +265,11 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
           <div class="pattern-content">
             <code class="pattern-code">/{{ pattern.pattern }}/{{ pattern.flags || '' }}</code>
             <p class="pattern-description" *ngIf="pattern.description">{{ pattern.description }}</p>
+            <div class="pattern-folder" *ngIf="pattern.folderId && getFolderById(pattern.folderId) as folder">
+              <span class="folder-tag" [style.border-color]="folder.color" [style.color]="folder.color">
+                📁 {{ folder.name }}
+              </span>
+            </div>
           </div>
           <div class="pattern-footer">
             <span class="pattern-date">{{ formatDate(pattern.updatedAt) }}</span>
@@ -270,6 +302,64 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
       p {
         color: var(--text-secondary);
       }
+    }
+
+    .folder-filter {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--bg-secondary);
+      border-radius: 0.75rem;
+      border: 1px solid var(--border-color);
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+      }
+    }
+
+    .folder-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .folder-chip {
+      padding: 0.5rem 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 2rem;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        border-color: var(--primary-color);
+        background: var(--bg-tertiary);
+      }
+
+      &.active {
+        background: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+      }
+    }
+
+    .pattern-folder {
+      margin-top: 0.75rem;
+    }
+
+    .folder-tag {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: transparent;
     }
 
     .upgrade-banner {
@@ -608,6 +698,7 @@ export class PatternLibraryComponent implements OnInit {
   showEditPatternModal = false;
   showVersionHistoryModal = false;
   selectedPatternForHistory: RegexPattern | null = null;
+  selectedFolderFilter: number | null | 'no-folder' = null;
   newPattern: RegexPattern = {
     name: '',
     pattern: '',
@@ -640,6 +731,27 @@ export class PatternLibraryComponent implements OnInit {
 
   get userTier(): string {
     return this.authService.currentUserValue?.subscriptionTier || 'FREE';
+  }
+
+  get filteredPatterns(): RegexPattern[] {
+    if (this.selectedFolderFilter === null) {
+      return this.patterns;
+    } else if (this.selectedFolderFilter === 'no-folder') {
+      return this.patterns.filter(p => !p.folderId);
+    } else {
+      return this.patterns.filter(p => p.folderId === this.selectedFolderFilter);
+    }
+  }
+
+  getPatternsInFolder(folderId: number | null): RegexPattern[] {
+    if (folderId === null) {
+      return this.patterns.filter(p => !p.folderId);
+    }
+    return this.patterns.filter(p => p.folderId === folderId);
+  }
+
+  getFolderById(folderId: number): Folder | undefined {
+    return this.folders.find(f => f.id === folderId);
   }
 
   ngOnInit() {
@@ -808,13 +920,18 @@ export class PatternLibraryComponent implements OnInit {
         ...this.selectedPatternForHistory,
         pattern: version.patternContent,
         flags: version.flags,
-        description: version.description
+        description: version.description,
+        // Preserve the folder relationship
+        folderId: this.selectedPatternForHistory.folderId
       };
 
       this.patternService.updatePattern(this.selectedPatternForHistory.id!, updatedPattern).subscribe({
         next: () => {
           this.notificationService.success('Pattern restored successfully');
           this.loadPatterns();
+          // Close version history modal and refresh
+          this.showVersionHistoryModal = false;
+          this.selectedPatternForHistory = null;
         },
         error: (error) => {
           console.error('Error restoring pattern:', error);
