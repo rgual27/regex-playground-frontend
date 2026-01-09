@@ -168,7 +168,7 @@ import { NotificationService } from '../../services/notification.service';
     .billing-toggle {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 0;
       background: var(--bg-secondary);
       padding: 4px;
       border-radius: 8px;
@@ -183,16 +183,25 @@ import { NotificationService } from '../../services/notification.service';
         font-size: 1rem;
         color: var(--text-secondary);
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.3s ease;
         font-weight: 500;
+        position: relative;
+        z-index: 1;
+        white-space: nowrap;
 
-        &:hover {
-          background: var(--bg-tertiary);
+        &:hover:not(.active) {
+          color: var(--text-primary);
         }
 
         &.active {
-          background: var(--accent);
+          background: var(--primary-color);
           color: white;
+          box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+
+          .discount-badge {
+            background: white;
+            color: var(--primary-color);
+          }
         }
       }
 
@@ -204,6 +213,7 @@ import { NotificationService } from '../../services/notification.service';
         border-radius: 4px;
         margin-left: 8px;
         font-weight: 600;
+        display: inline-block;
       }
     }
 

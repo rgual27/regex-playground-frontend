@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthComponent } from './components/auth/auth.component';
@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -32,13 +33,13 @@ import { ModalComponent } from './components/modal/modal.component';
                   {{ 'nav.features' | translate }} ▾
                 </button>
                 <div class="dropdown-menu" *ngIf="showFeaturesMenu">
-                  <a routerLink="/folders" routerLinkActive="active" (click)="showFeaturesMenu = false">
+                  <a routerLink="/folders" routerLinkActive="active">
                     📁 {{ 'nav.folders' | translate }}
                   </a>
-                  <a routerLink="/teams" routerLinkActive="active" (click)="showFeaturesMenu = false" *ngIf="userTier === 'TEAM'">
+                  <a routerLink="/teams" routerLinkActive="active" *ngIf="userTier === 'TEAM'">
                     👥 {{ 'nav.teams' | translate }}
                   </a>
-                  <a routerLink="/api-keys" routerLinkActive="active" (click)="showFeaturesMenu = false" *ngIf="userTier === 'TEAM'">
+                  <a routerLink="/api-keys" routerLinkActive="active" *ngIf="userTier === 'TEAM'">
                     🔑 {{ 'nav.apiKeys' | translate }}
                   </a>
                 </div>
@@ -280,7 +281,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.currentUser$ = this.authService.currentUser$;
   }
@@ -293,6 +295,13 @@ export class AppComponent implements OnInit {
     const savedLang = localStorage.getItem('language') || 'en';
     this.translate.setDefaultLang('en');
     this.translate.use(savedLang);
+
+    // Close features menu on navigation
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.showFeaturesMenu = false;
+    });
   }
 
   toggleFeaturesMenu(): void {
