@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { SubscriptionService } from '../../services/subscription.service';
+import { PatternService } from '../../services/pattern.service';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../services/modal.service';
@@ -32,7 +33,7 @@ import { NotificationService } from '../../services/notification.service';
           </div>
           <div class="info-row" *ngIf="user">
             <span class="label">{{ 'account.profile.memberSince' | translate }}:</span>
-            <span class="value">{{ user.createdAt | date }}</span>
+            <span class="value">{{ formatMemberSince() }}</span>
           </div>
         </div>
 
@@ -82,7 +83,7 @@ import { NotificationService } from '../../services/notification.service';
           <h2>📊 {{ 'account.usage.title' | translate }}</h2>
           <div class="stat-item">
             <span class="stat-label">{{ 'account.usage.savedPatterns' | translate }}:</span>
-            <span class="stat-value">{{ savedPatternsCount }} / {{ maxPatterns }}</span>
+            <span class="stat-value">{{ savedPatternsCount }} / {{ maxPatterns === Infinity ? '∞' : maxPatterns }}</span>
           </div>
           <div class="stat-item">
             <span class="stat-label">{{ 'account.usage.testsRun' | translate }}:</span>
@@ -285,10 +286,12 @@ export class AccountComponent implements OnInit {
   savedPatternsCount: number = 0;
   maxPatterns: number = 5;
   loading = false;
+  Infinity = Infinity;
 
   constructor(
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
+    private patternService: PatternService,
     private router: Router,
     private modalService: ModalService,
     private notificationService: NotificationService
@@ -300,6 +303,38 @@ export class AccountComponent implements OnInit {
     });
 
     this.loadSubscriptionInfo();
+    this.loadPatternCount();
+  }
+
+  loadPatternCount() {
+    if (this.authService.isAuthenticated) {
+      this.patternService.getMyPatterns().subscribe({
+        next: (patterns) => {
+          this.savedPatternsCount = patterns.length;
+        },
+        error: (error) => {
+          console.error('Error loading patterns count:', error);
+        }
+      });
+    }
+  }
+
+  formatMemberSince(): string {
+    if (!this.user) return 'N/A';
+
+    // Try different date fields that might exist
+    const dateValue = this.user.createdAt || this.user.created_at || this.user.registeredAt;
+
+    if (!dateValue) return 'N/A';
+
+    const date = new Date(dateValue);
+    if (isNaN(date.getTime())) return 'N/A';
+
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   }
 
   loadSubscriptionInfo() {
