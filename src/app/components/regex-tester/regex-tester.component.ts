@@ -291,6 +291,11 @@ export class RegexTesterComponent implements OnInit {
       return;
     }
 
+    if (!this.isAuthenticated) {
+      this.notificationService.warning('Please login to save patterns');
+      return;
+    }
+
     const patternName = await this.modalService.prompt(
       'Save Pattern',
       'Enter a name for this pattern:',
@@ -317,7 +322,12 @@ export class RegexTesterComponent implements OnInit {
         this.notificationService.success('Pattern saved successfully!');
       },
       error: (error) => {
-        this.notificationService.error(error.error?.message || 'Failed to save pattern. Please try again.');
+        console.error('Error saving pattern:', error);
+        if (error.status === 403) {
+          this.notificationService.error('Authentication failed. Please login again.');
+        } else {
+          this.notificationService.error(error.error?.message || 'Failed to save pattern. Please try again.');
+        }
       }
     });
   }
