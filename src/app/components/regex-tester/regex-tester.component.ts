@@ -332,6 +332,7 @@ export class RegexTesterComponent implements OnInit {
     const newPattern: RegexPattern = {
       name: patternName,
       pattern: this.pattern,
+      testString: this.testString,
       flags: this.flagsString,
       description: this.result?.explanation || '',
       isPublic: false
