@@ -868,7 +868,17 @@ export class PatternLibraryComponent implements OnInit {
   }
 
   editPattern(pattern: RegexPattern) {
-    this.editingPattern = { ...pattern };
+    // Explicitly copy all properties including folderId
+    this.editingPattern = {
+      id: pattern.id,
+      name: pattern.name,
+      pattern: pattern.pattern,
+      description: pattern.description || '',
+      flags: pattern.flags || '',
+      isPublic: pattern.isPublic || false,
+      folderId: pattern.folderId || null,
+      testString: pattern.testString
+    };
     this.showEditPatternModal = true;
   }
 
@@ -891,9 +901,15 @@ export class PatternLibraryComponent implements OnInit {
     }
 
     this.patternService.updatePattern(this.editingPattern.id, this.editingPattern).subscribe({
-      next: () => {
+      next: (updatedPattern) => {
         this.notificationService.success('Pattern updated successfully!');
-        this.loadPatterns(); // Reload to get updated data
+
+        // Update the pattern in the local array to reflect changes immediately
+        const index = this.patterns.findIndex(p => p.id === this.editingPattern.id);
+        if (index !== -1) {
+          this.patterns[index] = { ...updatedPattern };
+        }
+
         this.closeEditPatternModal();
       },
       error: (error) => {
