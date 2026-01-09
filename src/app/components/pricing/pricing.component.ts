@@ -79,18 +79,22 @@ import { NotificationService } from '../../services/notification.service';
             <li>❌ {{ 'pricing.pro.features.7' | translate }}</li>
           </ul>
           <button
-            class="btn w-full"
-            [class.btn-primary]="currentTier !== 'PRO'"
-            [class.btn-secondary]="currentTier === 'PRO'"
+            *ngIf="currentTier !== 'PRO'"
+            class="btn w-full btn-primary"
             (click)="subscribe('PRO')"
-            [disabled]="loading || currentTier === 'PRO'"
-            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000;">
-            <span *ngIf="currentTier === 'PRO'">{{ 'pricing.currentPlan' | translate }}</span>
-            <span *ngIf="currentTier !== 'PRO'">
-              {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
+            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000; background: #3b82f6 !important; opacity: 1 !important;">
+            <span>
+              {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : 'UPGRADE TO PRO (CLICK ME!)' }}
             </span>
           </button>
-          <p style="font-size: 10px; color: red;">DEBUG: disabled={{loading || currentTier === 'PRO'}}, loading={{loading}}, currentTier={{currentTier}}</p>
+          <button
+            *ngIf="currentTier === 'PRO'"
+            class="btn w-full btn-secondary"
+            disabled
+            style="cursor: not-allowed;">
+            <span>{{ 'pricing.currentPlan' | translate }}</span>
+          </button>
+          <p style="font-size: 10px; color: red;">DEBUG: loading={{loading}}, currentTier={{currentTier}}</p>
           <p class="trial-note" *ngIf="currentTier !== 'PRO'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
 
@@ -115,18 +119,14 @@ import { NotificationService } from '../../services/notification.service';
             <li>✅ {{ 'pricing.team.features.7' | translate }}</li>
           </ul>
           <button
-            class="btn w-full"
-            [class.btn-primary]="currentTier !== 'TEAM'"
-            [class.btn-secondary]="currentTier === 'TEAM'"
+            class="btn w-full btn-primary"
             (click)="subscribe('TEAM')"
-            [disabled]="loading || currentTier === 'TEAM'"
-            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000;">
-            <span *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</span>
-            <span *ngIf="currentTier !== 'TEAM'">
-              {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
+            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000; background: #3b82f6 !important; opacity: 1 !important;">
+            <span>
+              {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : 'UPGRADE TO TEAM (CLICK ME!)' }}
             </span>
           </button>
-          <p style="font-size: 10px; color: red;">DEBUG: disabled={{loading || currentTier === 'TEAM'}}, loading={{loading}}, currentTier={{currentTier}}</p>
+          <p style="font-size: 10px; color: red;">DEBUG: Was disabled={{loading || currentTier === 'TEAM'}}, loading={{loading}}, currentTier={{currentTier}}</p>
           <p class="trial-note" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
       </div>
