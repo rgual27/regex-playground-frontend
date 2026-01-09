@@ -14,16 +14,15 @@ import { NotificationService, Notification } from '../../services/notification.s
         [class.success]="notification.type === 'success'"
         [class.error]="notification.type === 'error'"
         [class.info]="notification.type === 'info'"
-        [class.warning]="notification.type === 'warning'"
-        [@slideIn]>
+        [class.warning]="notification.type === 'warning'">
         <div class="notification-icon">
-          <span *ngIf="notification.type === 'success'"></span>
-          <span *ngIf="notification.type === 'error'"></span>
-          <span *ngIf="notification.type === 'info'">9</span>
-          <span *ngIf="notification.type === 'warning'">�</span>
+          <span *ngIf="notification.type === 'success'">✓</span>
+          <span *ngIf="notification.type === 'error'">✕</span>
+          <span *ngIf="notification.type === 'info'">ℹ</span>
+          <span *ngIf="notification.type === 'warning'">⚠</span>
         </div>
         <div class="notification-message">{{ notification.message }}</div>
-        <button class="notification-close" (click)="close(notification.id)"></button>
+        <button class="notification-close" (click)="close(notification.id)">&times;</button>
       </div>
     </div>
   `,
@@ -127,7 +126,7 @@ import { NotificationService, Notification } from '../../services/notification.s
       border: none;
       color: #6b7280;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
       padding: 0;
       width: 24px;
       height: 24px;
@@ -137,6 +136,7 @@ import { NotificationService, Notification } from '../../services/notification.s
       border-radius: 4px;
       flex-shrink: 0;
       transition: all 0.2s;
+      line-height: 1;
     }
 
     .notification-close:hover {
