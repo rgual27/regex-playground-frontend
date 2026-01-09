@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "tester": "Tester",
+    "library": "Biblioteca",
+    "pricing": "Prezzi",
+    "contact": "Contatto",
+    "myAccount": "Il Mio Account",
+    "login": "Accedi",
+    "signup": "Registrati",
+    "logout": "Esci"
+  },
+  "hero": {
+    "title": "Testa i Tuoi Pattern Regex",
+    "subtitle": "Test regex in tempo reale con risultati istantanei. Testa pattern JavaScript, Python e Java."
+  },
+  "common": {
+    "save": "Salva",
+    "cancel": "Annulla",
+    "delete": "Elimina",
+    "edit": "Modifica",
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "success": "Successo"
+  },
+  "pricing": {
+    "title": "Prezzi Semplici e Trasparenti",
+    "subtitle": "Scegli il piano che si adatta alle tue esigenze. Tutti i piani includono 14 giorni di prova gratuita.",
+    "currentPlan": "PIANO ATTUALE",
+    "mostPopular": "PIÙ POPOLARE",
+    "bestValue": "MIGLIOR VALORE",
+    "free": {
+      "name": "Gratuito",
+      "price": "0€",
+      "period": "/mese",
+      "features": [
+        "Test regex illimitati",
+        "Risultati in tempo reale",
+        "5 pattern salvati",
+        "Spiegazioni dei pattern",
+        "Riferimento rapido"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "7€",
+      "period": "/mese",
+      "features": [
+        "Tutto in Gratuito",
+        "Pattern salvati illimitati",
+        "Organizza in cartelle",
+        "Esporta codice (Java, JS, Python)",
+        "Pattern privati",
+        "Cronologia versioni",
+        "Supporto prioritario"
+      ]
+    },
+    "team": {
+      "name": "Team",
+      "price": "25€",
+      "period": "/mese",
+      "features": [
+        "Tutto in Pro",
+        "Membri del team illimitati",
+        "Biblioteca condivisa",
+        "Analisi del team",
+        "Accesso API (1000 chiamate/giorno)",
+        "Integrazione Slack",
+        "SSO (opzionale)",
+        "Supporto prioritario"
+      ]
+    },
+    "startTrial": "Inizia Prova Gratuita",
+    "trialNote": "Nessuna carta di credito richiesta"
+  },
+  "account": {
+    "title": "Il Mio Account",
+    "subtitle": "Gestisci il tuo abbonamento e le impostazioni dell'account",
+    "profile": "Informazioni Profilo",
+    "fullName": "Nome Completo",
+    "email": "Email",
+    "memberSince": "Membro Dal",
+    "subscription": "Abbonamento",
+    "upgradePlan": "Aggiorna Piano",
+    "manageBilling": "Gestisci Fatturazione",
+    "cancelSubscription": "Annulla Abbonamento",
+    "usageStats": "Statistiche Utilizzo",
+    "savedPatterns": "Pattern Salvati",
+    "testsRun": "Test Eseguiti",
+    "teamMembers": "Membri del Team",
+    "quickActions": "Azioni Rapide",
+    "testRegex": "Testa Regex",
+    "patternLibrary": "Biblioteca Pattern",
+    "contactSupport": "Contatta Supporto"
+  },
+  "contact": {
+    "title": "Contattaci",
+    "subtitle": "Hai domande? Ci piacerebbe sentirti. Inviaci un messaggio e ti risponderemo il prima possibile.",
+    "sendMessage": "Inviaci un messaggio",
+    "yourName": "Il Tuo Nome",
+    "yourEmail": "La Tua Email",
+    "subject": "Oggetto",
+    "message": "Messaggio",
+    "send": "Invia Messaggio",
+    "sending": "Invio...",
+    "getInTouch": "Mettiti in Contatto",
+    "responseTime": "Tempo di Risposta",
+    "within24h": "Solitamente entro 24 ore",
+    "followUs": "Seguici",
+    "quickFaq": "FAQ Rapide"
+  },
+  "footer": {
+    "copyright": "© 2025 Regex Playground. Fatto con ❤️ per gli sviluppatori."
+  }
+}

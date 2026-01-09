@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "tester": "Testeur",
+    "library": "Bibliothèque",
+    "pricing": "Tarifs",
+    "contact": "Contact",
+    "myAccount": "Mon Compte",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "logout": "Déconnexion"
+  },
+  "hero": {
+    "title": "Testez vos Patterns Regex",
+    "subtitle": "Tests regex en temps réel avec résultats instantanés. Testez les patterns JavaScript, Python et Java."
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès"
+  },
+  "pricing": {
+    "title": "Tarification Simple et Transparente",
+    "subtitle": "Choisissez le plan qui correspond à vos besoins. Tous les plans incluent 14 jours d'essai gratuit.",
+    "currentPlan": "PLAN ACTUEL",
+    "mostPopular": "PLUS POPULAIRE",
+    "bestValue": "MEILLEUR RAPPORT",
+    "free": {
+      "name": "Gratuit",
+      "price": "0€",
+      "period": "/mois",
+      "features": [
+        "Tests regex illimités",
+        "Résultats en temps réel",
+        "5 patterns sauvegardés",
+        "Explications des patterns",
+        "Référence rapide"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "7€",
+      "period": "/mois",
+      "features": [
+        "Tout dans Gratuit",
+        "Patterns sauvegardés illimités",
+        "Organiser en dossiers",
+        "Exporter le code (Java, JS, Python)",
+        "Patterns privés",
+        "Historique des versions",
+        "Support prioritaire"
+      ]
+    },
+    "team": {
+      "name": "Équipe",
+      "price": "25€",
+      "period": "/mois",
+      "features": [
+        "Tout dans Pro",
+        "Membres illimités",
+        "Bibliothèque partagée",
+        "Analytiques d'équipe",
+        "Accès API (1000 appels/jour)",
+        "Intégration Slack",
+        "SSO (optionnel)",
+        "Support prioritaire"
+      ]
+    },
+    "startTrial": "Commencer l'Essai Gratuit",
+    "trialNote": "Aucune carte bancaire requise"
+  },
+  "account": {
+    "title": "Mon Compte",
+    "subtitle": "Gérez votre abonnement et paramètres de compte",
+    "profile": "Informations du Profil",
+    "fullName": "Nom Complet",
+    "email": "Email",
+    "memberSince": "Membre Depuis",
+    "subscription": "Abonnement",
+    "upgradePlan": "Améliorer le Plan",
+    "manageBilling": "Gérer la Facturation",
+    "cancelSubscription": "Annuler l'Abonnement",
+    "usageStats": "Statistiques d'Utilisation",
+    "savedPatterns": "Patterns Sauvegardés",
+    "testsRun": "Tests Effectués",
+    "teamMembers": "Membres de l'Équipe",
+    "quickActions": "Actions Rapides",
+    "testRegex": "Tester Regex",
+    "patternLibrary": "Bibliothèque de Patterns",
+    "contactSupport": "Contacter le Support"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Des questions? Nous aimerions avoir de vos nouvelles. Envoyez-nous un message et nous vous répondrons dès que possible.",
+    "sendMessage": "Envoyez-nous un message",
+    "yourName": "Votre Nom",
+    "yourEmail": "Votre Email",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer le Message",
+    "sending": "Envoi...",
+    "getInTouch": "Prenez Contact",
+    "responseTime": "Temps de Réponse",
+    "within24h": "Généralement sous 24 heures",
+    "followUs": "Suivez-nous",
+    "quickFaq": "FAQ Rapide"
+  },
+  "footer": {
+    "copyright": "© 2025 Regex Playground. Fait avec ❤️ pour les développeurs."
+  }
+}

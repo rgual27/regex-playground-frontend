@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "tester": "Tester",
+    "library": "Bibliothek",
+    "pricing": "Preise",
+    "contact": "Kontakt",
+    "myAccount": "Mein Konto",
+    "login": "Anmelden",
+    "signup": "Registrieren",
+    "logout": "Abmelden"
+  },
+  "hero": {
+    "title": "Testen Sie Ihre Regex-Muster",
+    "subtitle": "Echtzeit-Regex-Tests mit sofortigen Ergebnissen. Testen Sie JavaScript-, Python- und Java-Muster."
+  },
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg"
+  },
+  "pricing": {
+    "title": "Einfache, Transparente Preise",
+    "subtitle": "Wählen Sie den Plan, der Ihren Anforderungen entspricht. Alle Pläne beinhalten eine 14-tägige kostenlose Testversion.",
+    "currentPlan": "AKTUELLER PLAN",
+    "mostPopular": "AM BELIEBTESTEN",
+    "bestValue": "BESTES PREIS-LEISTUNGS-VERHÄLTNIS",
+    "free": {
+      "name": "Kostenlos",
+      "price": "0€",
+      "period": "/Monat",
+      "features": [
+        "Unbegrenzte Regex-Tests",
+        "Echtzeitergebnisse",
+        "5 gespeicherte Muster",
+        "Mustererklärungen",
+        "Schnellreferenz"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "7€",
+      "period": "/Monat",
+      "features": [
+        "Alles in Kostenlos",
+        "Unbegrenzt gespeicherte Muster",
+        "In Ordnern organisieren",
+        "Code exportieren (Java, JS, Python)",
+        "Private Muster",
+        "Versionsverlauf",
+        "Vorrangiger Support"
+      ]
+    },
+    "team": {
+      "name": "Team",
+      "price": "25€",
+      "period": "/Monat",
+      "features": [
+        "Alles in Pro",
+        "Unbegrenzte Teammitglieder",
+        "Gemeinsame Musterbibliothek",
+        "Team-Analytik",
+        "API-Zugriff (1000 Anrufe/Tag)",
+        "Slack-Integration",
+        "SSO (optional)",
+        "Vorrangiger Support"
+      ]
+    },
+    "startTrial": "Kostenlose Testversion Starten",
+    "trialNote": "Keine Kreditkarte erforderlich"
+  },
+  "account": {
+    "title": "Mein Konto",
+    "subtitle": "Verwalten Sie Ihr Abonnement und Ihre Kontoeinstellungen",
+    "profile": "Profilinformationen",
+    "fullName": "Vollständiger Name",
+    "email": "E-Mail",
+    "memberSince": "Mitglied Seit",
+    "subscription": "Abonnement",
+    "upgradePlan": "Plan Upgraden",
+    "manageBilling": "Abrechnung Verwalten",
+    "cancelSubscription": "Abonnement Kündigen",
+    "usageStats": "Nutzungsstatistiken",
+    "savedPatterns": "Gespeicherte Muster",
+    "testsRun": "Durchgeführte Tests",
+    "teamMembers": "Teammitglieder",
+    "quickActions": "Schnellaktionen",
+    "testRegex": "Regex Testen",
+    "patternLibrary": "Musterbibliothek",
+    "contactSupport": "Support Kontaktieren"
+  },
+  "contact": {
+    "title": "Kontaktieren Sie Uns",
+    "subtitle": "Haben Sie Fragen? Wir würden gerne von Ihnen hören. Senden Sie uns eine Nachricht und wir antworten so schnell wie möglich.",
+    "sendMessage": "Senden Sie uns eine Nachricht",
+    "yourName": "Ihr Name",
+    "yourEmail": "Ihre E-Mail",
+    "subject": "Betreff",
+    "message": "Nachricht",
+    "send": "Nachricht Senden",
+    "sending": "Wird Gesendet...",
+    "getInTouch": "Kontakt Aufnehmen",
+    "responseTime": "Antwortzeit",
+    "within24h": "Normalerweise innerhalb von 24 Stunden",
+    "followUs": "Folgen Sie Uns",
+    "quickFaq": "Schnell-FAQ"
+  },
+  "footer": {
+    "copyright": "© 2025 Regex Playground. Mit ❤️ für Entwickler gemacht."
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "tester": "Testador",
+    "library": "Biblioteca",
+    "pricing": "Preços",
+    "contact": "Contato",
+    "myAccount": "Minha Conta",
+    "login": "Entrar",
+    "signup": "Cadastrar",
+    "logout": "Sair"
+  },
+  "hero": {
+    "title": "Teste Seus Padrões Regex",
+    "subtitle": "Testes de regex em tempo real com resultados instantâneos. Teste padrões JavaScript, Python e Java."
+  },
+  "common": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso"
+  },
+  "pricing": {
+    "title": "Preços Simples e Transparentes",
+    "subtitle": "Escolha o plano que atende às suas necessidades. Todos os planos incluem 14 dias de teste gratuito.",
+    "currentPlan": "PLANO ATUAL",
+    "mostPopular": "MAIS POPULAR",
+    "bestValue": "MELHOR VALOR",
+    "free": {
+      "name": "Grátis",
+      "price": "R$0",
+      "period": "/mês",
+      "features": [
+        "Testes regex ilimitados",
+        "Resultados em tempo real",
+        "5 padrões salvos",
+        "Explicações de padrões",
+        "Referência rápida"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "R$35",
+      "period": "/mês",
+      "features": [
+        "Tudo no Grátis",
+        "Padrões salvos ilimitados",
+        "Organizar em pastas",
+        "Exportar código (Java, JS, Python)",
+        "Padrões privados",
+        "Histórico de versões",
+        "Suporte prioritário"
+      ]
+    },
+    "team": {
+      "name": "Equipe",
+      "price": "R$125",
+      "period": "/mês",
+      "features": [
+        "Tudo no Pro",
+        "Membros ilimitados",
+        "Biblioteca compartilhada",
+        "Análises da equipe",
+        "Acesso API (1000 chamadas/dia)",
+        "Integração Slack",
+        "SSO (opcional)",
+        "Suporte prioritário"
+      ]
+    },
+    "startTrial": "Iniciar Teste Gratuito",
+    "trialNote": "Nenhum cartão de crédito necessário"
+  },
+  "account": {
+    "title": "Minha Conta",
+    "subtitle": "Gerencie sua assinatura e configurações de conta",
+    "profile": "Informações do Perfil",
+    "fullName": "Nome Completo",
+    "email": "E-mail",
+    "memberSince": "Membro Desde",
+    "subscription": "Assinatura",
+    "upgradePlan": "Atualizar Plano",
+    "manageBilling": "Gerenciar Faturamento",
+    "cancelSubscription": "Cancelar Assinatura",
+    "usageStats": "Estatísticas de Uso",
+    "savedPatterns": "Padrões Salvos",
+    "testsRun": "Testes Executados",
+    "teamMembers": "Membros da Equipe",
+    "quickActions": "Ações Rápidas",
+    "testRegex": "Testar Regex",
+    "patternLibrary": "Biblioteca de Padrões",
+    "contactSupport": "Contatar Suporte"
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Tem perguntas? Adoraríamos ouvir você. Envie-nos uma mensagem e responderemos o mais rápido possível.",
+    "sendMessage": "Envie-nos uma mensagem",
+    "yourName": "Seu Nome",
+    "yourEmail": "Seu E-mail",
+    "subject": "Assunto",
+    "message": "Mensagem",
+    "send": "Enviar Mensagem",
+    "sending": "Enviando...",
+    "getInTouch": "Entre em Contato",
+    "responseTime": "Tempo de Resposta",
+    "within24h": "Geralmente em 24 horas",
+    "followUs": "Siga-nos",
+    "quickFaq": "FAQ Rápido"
+  },
+  "footer": {
+    "copyright": "© 2025 Regex Playground. Feito com ❤️ para desenvolvedores."
+  }
+}
