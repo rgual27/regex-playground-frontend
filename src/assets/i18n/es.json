@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "tester": "Probador",
+    "library": "Biblioteca",
+    "pricing": "Precios",
+    "contact": "Contacto",
+    "myAccount": "Mi Cuenta",
+    "login": "Iniciar Sesión",
+    "signup": "Registrarse",
+    "logout": "Cerrar Sesión"
+  },
+  "hero": {
+    "title": "Prueba tus Patrones Regex",
+    "subtitle": "Pruebas de regex en tiempo real con resultados instantáneos. Prueba patrones de JavaScript, Python y Java."
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito"
+  },
+  "pricing": {
+    "title": "Precios Simples y Transparentes",
+    "subtitle": "Elige el plan que se adapte a tus necesidades. Todos los planes incluyen 14 días de prueba gratuita.",
+    "currentPlan": "PLAN ACTUAL",
+    "mostPopular": "MÁS POPULAR",
+    "bestValue": "MEJOR VALOR",
+    "free": {
+      "name": "Gratis",
+      "price": "$0",
+      "period": "/mes",
+      "features": [
+        "Pruebas regex ilimitadas",
+        "Resultados en tiempo real",
+        "5 patrones guardados",
+        "Explicaciones de patrones",
+        "Referencia rápida"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$7",
+      "period": "/mes",
+      "features": [
+        "Todo en Gratis",
+        "Patrones guardados ilimitados",
+        "Organizar en carpetas",
+        "Exportar código (Java, JS, Python)",
+        "Patrones privados",
+        "Historial de versiones",
+        "Soporte prioritario"
+      ]
+    },
+    "team": {
+      "name": "Equipo",
+      "price": "$25",
+      "period": "/mes",
+      "features": [
+        "Todo en Pro",
+        "Miembros ilimitados",
+        "Biblioteca compartida",
+        "Analíticas de equipo",
+        "Acceso API (1000 llamadas/día)",
+        "Integración Slack",
+        "SSO (opcional)",
+        "Soporte prioritario"
+      ]
+    },
+    "startTrial": "Iniciar Prueba Gratuita",
+    "trialNote": "No se requiere tarjeta de crédito"
+  },
+  "account": {
+    "title": "Mi Cuenta",
+    "subtitle": "Gestiona tu suscripción y configuración de cuenta",
+    "profile": "Información del Perfil",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "memberSince": "Miembro Desde",
+    "subscription": "Suscripción",
+    "upgradePlan": "Mejorar Plan",
+    "manageBilling": "Gestionar Facturación",
+    "cancelSubscription": "Cancelar Suscripción",
+    "usageStats": "Estadísticas de Uso",
+    "savedPatterns": "Patrones Guardados",
+    "testsRun": "Pruebas Realizadas",
+    "teamMembers": "Miembros del Equipo",
+    "quickActions": "Acciones Rápidas",
+    "testRegex": "Probar Regex",
+    "patternLibrary": "Biblioteca de Patrones",
+    "contactSupport": "Contactar Soporte"
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "¿Tienes preguntas? Nos encantaría saber de ti. Envíanos un mensaje y te responderemos lo antes posible.",
+    "sendMessage": "Envíanos un mensaje",
+    "yourName": "Tu Nombre",
+    "yourEmail": "Tu Correo",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "getInTouch": "Ponte en Contacto",
+    "responseTime": "Tiempo de Respuesta",
+    "within24h": "Generalmente en 24 horas",
+    "followUs": "Síguenos",
+    "quickFaq": "Preguntas Frecuentes"
+  },
+  "footer": {
+    "copyright": "© 2025 Regex Playground. Hecho con ❤️ para desarrolladores."
+  }
+}

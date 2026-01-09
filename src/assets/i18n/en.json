@@ -1,0 +1,114 @@
+{
+  "nav": {
+    "tester": "Tester",
+    "library": "Library",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "myAccount": "My Account",
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Test Your Regex Patterns",
+    "subtitle": "Real-time regex testing with instant results. Test JavaScript, Python, and Java patterns."
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that fits your needs. All plans include 14-day free trial.",
+    "currentPlan": "CURRENT PLAN",
+    "mostPopular": "MOST POPULAR",
+    "bestValue": "BEST VALUE",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "period": "/month",
+      "features": [
+        "Unlimited regex testing",
+        "Real-time results",
+        "5 saved patterns",
+        "Pattern explanations",
+        "Quick reference"
+      ]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$7",
+      "period": "/month",
+      "features": [
+        "Everything in Free",
+        "Unlimited saved patterns",
+        "Organize in folders",
+        "Export code (Java, JS, Python)",
+        "Private patterns",
+        "Version history",
+        "Priority support"
+      ]
+    },
+    "team": {
+      "name": "Team",
+      "price": "$25",
+      "period": "/month",
+      "features": [
+        "Everything in Pro",
+        "Unlimited team members",
+        "Shared pattern library",
+        "Team analytics",
+        "API access (1000 calls/day)",
+        "Slack integration",
+        "SSO (optional)",
+        "Priority support"
+      ]
+    },
+    "startTrial": "Start Free Trial",
+    "trialNote": "No credit card required for trial"
+  },
+  "account": {
+    "title": "My Account",
+    "subtitle": "Manage your subscription and account settings",
+    "profile": "Profile Information",
+    "fullName": "Full Name",
+    "email": "Email",
+    "memberSince": "Member Since",
+    "subscription": "Subscription",
+    "upgradePlan": "Upgrade Plan",
+    "manageBilling": "Manage Billing",
+    "cancelSubscription": "Cancel Subscription",
+    "usageStats": "Usage Statistics",
+    "savedPatterns": "Saved Patterns",
+    "testsRun": "Tests Run",
+    "teamMembers": "Team Members",
+    "quickActions": "Quick Actions",
+    "testRegex": "Test Regex",
+    "patternLibrary": "Pattern Library",
+    "contactSupport": "Contact Support"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "sendMessage": "Send us a message",
+    "yourName": "Your Name",
+    "yourEmail": "Your Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "getInTouch": "Get in Touch",
+    "responseTime": "Response Time",
+    "within24h": "Usually within 24 hours",
+    "followUs": "Follow Us",
+    "quickFaq": "Quick FAQ"
+  },
+  "footer": {
+    "copyright": "© 2025 Regex Playground. Built with ❤️ for developers."
+  }
+}

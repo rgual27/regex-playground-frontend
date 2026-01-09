@@ -1,13 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
+import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AuthComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, AuthComponent, TranslateModule, LanguageSwitcherComponent],
   template: `
     <div class="app-container">
       <header class="header">
@@ -31,13 +33,14 @@ import { AuthService } from './services/auth.service';
               </a>
             </div>
             <div class="nav-actions">
+              <app-language-switcher></app-language-switcher>
               <ng-container *ngIf="currentUser$ | async as user; else guestMenu">
-                <a routerLink="/account" class="btn btn-secondary">My Account</a>
-                <button class="btn btn-secondary" (click)="logout()">Logout</button>
+                <a routerLink="/account" class="btn btn-secondary">{{ 'nav.myAccount' | translate }}</a>
+                <button class="btn btn-secondary" (click)="logout()">{{ 'nav.logout' | translate }}</button>
               </ng-container>
               <ng-template #guestMenu>
-                <button class="btn btn-secondary" (click)="openLogin()">Login</button>
-                <button class="btn btn-primary" (click)="openSignUp()">Sign Up</button>
+                <button class="btn btn-secondary" (click)="openLogin()">{{ 'nav.login' | translate }}</button>
+                <button class="btn btn-primary" (click)="openSignUp()">{{ 'nav.signup' | translate }}</button>
               </ng-template>
             </div>
           </nav>
@@ -183,12 +186,21 @@ import { AuthService } from './services/auth.service';
     }
   `]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild(AuthComponent) authComponent!: AuthComponent;
   currentUser$;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
     this.currentUser$ = this.authService.currentUser$;
+  }
+
+  ngOnInit() {
+    const savedLang = localStorage.getItem('language') || 'en';
+    this.translate.setDefaultLang('en');
+    this.translate.use(savedLang);
   }
 
   openLogin(): void {
