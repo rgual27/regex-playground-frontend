@@ -11,11 +11,11 @@ export class SubscriptionService {
 
   constructor(private http: HttpClient) {}
 
-  createCheckoutSession(tier: string): Observable<{ url: string }> {
+  createCheckoutSession(tier: string, billingPeriod: string = 'monthly'): Observable<{ url: string }> {
     return this.http.post<{ url: string }>(
       `${this.apiUrl}/api/subscriptions/checkout`,
       null,
-      { params: { tier } }
+      { params: { tier, billingPeriod } }
     );
   }
 

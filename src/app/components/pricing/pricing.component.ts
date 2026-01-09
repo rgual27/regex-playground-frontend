@@ -14,6 +14,21 @@ import { NotificationService } from '../../services/notification.service';
       <div class="pricing-header">
         <h1>{{ 'pricing.title' | translate }}</h1>
         <p>{{ 'pricing.subtitle' | translate }}</p>
+
+        <div class="billing-toggle">
+          <button
+            class="toggle-btn"
+            [class.active]="billingPeriod === 'monthly'"
+            (click)="billingPeriod = 'monthly'">
+            Monthly
+          </button>
+          <button
+            class="toggle-btn"
+            [class.active]="billingPeriod === 'annual'"
+            (click)="billingPeriod = 'annual'">
+            Annual <span class="discount-badge">Save 20%</span>
+          </button>
+        </div>
       </div>
 
       <div class="pricing-grid">
@@ -146,6 +161,49 @@ import { NotificationService } from '../../services/notification.service';
       p {
         font-size: 1.125rem;
         color: var(--text-secondary);
+        margin-bottom: 2rem;
+      }
+    }
+
+    .billing-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      background: var(--bg-secondary);
+      padding: 4px;
+      border-radius: 8px;
+      width: fit-content;
+      margin: 0 auto 2rem;
+
+      .toggle-btn {
+        padding: 12px 24px;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 500;
+
+        &:hover {
+          background: var(--bg-tertiary);
+        }
+
+        &.active {
+          background: var(--accent);
+          color: white;
+        }
+      }
+
+      .discount-badge {
+        font-size: 0.75rem;
+        background: #10b981;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+        font-weight: 600;
       }
     }
 
@@ -271,6 +329,7 @@ export class PricingComponent implements OnInit {
   selectedTier: string = '';
   currentTier: string | null = null;
   tierLoading = true;
+  billingPeriod: 'monthly' | 'annual' = 'monthly';
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -311,7 +370,7 @@ export class PricingComponent implements OnInit {
     this.loading = true;
     this.selectedTier = tier;
 
-    this.subscriptionService.createCheckoutSession(tier).subscribe({
+    this.subscriptionService.createCheckoutSession(tier, this.billingPeriod).subscribe({
       next: (response) => {
         window.location.href = response.url;
       },

@@ -10,6 +10,7 @@ export interface RegexPattern {
   description?: string;
   testString?: string;
   flags?: string;
+  folderId?: number;
   testCases?: TestCase[];
   tags?: string[];
   isPublic?: boolean;
@@ -22,6 +23,19 @@ export interface TestCase {
   input: string;
   expectedOutput: string;
   shouldMatch: boolean;
+}
+
+export interface PatternVersion {
+  id: number;
+  version: number;
+  name: string;
+  patternContent: string;
+  description?: string;
+  testString?: string;
+  flags?: string;
+  flavor: string;
+  changeNote?: string;
+  createdAt: Date;
 }
 
 @Injectable({
@@ -76,5 +90,9 @@ export class PatternService {
       return JSON.parse(stored);
     }
     return null;
+  }
+
+  getPatternVersions(patternId: number): Observable<PatternVersion[]> {
+    return this.http.get<PatternVersion[]>(`${this.apiUrl}/api/patterns/${patternId}/versions`);
   }
 }
