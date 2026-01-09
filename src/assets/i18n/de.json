@@ -20,7 +20,23 @@
     "edit": "Bearbeiten",
     "loading": "Lädt...",
     "error": "Fehler",
-    "success": "Erfolg"
+    "success": "Erfolg",
+    "regex": "Regulärer Ausdruck",
+    "testString": "Testzeichenfolge",
+    "match": "Übereinstimmung",
+    "matches": "Übereinstimmungen",
+    "group": "Gruppe",
+    "explanation": "Mustererklärung",
+    "enterPattern": "Geben Sie Ihr Regex-Muster ein",
+    "enterTestString": "Geben Sie hier die Testzeichenfolge ein...",
+    "quickReference": "Schnellreferenz",
+    "actions": "Aktionen",
+    "savePattern": "Muster Speichern",
+    "share": "Teilen",
+    "exportCode": "Code Exportieren",
+    "upgradeToPro": "Auf Pro Upgraden",
+    "loginToSave": "Anmelden, um Muster zu speichern",
+    "commonPatterns": "Gängige Muster"
   },
   "pricing": {
     "title": "Einfache, Transparente Preise",
@@ -28,21 +44,24 @@
     "currentPlan": "AKTUELLER PLAN",
     "mostPopular": "AM BELIEBTESTEN",
     "bestValue": "BESTES PREIS-LEISTUNGS-VERHÄLTNIS",
+    "startTrial": "Kostenlose Testversion Starten",
+    "trialNote": "Keine Kreditkarte für die Testversion erforderlich",
     "free": {
-      "name": "Kostenlos",
-      "price": "0€",
+      "title": "Kostenlos",
       "period": "/Monat",
       "features": [
         "Unbegrenzte Regex-Tests",
         "Echtzeitergebnisse",
         "5 gespeicherte Muster",
         "Mustererklärungen",
-        "Schnellreferenz"
+        "Schnellreferenz",
+        "Code-Export",
+        "Private Muster",
+        "Team-Freigabe"
       ]
     },
     "pro": {
-      "name": "Pro",
-      "price": "7€",
+      "title": "Pro",
       "period": "/Monat",
       "features": [
         "Alles in Kostenlos",
@@ -51,12 +70,12 @@
         "Code exportieren (Java, JS, Python)",
         "Private Muster",
         "Versionsverlauf",
-        "Vorrangiger Support"
+        "Vorrangiger Support",
+        "Team-Zusammenarbeit"
       ]
     },
     "team": {
-      "name": "Team",
-      "price": "25€",
+      "title": "Team",
       "period": "/Monat",
       "features": [
         "Alles in Pro",
@@ -69,44 +88,86 @@
         "Vorrangiger Support"
       ]
     },
-    "startTrial": "Kostenlose Testversion Starten",
-    "trialNote": "Keine Kreditkarte erforderlich"
+    "faq": {
+      "title": "Häufig Gestellte Fragen",
+      "q1": "Kann ich jederzeit kündigen?",
+      "a1": "Ja! Sie können Ihr Abonnement jederzeit kündigen. Keine Fragen gestellt.",
+      "q2": "Bieten Sie Rückerstattungen an?",
+      "a2": "Ja, wir bieten eine 30-tägige Geld-zurück-Garantie für alle bezahlten Pläne.",
+      "q3": "Welche Zahlungsmethoden akzeptieren Sie?",
+      "a3": "Wir akzeptieren alle gängigen Kreditkarten über Stripe. Enterprise-Pläne können per Rechnung bezahlen.",
+      "q4": "Gibt es einen Rabatt für jährliche Abrechnung?",
+      "a4": "Ja! Sparen Sie 20% bei jährlicher Zahlung. Kontaktieren Sie uns für Details."
+    }
   },
   "account": {
     "title": "Mein Konto",
     "subtitle": "Verwalten Sie Ihr Abonnement und Ihre Kontoeinstellungen",
-    "profile": "Profilinformationen",
-    "fullName": "Vollständiger Name",
-    "email": "E-Mail",
-    "memberSince": "Mitglied Seit",
-    "subscription": "Abonnement",
-    "upgradePlan": "Plan Upgraden",
-    "manageBilling": "Abrechnung Verwalten",
-    "cancelSubscription": "Abonnement Kündigen",
-    "usageStats": "Nutzungsstatistiken",
-    "savedPatterns": "Gespeicherte Muster",
-    "testsRun": "Durchgeführte Tests",
-    "teamMembers": "Teammitglieder",
-    "quickActions": "Schnellaktionen",
-    "testRegex": "Regex Testen",
-    "patternLibrary": "Musterbibliothek",
-    "contactSupport": "Support Kontaktieren"
+    "profile": {
+      "title": "Profilinformationen",
+      "fullName": "Vollständiger Name",
+      "email": "E-Mail",
+      "memberSince": "Mitglied Seit"
+    },
+    "subscription": {
+      "title": "Abonnement",
+      "freeDesc": "Sie sind derzeit im kostenlosen Plan mit eingeschränkten Funktionen.",
+      "proDesc": "Sie haben Zugriff auf alle Pro-Funktionen, einschließlich unbegrenzter Muster und Code-Export.",
+      "teamDesc": "Sie haben Zugriff auf alle Team-Funktionen, einschließlich Zusammenarbeit und API-Zugriff.",
+      "upgrade": "Plan Upgraden",
+      "manageBilling": "Abrechnung Verwalten",
+      "cancel": "Abonnement Kündigen",
+      "canceling": "Wird Gekündigt..."
+    },
+    "usage": {
+      "title": "Nutzungsstatistiken",
+      "savedPatterns": "Gespeicherte Muster",
+      "testsRun": "Durchgeführte Tests",
+      "teamMembers": "Teammitglieder",
+      "unlimited": "Unbegrenzt"
+    },
+    "actions": {
+      "title": "Schnellaktionen",
+      "testRegex": "Regex Testen",
+      "library": "Musterbibliothek",
+      "contact": "Support Kontaktieren",
+      "logout": "Abmelden"
+    }
   },
   "contact": {
     "title": "Kontaktieren Sie Uns",
     "subtitle": "Haben Sie Fragen? Wir würden gerne von Ihnen hören. Senden Sie uns eine Nachricht und wir antworten so schnell wie möglich.",
-    "sendMessage": "Senden Sie uns eine Nachricht",
-    "yourName": "Ihr Name",
-    "yourEmail": "Ihre E-Mail",
-    "subject": "Betreff",
-    "message": "Nachricht",
-    "send": "Nachricht Senden",
-    "sending": "Wird Gesendet...",
-    "getInTouch": "Kontakt Aufnehmen",
-    "responseTime": "Antwortzeit",
-    "within24h": "Normalerweise innerhalb von 24 Stunden",
-    "followUs": "Folgen Sie Uns",
-    "quickFaq": "Schnell-FAQ"
+    "form": {
+      "title": "Senden Sie uns eine Nachricht",
+      "name": "Ihr Name",
+      "namePlaceholder": "Max Mustermann",
+      "email": "Ihre E-Mail",
+      "emailPlaceholder": "max@beispiel.com",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Wie können wir helfen?",
+      "message": "Nachricht",
+      "messagePlaceholder": "Erzählen Sie uns mehr über Ihre Frage oder Ihr Feedback...",
+      "send": "Nachricht Senden",
+      "sending": "Wird Gesendet..."
+    },
+    "info": {
+      "title": "Kontakt Aufnehmen",
+      "email": "E-Mail",
+      "responseTime": "Antwortzeit",
+      "responseValue": "Normalerweise innerhalb von 24 Stunden"
+    },
+    "faq": {
+      "title": "Schnell-FAQ",
+      "q1": "Kann ich meinen Plan upgraden?",
+      "a1": "Ja! Gehen Sie zu Preise und wählen Sie Ihren Plan.",
+      "q2": "Wie exportiere ich Code?",
+      "a2": "Pro-Benutzer können Regex zu Java, JavaScript und Python aus dem Tester exportieren.",
+      "q3": "Brauchen Sie Hilfe mit Regex?",
+      "a3": "Schauen Sie sich unsere Musterbibliothek für gängige Beispiele und Erklärungen an."
+    },
+    "social": {
+      "title": "Folgen Sie Uns"
+    }
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Mit ❤️ für Entwickler gemacht."
