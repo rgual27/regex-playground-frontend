@@ -10,7 +10,7 @@ export interface RegexPattern {
   description?: string;
   testString?: string;
   flags?: string;
-  folderId?: number;
+  folderId?: number | null;
   testCases?: TestCase[];
   tags?: string[];
   isPublic?: boolean;
