@@ -4,14 +4,16 @@ import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PatternService, RegexPattern } from '../../services/pattern.service';
 import { AuthService } from '../../services/auth.service';
+import { FolderService, Folder } from '../../services/folder.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../services/modal.service';
 import { NotificationService } from '../../services/notification.service';
+import { VersionHistoryComponent } from '../version-history/version-history.component';
 
 @Component({
   selector: 'app-pattern-library',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule, FormsModule],
+  imports: [CommonModule, RouterLink, TranslateModule, FormsModule, VersionHistoryComponent],
   template: `
     <div class="container">
       <div class="library-header">
@@ -74,6 +76,20 @@ import { NotificationService } from '../../services/notification.service';
                   rows="3"></textarea>
               </div>
 
+              <div class="form-group" *ngIf="(userTier === 'PRO' || userTier === 'TEAM') && folders.length > 0">
+                <label for="folder">{{ 'library.folder' | translate }}</label>
+                <select
+                  id="folder"
+                  [(ngModel)]="newPattern.folderId"
+                  name="folder"
+                  class="form-control">
+                  <option [ngValue]="null">{{ 'library.noFolder' | translate }}</option>
+                  <option *ngFor="let folder of folders" [ngValue]="folder.id">
+                    📁 {{ folder.name }}
+                  </option>
+                </select>
+              </div>
+
               <div class="form-group checkbox-group">
                 <label>
                   <input
@@ -126,6 +142,7 @@ import { NotificationService } from '../../services/notification.service';
           <div class="pattern-header">
             <h3>{{ pattern.name }}</h3>
             <div class="pattern-actions">
+              <button class="btn-icon" (click)="showVersionHistory(pattern)" [title]="'library.versions' | translate" *ngIf="userTier === 'PRO' || userTier === 'TEAM'">📜</button>
               <button class="btn-icon" (click)="deletePattern(pattern.id!)" [title]="'library.delete' | translate">🗑️</button>
             </div>
           </div>
@@ -139,6 +156,14 @@ import { NotificationService } from '../../services/notification.service';
           </div>
         </div>
       </div>
+
+      <!-- Version History Modal -->
+      <app-version-history
+        [patternId]="selectedPatternForHistory?.id || null"
+        [show]="showVersionHistoryModal"
+        (closed)="showVersionHistoryModal = false; selectedPatternForHistory = null"
+        (versionRestored)="onVersionRestored($event)">
+      </app-version-history>
     </div>
   `,
   styles: [`
@@ -453,6 +478,23 @@ import { NotificationService } from '../../services/notification.service';
       textarea {
         resize: vertical;
       }
+
+      select.form-control {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 15px;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: var(--bg-primary);
+        }
+      }
     }
 
     .checkbox-group {
@@ -471,19 +513,24 @@ import { NotificationService } from '../../services/notification.service';
 })
 export class PatternLibraryComponent implements OnInit {
   patterns: RegexPattern[] = [];
+  folders: Folder[] = [];
   loading = false;
   showNewPatternModal = false;
+  showVersionHistoryModal = false;
+  selectedPatternForHistory: RegexPattern | null = null;
   newPattern: RegexPattern = {
     name: '',
     pattern: '',
     description: '',
     flags: '',
-    isPublic: false
+    isPublic: false,
+    folderId: null
   };
 
   constructor(
     private patternService: PatternService,
     private authService: AuthService,
+    private folderService: FolderService,
     private modalService: ModalService,
     private notificationService: NotificationService,
     private router: Router
@@ -500,6 +547,9 @@ export class PatternLibraryComponent implements OnInit {
   ngOnInit() {
     if (this.isAuthenticated) {
       this.loadPatterns();
+      if (this.userTier === 'PRO' || this.userTier === 'TEAM') {
+        this.loadFolders();
+      }
     }
   }
 
@@ -513,6 +563,17 @@ export class PatternLibraryComponent implements OnInit {
       error: (error) => {
         console.error('Error loading patterns:', error);
         this.loading = false;
+      }
+    });
+  }
+
+  loadFolders() {
+    this.folderService.getFolders().subscribe({
+      next: (folders) => {
+        this.folders = folders;
+      },
+      error: (error) => {
+        console.error('Error loading folders:', error);
       }
     });
   }
@@ -572,7 +633,8 @@ export class PatternLibraryComponent implements OnInit {
       pattern: '',
       description: '',
       flags: '',
-      isPublic: false
+      isPublic: false,
+      folderId: null
     };
   }
 
@@ -598,5 +660,33 @@ export class PatternLibraryComponent implements OnInit {
   loadInTester(pattern: RegexPattern) {
     this.patternService.loadPatternIntoTester(pattern);
     this.router.navigate(['/']);
+  }
+
+  showVersionHistory(pattern: RegexPattern) {
+    this.selectedPatternForHistory = pattern;
+    this.showVersionHistoryModal = true;
+  }
+
+  onVersionRestored(version: any) {
+    // Restore the pattern from version history
+    if (this.selectedPatternForHistory) {
+      const updatedPattern: RegexPattern = {
+        ...this.selectedPatternForHistory,
+        pattern: version.patternContent,
+        flags: version.flags,
+        description: version.description
+      };
+
+      this.patternService.updatePattern(this.selectedPatternForHistory.id!, updatedPattern).subscribe({
+        next: () => {
+          this.notificationService.success('Pattern restored successfully');
+          this.loadPatterns();
+        },
+        error: (error) => {
+          console.error('Error restoring pattern:', error);
+          this.notificationService.error('Failed to restore pattern');
+        }
+      });
+    }
   }
 }

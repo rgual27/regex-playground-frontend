@@ -27,6 +27,22 @@ import { ModalComponent } from './components/modal/modal.component';
               <a routerLink="/library" routerLinkActive="active">
                 {{ 'nav.library' | translate }}
               </a>
+              <div class="dropdown" *ngIf="(currentUser$ | async) && (userTier === 'PRO' || userTier === 'TEAM')">
+                <button class="dropdown-toggle" (click)="toggleFeaturesMenu()">
+                  {{ 'nav.features' | translate }} ▾
+                </button>
+                <div class="dropdown-menu" *ngIf="showFeaturesMenu">
+                  <a routerLink="/folders" routerLinkActive="active" (click)="showFeaturesMenu = false">
+                    📁 {{ 'nav.folders' | translate }}
+                  </a>
+                  <a routerLink="/teams" routerLinkActive="active" (click)="showFeaturesMenu = false" *ngIf="userTier === 'TEAM'">
+                    👥 {{ 'nav.teams' | translate }}
+                  </a>
+                  <a routerLink="/api-keys" routerLinkActive="active" (click)="showFeaturesMenu = false" *ngIf="userTier === 'TEAM'">
+                    🔑 {{ 'nav.apiKeys' | translate }}
+                  </a>
+                </div>
+              </div>
               <a routerLink="/pricing" routerLinkActive="active">
                 {{ 'nav.pricing' | translate }}
               </a>
@@ -121,6 +137,73 @@ import { ModalComponent } from './components/modal/modal.component';
       transform: translateY(-1px);
     }
 
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle {
+      background: none;
+      border: none;
+      color: #334155;
+      font-weight: 600;
+      padding: 0.5rem 0;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      font-size: 1rem;
+
+      &:hover {
+        color: #1E40AF;
+      }
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: var(--shadow-lg);
+      margin-top: 0.5rem;
+      min-width: 180px;
+      z-index: 1001;
+      animation: fadeIn 0.2s ease-out;
+
+      a {
+        display: block;
+        padding: 0.75rem 1rem;
+        color: var(--text-primary);
+        font-weight: 500;
+        border-bottom: none !important;
+        transition: background 0.2s;
+
+        &:hover {
+          background: var(--bg-secondary);
+          transform: none !important;
+        }
+
+        &:first-child {
+          border-radius: 8px 8px 0 0;
+        }
+
+        &:last-child {
+          border-radius: 0 0 8px 8px;
+        }
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .nav-actions {
       display: flex;
       gap: 1rem;
@@ -193,6 +276,7 @@ import { ModalComponent } from './components/modal/modal.component';
 export class AppComponent implements OnInit {
   @ViewChild(AuthComponent) authComponent!: AuthComponent;
   currentUser$;
+  showFeaturesMenu = false;
 
   constructor(
     private authService: AuthService,
@@ -201,10 +285,18 @@ export class AppComponent implements OnInit {
     this.currentUser$ = this.authService.currentUser$;
   }
 
+  get userTier(): string {
+    return this.authService.currentUserValue?.subscriptionTier || 'FREE';
+  }
+
   ngOnInit() {
     const savedLang = localStorage.getItem('language') || 'en';
     this.translate.setDefaultLang('en');
     this.translate.use(savedLang);
+  }
+
+  toggleFeaturesMenu(): void {
+    this.showFeaturesMenu = !this.showFeaturesMenu;
   }
 
   openLogin(): void {

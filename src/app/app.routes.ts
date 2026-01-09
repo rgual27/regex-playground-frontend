@@ -27,6 +27,21 @@ export const routes: Routes = [
       .then(m => m.ContactComponent)
   },
   {
+    path: 'folders',
+    loadComponent: () => import('./components/folder-manager/folder-manager.component')
+      .then(m => m.FolderManagerComponent)
+  },
+  {
+    path: 'teams',
+    loadComponent: () => import('./components/team-manager/team-manager.component')
+      .then(m => m.TeamManagerComponent)
+  },
+  {
+    path: 'api-keys',
+    loadComponent: () => import('./components/api-keys/api-keys.component')
+      .then(m => m.ApiKeysComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
