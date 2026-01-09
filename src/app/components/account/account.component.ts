@@ -363,7 +363,20 @@ export class AccountComponent implements OnInit {
   }
 
   manageBilling() {
-    this.notificationService.info('Redirecting to Stripe billing portal...\nThis feature will be implemented with Stripe Customer Portal.');
+    this.loading = true;
+    this.notificationService.info('Redirecting to Stripe billing portal...');
+
+    this.subscriptionService.createBillingPortalSession().subscribe({
+      next: (response) => {
+        // Redirect to Stripe billing portal
+        window.location.href = response.url;
+      },
+      error: (error) => {
+        console.error('Error creating billing portal session:', error);
+        this.notificationService.error(error.error?.error || 'Failed to open billing portal. Please try again.');
+        this.loading = false;
+      }
+    });
   }
 
   async cancelSubscription() {

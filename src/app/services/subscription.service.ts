@@ -26,4 +26,8 @@ export class SubscriptionService {
   cancelSubscription(): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(`${this.apiUrl}/api/subscriptions/cancel`, {});
   }
+
+  createBillingPortalSession(): Observable<{ url: string }> {
+    return this.http.post<{ url: string }>(`${this.apiUrl}/api/subscriptions/billing-portal`, {});
+  }
 }
