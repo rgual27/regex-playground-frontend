@@ -106,6 +106,17 @@ button {
   color: white;
 }
 
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.w-full {
+  width: 100%;
+}
+
 input, textarea, select {
   font-family: inherit;
   font-size: 1rem;

@@ -35,7 +35,7 @@ import { NotificationService } from '../../services/notification.service';
             <li>❌ {{ 'pricing.free.features.6' | translate }}</li>
             <li>❌ {{ 'pricing.free.features.7' | translate }}</li>
           </ul>
-          <button class="btn btn-secondary w-full">{{ 'pricing.currentPlan' | translate }}</button>
+          <button class="btn btn-secondary w-full" disabled>{{ 'pricing.currentPlan' | translate }}</button>
         </div>
 
         <!-- Pro Plan -->
@@ -57,10 +57,18 @@ import { NotificationService } from '../../services/notification.service';
             <li>✅ {{ 'pricing.pro.features.6' | translate }}</li>
             <li>❌ {{ 'pricing.pro.features.7' | translate }}</li>
           </ul>
-          <button class="btn btn-primary w-full" (click)="subscribe('PRO')" [disabled]="loading">
-            {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
+          <button
+            class="btn w-full"
+            [class.btn-primary]="currentTier !== 'PRO'"
+            [class.btn-secondary]="currentTier === 'PRO'"
+            (click)="subscribe('PRO')"
+            [disabled]="loading || currentTier === 'PRO'">
+            <span *ngIf="currentTier === 'PRO'">{{ 'pricing.currentPlan' | translate }}</span>
+            <span *ngIf="currentTier !== 'PRO'">
+              {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
+            </span>
           </button>
-          <p class="trial-note">{{ 'pricing.trialNote' | translate }}</p>
+          <p class="trial-note" *ngIf="currentTier !== 'PRO'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
 
         <!-- Team Plan -->
@@ -82,10 +90,18 @@ import { NotificationService } from '../../services/notification.service';
             <li>✅ {{ 'pricing.team.features.6' | translate }}</li>
             <li>✅ {{ 'pricing.team.features.7' | translate }}</li>
           </ul>
-          <button class="btn btn-primary w-full" (click)="subscribe('TEAM')" [disabled]="loading">
-            {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
+          <button
+            class="btn w-full"
+            [class.btn-primary]="currentTier !== 'TEAM'"
+            [class.btn-secondary]="currentTier === 'TEAM'"
+            (click)="subscribe('TEAM')"
+            [disabled]="loading || currentTier === 'TEAM'">
+            <span *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</span>
+            <span *ngIf="currentTier !== 'TEAM'">
+              {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
+            </span>
           </button>
-          <p class="trial-note">{{ 'pricing.trialNote' | translate }}</p>
+          <p class="trial-note" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
       </div>
 
