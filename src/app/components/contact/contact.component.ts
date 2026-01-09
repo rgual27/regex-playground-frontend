@@ -86,7 +86,7 @@ import { FormsModule } from '@angular/forms';
             <h3>💬 Get in Touch</h3>
             <div class="info-item">
               <strong>Email:</strong>
-              <a href="mailto:support@regexplayground.com">support@regexplayground.com</a>
+              <a href="mailto:support&#64;regexplayground.com">support&#64;regexplayground.com</a>
             </div>
             <div class="info-item">
               <strong>Response Time:</strong>
