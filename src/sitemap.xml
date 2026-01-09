@@ -4,36 +4,44 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage - Highest Priority -->
+  <!-- Homepage / Regex Tester - Highest Priority -->
   <url>
     <loc>https://www.regexplayground.com/</loc>
-    <lastmod>2026-01-08</lastmod>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- Regex Tester - Main Tool -->
-  <url>
-    <loc>https://www.regexplayground.com/</loc>
-    <lastmod>2026-01-08</lastmod>
-    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Pattern Library -->
   <url>
     <loc>https://www.regexplayground.com/library</loc>
-    <lastmod>2026-01-08</lastmod>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
   <!-- Pricing Page -->
   <url>
     <loc>https://www.regexplayground.com/pricing</loc>
-    <lastmod>2026-01-08</lastmod>
+    <lastmod>2026-01-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://www.regexplayground.com/contact</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Account Management -->
+  <url>
+    <loc>https://www.regexplayground.com/account</loc>
+    <lastmod>2026-01-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 
 </urlset>
