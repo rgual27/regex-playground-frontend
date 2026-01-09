@@ -53,13 +53,13 @@
   },
   "pricing": {
     "title": "Precios Simples y Transparentes",
-    "subtitle": "Elige el plan que se ajuste a tus necesidades. Todos los planes incluyen 14 días de prueba gratuita.",
+    "subtitle": "Elige el plan que se ajuste a tus necesidades. Cancela en cualquier momento.",
     "currentPlan": "PLAN ACTUAL",
     "mostPopular": "MÁS POPULAR",
     "bestValue": "MEJOR VALOR",
     "getStarted": "Comenzar",
-    "startTrial": "Comenzar Prueba Gratuita",
-    "trialNote": "No se requiere tarjeta de crédito para la prueba",
+    "startTrial": "Suscribirse Ahora",
+    "trialNote": "Cancela en cualquier momento",
     "free": {
       "title": "Gratis",
       "period": "/mes",

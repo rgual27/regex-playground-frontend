@@ -53,13 +53,13 @@
   },
   "pricing": {
     "title": "Simple, Transparent Pricing",
-    "subtitle": "Choose the plan that fits your needs. All plans include 14-day free trial.",
+    "subtitle": "Choose the plan that fits your needs. Cancel anytime.",
     "currentPlan": "CURRENT PLAN",
     "mostPopular": "MOST POPULAR",
     "bestValue": "BEST VALUE",
     "getStarted": "Get Started",
-    "startTrial": "Start Free Trial",
-    "trialNote": "No credit card required for trial",
+    "startTrial": "Subscribe Now",
+    "trialNote": "Cancel anytime",
     "free": {
       "title": "Free",
       "period": "/month",
