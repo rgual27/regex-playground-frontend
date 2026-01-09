@@ -3,6 +3,7 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthService } from './services/auth.service';
+import { AnalyticsService } from './services/analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -182,7 +183,7 @@ export class AppComponent {
   @ViewChild(AuthComponent) authComponent!: AuthComponent;
   currentUser$;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private analyticsService: AnalyticsService) {
     this.currentUser$ = this.authService.currentUser$;
   }
 
