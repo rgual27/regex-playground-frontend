@@ -64,7 +64,7 @@ import { NotificationService } from '../../services/notification.service';
           <div class="plan-badge pro" *ngIf="currentTier !== 'PRO'">{{ 'pricing.mostPopular' | translate }}</div>
           <h3>{{ 'pricing.pro.title' | translate }}</h3>
           <div class="price">
-            <span class="amount">${{ billingPeriod === 'monthly' ? '7' : '67' }}</span>
+            <span class="amount">{{ billingPeriod === 'monthly' ? '$7' : '$67' }}</span>
             <span class="period">{{ billingPeriod === 'monthly' ? '/month' : '/year' }}</span>
             <span class="savings" *ngIf="billingPeriod === 'annual'">Save $17/year</span>
           </div>
@@ -98,7 +98,7 @@ import { NotificationService } from '../../services/notification.service';
           <div class="plan-badge" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.bestValue' | translate }}</div>
           <h3>{{ 'pricing.team.title' | translate }}</h3>
           <div class="price">
-            <span class="amount">${{ billingPeriod === 'monthly' ? '25' : '240' }}</span>
+            <span class="amount">{{ billingPeriod === 'monthly' ? '$25' : '$240' }}</span>
             <span class="period">{{ billingPeriod === 'monthly' ? '/month' : '/year' }}</span>
             <span class="savings" *ngIf="billingPeriod === 'annual'">Save $60/year</span>
           </div>
