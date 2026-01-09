@@ -351,7 +351,7 @@ export class AccountComponent implements OnInit {
   }
 
   updateMaxPatterns() {
-    if (this.subscriptionTier === 'PRO' || this.subscriptionTier === 'TEAM') {
+    if (this.subscriptionTier === 'PRO') {
       this.maxPatterns = Infinity;
     } else {
       this.maxPatterns = 5;

@@ -227,7 +227,7 @@ import { ExportModalComponent } from '../export-modal/export-modal.component';
                 class="form-control"
                 (keyup.enter)="confirmSavePattern()">
             </div>
-            <div class="form-group" *ngIf="(currentTier === 'PRO' || currentTier === 'TEAM') && folders.length > 0">
+            <div class="form-group" *ngIf="currentTier === 'PRO' && folders.length > 0">
               <label>📁 Folder (Optional)</label>
               <select [(ngModel)]="selectedFolderId" class="form-control">
                 <option [ngValue]="null">No folder</option>

@@ -25,7 +25,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
       </div>
 
       <!-- Folder Filter -->
-      <div class="folder-filter" *ngIf="(userTier === 'PRO' || userTier === 'TEAM') && folders.length > 0">
+      <div class="folder-filter" *ngIf="userTier === 'PRO' && folders.length > 0">
         <label>📁 Filter by folder:</label>
         <div class="folder-chips">
           <button
@@ -103,7 +103,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
                   rows="3"></textarea>
               </div>
 
-              <div class="form-group" *ngIf="(userTier === 'PRO' || userTier === 'TEAM') && folders.length > 0">
+              <div class="form-group" *ngIf="userTier === 'PRO' && folders.length > 0">
                 <label for="folder">{{ 'library.folder' | translate }}</label>
                 <select
                   id="folder"
@@ -191,7 +191,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
                   rows="3"></textarea>
               </div>
 
-              <div class="form-group" *ngIf="(userTier === 'PRO' || userTier === 'TEAM') && folders.length > 0">
+              <div class="form-group" *ngIf="userTier === 'PRO' && folders.length > 0">
                 <label for="editFolder">📁 {{ 'library.folder' | translate }}</label>
                 <select
                   id="editFolder"
@@ -258,7 +258,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
             <h3>{{ pattern.name }}</h3>
             <div class="pattern-actions">
               <button class="btn-icon" (click)="editPattern(pattern)" [title]="'common.edit' | translate">✏️</button>
-              <button class="btn-icon" (click)="showVersionHistory(pattern)" [title]="'library.versions' | translate" *ngIf="userTier === 'PRO' || userTier === 'TEAM'">📜</button>
+              <button class="btn-icon" (click)="showVersionHistory(pattern)" [title]="'library.versions' | translate" *ngIf="userTier === 'PRO'">📜</button>
               <button class="btn-icon" (click)="deletePattern(pattern.id!)" [title]="'library.delete' | translate">🗑️</button>
             </div>
           </div>
@@ -757,7 +757,7 @@ export class PatternLibraryComponent implements OnInit {
   ngOnInit() {
     if (this.isAuthenticated) {
       this.loadPatterns();
-      if (this.userTier === 'PRO' || this.userTier === 'TEAM') {
+      if (this.userTier === 'PRO') {
         this.loadFolders();
       }
     }

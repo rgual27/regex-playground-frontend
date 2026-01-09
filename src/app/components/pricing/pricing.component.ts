@@ -89,39 +89,6 @@ import { NotificationService } from '../../services/notification.service';
           <p class="trial-note" *ngIf="currentTier !== 'PRO'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
 
-        <!-- Team Plan -->
-        <div class="pricing-card" [class.current]="currentTier === 'TEAM'" *ngIf="!tierLoading">
-          <div class="plan-badge" *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</div>
-          <div class="plan-badge" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.bestValue' | translate }}</div>
-          <h3>{{ 'pricing.team.title' | translate }}</h3>
-          <div class="price">
-            <span class="amount">{{ billingPeriod === 'monthly' ? '$25' : '$240' }}</span>
-            <span class="period">{{ billingPeriod === 'monthly' ? '/month' : '/year' }}</span>
-            <span class="savings" *ngIf="billingPeriod === 'annual'">Save $60/year</span>
-          </div>
-          <ul class="features">
-            <li>✅ {{ 'pricing.team.features.0' | translate }}</li>
-            <li>✅ {{ 'pricing.team.features.1' | translate }}</li>
-            <li>✅ {{ 'pricing.team.features.2' | translate }}</li>
-            <li>✅ {{ 'pricing.team.features.3' | translate }}</li>
-            <li>✅ {{ 'pricing.team.features.4' | translate }}</li>
-            <li>✅ {{ 'pricing.team.features.5' | translate }}</li>
-            <li>✅ {{ 'pricing.team.features.6' | translate }}</li>
-            <li>✅ {{ 'pricing.team.features.7' | translate }}</li>
-          </ul>
-          <button
-            class="btn w-full"
-            [class.btn-primary]="currentTier !== 'TEAM'"
-            [class.btn-secondary]="currentTier === 'TEAM'"
-            (click)="subscribe('TEAM')"
-            [disabled]="loading || currentTier === 'TEAM'">
-            <span *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</span>
-            <span *ngIf="currentTier !== 'TEAM'">
-              {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
-            </span>
-          </button>
-          <p class="trial-note" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.trialNote' | translate }}</p>
-        </div>
       </div>
 
       <div class="faq-section">
