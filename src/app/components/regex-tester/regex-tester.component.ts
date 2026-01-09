@@ -5,6 +5,7 @@ import { RegexService, RegexTestRequest, RegexTestResponse } from '../../service
 import { PatternService, RegexPattern } from '../../services/pattern.service';
 import { AuthService } from '../../services/auth.service';
 import { SubscriptionService } from '../../services/subscription.service';
+import { FolderService, Folder } from '../../services/folder.service';
 import { debounceTime, Subject } from 'rxjs';
 
 import { RouterLink } from '@angular/router';
@@ -205,6 +206,40 @@ import { ExportModalComponent } from '../export-modal/export-modal.component';
         [flags]="flagsString"
         (closeModal)="closeExportModal()">
       </app-export-modal>
+
+      <!-- Save Pattern Modal with Folder Selection -->
+      <div class="modal-overlay" *ngIf="showSavePatternModal" (click)="closeSavePatternModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Save Pattern</h3>
+            <button class="modal-close" (click)="closeSavePatternModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Pattern Name</label>
+              <input
+                type="text"
+                [(ngModel)]="newPatternName"
+                placeholder="My regex pattern"
+                class="form-control"
+                (keyup.enter)="confirmSavePattern()">
+            </div>
+            <div class="form-group" *ngIf="(currentTier === 'PRO' || currentTier === 'TEAM') && folders.length > 0">
+              <label>📁 Folder (Optional)</label>
+              <select [(ngModel)]="selectedFolderId" class="form-control">
+                <option [ngValue]="null">No folder</option>
+                <option *ngFor="let folder of folders" [ngValue]="folder.id">
+                  📁 {{ folder.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-secondary" (click)="closeSavePatternModal()">Cancel</button>
+            <button class="btn btn-primary" (click)="confirmSavePattern()" [disabled]="!newPatternName">Save</button>
+          </div>
+        </div>
+      </div>
     </div>
   `,
   styleUrls: ['./regex-tester.component.scss']
@@ -238,12 +273,17 @@ export class RegexTesterComponent implements OnInit {
   currentTier: string = 'FREE';
   showUpgradeButton: boolean = true;
   showExportModal: boolean = false;
+  folders: Folder[] = [];
+  showSavePatternModal: boolean = false;
+  newPatternName: string = '';
+  selectedFolderId: number | null = null;
 
   constructor(
     private regexService: RegexService,
     private patternService: PatternService,
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
+    private folderService: FolderService,
     private modalService: ModalService,
     private notificationService: NotificationService
   ) {}
@@ -260,6 +300,7 @@ export class RegexTesterComponent implements OnInit {
     // Load subscription tier to determine upgrade button visibility
     if (this.isAuthenticated) {
       this.loadSubscriptionTier();
+      this.loadFolders();
     }
 
     // Check if there's a pattern to load from sessionStorage (from library)
@@ -267,6 +308,17 @@ export class RegexTesterComponent implements OnInit {
     if (patternToLoad) {
       this.loadPatternFromLibrary(patternToLoad);
     }
+  }
+
+  loadFolders() {
+    this.folderService.getFolders().subscribe({
+      next: (folders) => {
+        this.folders = folders;
+      },
+      error: (error) => {
+        console.error('Error loading folders:', error);
+      }
+    });
   }
 
   loadSubscriptionTier() {
@@ -408,44 +460,50 @@ export class RegexTesterComponent implements OnInit {
         }
       });
     } else {
-      // Create new pattern
-      const patternName = await this.modalService.prompt(
-        'Save Pattern',
-        'Enter a name for this pattern:',
-        'My regex pattern',
-        '',
-        'Save',
-        'Cancel'
-      );
-
-      if (!patternName) {
-        return;
-      }
-
-      const newPattern: RegexPattern = {
-        name: patternName,
-        pattern: this.pattern,
-        testString: this.testString,
-        flags: this.flagsString,
-        description: this.result?.explanation || '',
-        isPublic: false
-      };
-
-      this.patternService.savePattern(newPattern).subscribe({
-        next: (savedPattern) => {
-          this.notificationService.success('Pattern saved successfully!');
-          this.loadedPattern = savedPattern; // Track the newly saved pattern
-        },
-        error: (error) => {
-          console.error('Error saving pattern:', error);
-          if (error.status === 403) {
-            this.notificationService.error('Authentication failed. Please login again.');
-          } else {
-            this.notificationService.error(error.error?.message || 'Failed to save pattern. Please try again.');
-          }
-        }
-      });
+      // Create new pattern - show modal
+      this.newPatternName = '';
+      this.selectedFolderId = null;
+      this.showSavePatternModal = true;
     }
+  }
+
+  closeSavePatternModal() {
+    this.showSavePatternModal = false;
+    this.newPatternName = '';
+    this.selectedFolderId = null;
+  }
+
+  confirmSavePattern() {
+    if (!this.newPatternName.trim()) {
+      this.notificationService.warning('Please enter a pattern name');
+      return;
+    }
+
+    const newPattern: RegexPattern = {
+      name: this.newPatternName,
+      pattern: this.pattern,
+      testString: this.testString,
+      flags: this.flagsString,
+      description: this.result?.explanation || '',
+      isPublic: false,
+      folderId: this.selectedFolderId || undefined
+    };
+
+    this.patternService.savePattern(newPattern).subscribe({
+      next: (savedPattern) => {
+        this.notificationService.success('Pattern saved successfully!');
+        this.loadedPattern = savedPattern;
+        this.closeSavePatternModal();
+      },
+      error: (error) => {
+        console.error('Error saving pattern:', error);
+        if (error.status === 403) {
+          this.notificationService.error('Authentication failed. Please login again.');
+        } else {
+          this.notificationService.error(error.error?.message || 'Failed to save pattern. Please try again.');
+        }
+      }
+    });
   }
 
   async savePatternAsNew() {
