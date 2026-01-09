@@ -11,11 +11,12 @@ import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../services/modal.service';
 import { NotificationService } from '../../services/notification.service';
+import { ExportModalComponent } from '../export-modal/export-modal.component';
 
 @Component({
   selector: 'app-regex-tester',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, TranslateModule],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule, ExportModalComponent],
   template: `
     <div class="container">
       <div class="hero">
@@ -155,7 +156,7 @@ import { NotificationService } from '../../services/notification.service';
           <div class="action-buttons">
             <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">💾 {{ 'common.savePattern' | translate }}</button>
             <button class="btn btn-secondary w-full" [disabled]="true">📤 {{ 'common.share' | translate }}</button>
-            <button class="btn btn-secondary w-full" [disabled]="true">💻 {{ 'common.exportCode' | translate }}</button>
+            <button class="btn btn-secondary w-full" (click)="openExportModal()" [disabled]="!pattern">💻 {{ 'common.exportCode' | translate }}</button>
             <button class="btn btn-primary w-full" routerLink="/pricing" *ngIf="showUpgradeButton">⭐ {{ 'common.upgradeToPro' | translate }}</button>
           </div>
           <p *ngIf="!isAuthenticated" class="text-sm text-secondary">{{ 'common.loginToSave' | translate }}</p>
@@ -185,6 +186,14 @@ import { NotificationService } from '../../services/notification.service';
           </div>
         </div>
       </div>
+
+      <!-- Export Modal -->
+      <app-export-modal
+        [isOpen]="showExportModal"
+        [pattern]="pattern"
+        [flags]="flagsString"
+        (closeModal)="closeExportModal()">
+      </app-export-modal>
     </div>
   `,
   styleUrls: ['./regex-tester.component.scss']
@@ -214,6 +223,7 @@ export class RegexTesterComponent implements OnInit {
   saveMessageType: 'success' | 'error' = 'success';
   currentTier: string = 'FREE';
   showUpgradeButton: boolean = true;
+  showExportModal: boolean = false;
 
   constructor(
     private regexService: RegexService,
@@ -384,5 +394,17 @@ export class RegexTesterComponent implements OnInit {
         }
       }
     });
+  }
+
+  openExportModal() {
+    if (!this.pattern) {
+      this.notificationService.warning('Please enter a regex pattern first');
+      return;
+    }
+    this.showExportModal = true;
+  }
+
+  closeExportModal() {
+    this.showExportModal = false;
   }
 }
