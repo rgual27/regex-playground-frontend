@@ -7,23 +7,24 @@ import { AuthService } from '../../services/auth.service';
 import { debounceTime, Subject } from 'rxjs';
 
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-regex-tester',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule],
   template: `
     <div class="container">
       <div class="hero">
-        <h1>🔍 Test Your Regex Patterns</h1>
-        <p>Real-time regex testing with instant results. Test JavaScript, Python, and Java patterns.</p>
+        <h1>🔍 {{ 'hero.title' | translate }}</h1>
+        <p>{{ 'hero.subtitle' | translate }}</p>
       </div>
 
       <div class="tester-grid">
         <!-- Pattern Input Section -->
         <div class="card pattern-section">
           <div class="section-header">
-            <h2>Regular Expression</h2>
+            <h2>{{ 'common.regex' | translate }}</h2>
             <div class="flags">
               <label class="flag-label">
                 <input type="checkbox" [(ngModel)]="flags.i" (change)="onFlagsChange()">
@@ -47,28 +48,28 @@ import { RouterLink } from '@angular/router';
               class="regex-input"
               [(ngModel)]="pattern"
               (ngModelChange)="onPatternChange()"
-              placeholder="Enter your regex pattern"
+              [placeholder]="'common.enterPattern' | translate"
               [class.error]="result && !result.isValid"
             >
             <span class="regex-slash">/{{ flagsString }}</span>
           </div>
 
           <div *ngIf="result && !result.isValid" class="error-message">
-            <strong>❌ Error:</strong> {{ result.error }}
+            <strong>❌ {{ 'common.error' | translate }}:</strong> {{ result.error }}
           </div>
 
           <div *ngIf="result && result.isValid && result.explanation" class="explanation">
-            <strong>💡 Pattern explanation:</strong> {{ result.explanation }}
+            <strong>💡 {{ 'common.explanation' | translate }}:</strong> {{ result.explanation }}
           </div>
         </div>
 
         <!-- Test String Section -->
         <div class="card test-section">
           <div class="section-header">
-            <h2>Test String</h2>
+            <h2>{{ 'common.testString' | translate }}</h2>
             <div class="match-counter" *ngIf="result && result.isValid">
               <span [class.has-matches]="result.matchCount! > 0">
-                {{ result.matchCount }} {{ result.matchCount === 1 ? 'match' : 'matches' }}
+                {{ result.matchCount }} {{ result.matchCount === 1 ? ('common.match' | translate) : ('common.matches' | translate) }}
               </span>
             </div>
           </div>
@@ -77,20 +78,20 @@ import { RouterLink } from '@angular/router';
             class="test-input"
             [(ngModel)]="testString"
             (ngModelChange)="onTestStringChange()"
-            placeholder="Enter test string here..."
+            [placeholder]="'common.enterTestString' | translate"
             rows="10"
           ></textarea>
 
           <div *ngIf="result && result.isValid && result.matchCount! > 0" class="matches-preview">
             <div *ngFor="let match of result.matches; let i = index" class="match-item">
               <div class="match-header">
-                <strong>Match {{ i + 1 }}</strong>
+                <strong>{{ 'common.match' | translate }} {{ i + 1 }}</strong>
                 <span class="match-position">[{{ match.start }} - {{ match.end }}]</span>
               </div>
               <div class="match-value">{{ match.fullMatch }}</div>
               <div *ngIf="match.groups.length > 0" class="match-groups">
                 <div *ngFor="let group of match.groups; let j = index" class="group-item">
-                  <span class="group-label">Group {{ j + 1 }}:</span>
+                  <span class="group-label">{{ 'common.group' | translate }} {{ j + 1 }}:</span>
                   <span class="group-value">{{ group }}</span>
                 </div>
               </div>
@@ -100,7 +101,7 @@ import { RouterLink } from '@angular/router';
 
         <!-- Quick Reference Section -->
         <div class="card reference-section">
-          <h2>Quick Reference</h2>
+          <h2>{{ 'common.quickReference' | translate }}</h2>
           <div class="reference-grid">
             <div class="reference-item" (click)="insertPattern('\\d')">
               <code>\\d</code>
@@ -147,21 +148,21 @@ import { RouterLink } from '@angular/router';
 
         <!-- Actions Section -->
         <div class="card actions-section">
-          <h2>Actions</h2>
+          <h2>{{ 'common.actions' | translate }}</h2>
           <div class="action-buttons">
-            <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">💾 Save Pattern</button>
-            <button class="btn btn-secondary w-full" [disabled]="true">📤 Share</button>
-            <button class="btn btn-secondary w-full" [disabled]="true">💻 Export Code</button>
-            <button class="btn btn-primary w-full" routerLink="/pricing">⭐ Upgrade to Pro</button>
+            <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">💾 {{ 'common.savePattern' | translate }}</button>
+            <button class="btn btn-secondary w-full" [disabled]="true">📤 {{ 'common.share' | translate }}</button>
+            <button class="btn btn-secondary w-full" [disabled]="true">💻 {{ 'common.exportCode' | translate }}</button>
+            <button class="btn btn-primary w-full" routerLink="/pricing">⭐ {{ 'common.upgradeToPro' | translate }}</button>
           </div>
-          <p *ngIf="!isAuthenticated" class="text-sm text-secondary">Login to save patterns</p>
+          <p *ngIf="!isAuthenticated" class="text-sm text-secondary">{{ 'common.loginToSave' | translate }}</p>
           <p *ngIf="saveMessage" [class]="saveMessageType === 'success' ? 'text-success' : 'text-error'">{{ saveMessage }}</p>
         </div>
       </div>
 
       <!-- Common Patterns Section -->
       <div class="card common-patterns">
-        <h2>Common Patterns</h2>
+        <h2>{{ 'common.commonPatterns' | translate }}</h2>
         <div class="patterns-grid">
           <div class="pattern-card" (click)="loadPattern(emailPattern, 'test&#64;example.com')">
             <strong>📧 Email</strong>

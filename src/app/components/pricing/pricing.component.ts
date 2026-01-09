@@ -2,109 +2,110 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SubscriptionService } from '../../services/subscription.service';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pricing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <div class="container">
       <div class="pricing-header">
-        <h1>Simple, Transparent Pricing</h1>
-        <p>Choose the plan that fits your needs. All plans include 14-day free trial.</p>
+        <h1>{{ 'pricing.title' | translate }}</h1>
+        <p>{{ 'pricing.subtitle' | translate }}</p>
       </div>
 
       <div class="pricing-grid">
         <!-- Free Plan -->
         <div class="pricing-card" [class.current]="currentTier === 'FREE'">
-          <div class="plan-badge" *ngIf="currentTier === 'FREE'">CURRENT PLAN</div>
-          <h3>Free</h3>
+          <div class="plan-badge" *ngIf="currentTier === 'FREE'">{{ 'pricing.currentPlan' | translate }}</div>
+          <h3>{{ 'pricing.free.title' | translate }}</h3>
           <div class="price">
             <span class="amount">$0</span>
-            <span class="period">/month</span>
+            <span class="period">{{ 'pricing.free.period' | translate }}</span>
           </div>
           <ul class="features">
-            <li>✅ Unlimited regex testing</li>
-            <li>✅ Real-time results</li>
-            <li>✅ 5 saved patterns</li>
-            <li>✅ Pattern explanations</li>
-            <li>✅ Quick reference</li>
-            <li>❌ Code export</li>
-            <li>❌ Private patterns</li>
-            <li>❌ Team sharing</li>
+            <li>✅ {{ 'pricing.free.features.0' | translate }}</li>
+            <li>✅ {{ 'pricing.free.features.1' | translate }}</li>
+            <li>✅ {{ 'pricing.free.features.2' | translate }}</li>
+            <li>✅ {{ 'pricing.free.features.3' | translate }}</li>
+            <li>✅ {{ 'pricing.free.features.4' | translate }}</li>
+            <li>❌ {{ 'pricing.free.features.5' | translate }}</li>
+            <li>❌ {{ 'pricing.free.features.6' | translate }}</li>
+            <li>❌ {{ 'pricing.free.features.7' | translate }}</li>
           </ul>
-          <button class="btn btn-secondary w-full">Current Plan</button>
+          <button class="btn btn-secondary w-full">{{ 'pricing.currentPlan' | translate }}</button>
         </div>
 
         <!-- Pro Plan -->
         <div class="pricing-card featured" [class.current]="currentTier === 'PRO'">
-          <div class="plan-badge pro" *ngIf="currentTier === 'PRO'">CURRENT PLAN</div>
-          <div class="plan-badge pro" *ngIf="currentTier !== 'PRO'">MOST POPULAR</div>
-          <h3>Pro</h3>
+          <div class="plan-badge pro" *ngIf="currentTier === 'PRO'">{{ 'pricing.currentPlan' | translate }}</div>
+          <div class="plan-badge pro" *ngIf="currentTier !== 'PRO'">{{ 'pricing.mostPopular' | translate }}</div>
+          <h3>{{ 'pricing.pro.title' | translate }}</h3>
           <div class="price">
             <span class="amount">$7</span>
-            <span class="period">/month</span>
+            <span class="period">{{ 'pricing.pro.period' | translate }}</span>
           </div>
           <ul class="features">
-            <li>✅ Everything in Free</li>
-            <li>✅ Unlimited saved patterns</li>
-            <li>✅ Organize in folders</li>
-            <li>✅ Export code (Java, JS, Python)</li>
-            <li>✅ Private patterns</li>
-            <li>✅ Version history</li>
-            <li>✅ Priority support</li>
-            <li>❌ Team collaboration</li>
+            <li>✅ {{ 'pricing.pro.features.0' | translate }}</li>
+            <li>✅ {{ 'pricing.pro.features.1' | translate }}</li>
+            <li>✅ {{ 'pricing.pro.features.2' | translate }}</li>
+            <li>✅ {{ 'pricing.pro.features.3' | translate }}</li>
+            <li>✅ {{ 'pricing.pro.features.4' | translate }}</li>
+            <li>✅ {{ 'pricing.pro.features.5' | translate }}</li>
+            <li>✅ {{ 'pricing.pro.features.6' | translate }}</li>
+            <li>❌ {{ 'pricing.pro.features.7' | translate }}</li>
           </ul>
           <button class="btn btn-primary w-full" (click)="subscribe('PRO')" [disabled]="loading">
-            {{ loading && selectedTier === 'PRO' ? 'Loading...' : 'Start Free Trial' }}
+            {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
           </button>
-          <p class="trial-note">No credit card required for trial</p>
+          <p class="trial-note">{{ 'pricing.trialNote' | translate }}</p>
         </div>
 
         <!-- Team Plan -->
         <div class="pricing-card" [class.current]="currentTier === 'TEAM'">
-          <div class="plan-badge" *ngIf="currentTier === 'TEAM'">CURRENT PLAN</div>
-          <div class="plan-badge" *ngIf="currentTier !== 'TEAM'">BEST VALUE</div>
-          <h3>Team</h3>
+          <div class="plan-badge" *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</div>
+          <div class="plan-badge" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.bestValue' | translate }}</div>
+          <h3>{{ 'pricing.team.title' | translate }}</h3>
           <div class="price">
             <span class="amount">$25</span>
-            <span class="period">/month</span>
+            <span class="period">{{ 'pricing.team.period' | translate }}</span>
           </div>
           <ul class="features">
-            <li>✅ Everything in Pro</li>
-            <li>✅ Unlimited team members</li>
-            <li>✅ Shared pattern library</li>
-            <li>✅ Team analytics</li>
-            <li>✅ API access (1000 calls/day)</li>
-            <li>✅ Slack integration</li>
-            <li>✅ SSO (optional)</li>
-            <li>✅ Priority support</li>
+            <li>✅ {{ 'pricing.team.features.0' | translate }}</li>
+            <li>✅ {{ 'pricing.team.features.1' | translate }}</li>
+            <li>✅ {{ 'pricing.team.features.2' | translate }}</li>
+            <li>✅ {{ 'pricing.team.features.3' | translate }}</li>
+            <li>✅ {{ 'pricing.team.features.4' | translate }}</li>
+            <li>✅ {{ 'pricing.team.features.5' | translate }}</li>
+            <li>✅ {{ 'pricing.team.features.6' | translate }}</li>
+            <li>✅ {{ 'pricing.team.features.7' | translate }}</li>
           </ul>
           <button class="btn btn-primary w-full" (click)="subscribe('TEAM')" [disabled]="loading">
-            {{ loading && selectedTier === 'TEAM' ? 'Loading...' : 'Start Free Trial' }}
+            {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
           </button>
-          <p class="trial-note">No credit card required for trial</p>
+          <p class="trial-note">{{ 'pricing.trialNote' | translate }}</p>
         </div>
       </div>
 
       <div class="faq-section">
-        <h2>Frequently Asked Questions</h2>
+        <h2>{{ 'pricing.faq.title' | translate }}</h2>
         <div class="faq-grid">
           <div class="faq-item">
-            <h4>Can I cancel anytime?</h4>
-            <p>Yes! You can cancel your subscription at any time. No questions asked.</p>
+            <h4>{{ 'pricing.faq.q1' | translate }}</h4>
+            <p>{{ 'pricing.faq.a1' | translate }}</p>
           </div>
           <div class="faq-item">
-            <h4>Do you offer refunds?</h4>
-            <p>Yes, we offer a 30-day money-back guarantee for all paid plans.</p>
+            <h4>{{ 'pricing.faq.q2' | translate }}</h4>
+            <p>{{ 'pricing.faq.a2' | translate }}</p>
           </div>
           <div class="faq-item">
-            <h4>What payment methods do you accept?</h4>
-            <p>We accept all major credit cards via Stripe. Enterprise plans can pay via invoice.</p>
+            <h4>{{ 'pricing.faq.q3' | translate }}</h4>
+            <p>{{ 'pricing.faq.a3' | translate }}</p>
           </div>
           <div class="faq-item">
-            <h4>Is there a discount for annual billing?</h4>
-            <p>Yes! Save 20% by paying annually. Contact us for details.</p>
+            <h4>{{ 'pricing.faq.q4' | translate }}</h4>
+            <p>{{ 'pricing.faq.a4' | translate }}</p>
           </div>
         </div>
       </div>

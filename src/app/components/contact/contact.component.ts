@@ -2,67 +2,68 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   template: `
     <div class="container">
       <div class="contact-header">
-        <h1>📧 Contact Us</h1>
-        <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        <h1>📧 {{ 'contact.title' | translate }}</h1>
+        <p>{{ 'contact.subtitle' | translate }}</p>
       </div>
 
       <div class="contact-grid">
         <div class="card contact-form">
-          <h2>Send us a message</h2>
+          <h2>{{ 'contact.form.title' | translate }}</h2>
           <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
             <div class="form-group">
-              <label for="name">Your Name</label>
+              <label for="name">{{ 'contact.form.name' | translate }}</label>
               <input
                 type="text"
                 id="name"
                 [(ngModel)]="formData.name"
                 name="name"
                 required
-                placeholder="John Doe"
+                [placeholder]="'contact.form.namePlaceholder' | translate"
               >
             </div>
 
             <div class="form-group">
-              <label for="email">Your Email</label>
+              <label for="email">{{ 'contact.form.email' | translate }}</label>
               <input
                 type="email"
                 id="email"
                 [(ngModel)]="formData.email"
                 name="email"
                 required
-                placeholder="john@example.com"
+                [placeholder]="'contact.form.emailPlaceholder' | translate"
               >
             </div>
 
             <div class="form-group">
-              <label for="subject">Subject</label>
+              <label for="subject">{{ 'contact.form.subject' | translate }}</label>
               <input
                 type="text"
                 id="subject"
                 [(ngModel)]="formData.subject"
                 name="subject"
                 required
-                placeholder="How can we help?"
+                [placeholder]="'contact.form.subjectPlaceholder' | translate"
               >
             </div>
 
             <div class="form-group">
-              <label for="message">Message</label>
+              <label for="message">{{ 'contact.form.message' | translate }}</label>
               <textarea
                 id="message"
                 [(ngModel)]="formData.message"
                 name="message"
                 required
                 rows="6"
-                placeholder="Tell us more about your question or feedback..."
+                [placeholder]="'contact.form.messagePlaceholder' | translate"
               ></textarea>
             </div>
 
@@ -70,7 +71,7 @@ import { ContactService } from '../../services/contact.service';
               type="submit"
               class="btn btn-primary w-full"
               [disabled]="!contactForm.valid || loading">
-              {{ loading ? 'Sending...' : 'Send Message' }}
+              {{ loading ? ('contact.form.sending' | translate) : ('contact.form.send' | translate) }}
             </button>
 
             <p class="success-message" *ngIf="successMessage">
@@ -84,35 +85,35 @@ import { ContactService } from '../../services/contact.service';
 
         <div class="contact-info">
           <div class="card info-card">
-            <h3>💬 Get in Touch</h3>
+            <h3>💬 {{ 'contact.info.title' | translate }}</h3>
             <div class="info-item">
-              <strong>Email:</strong>
+              <strong>{{ 'contact.info.email' | translate }}:</strong>
               <a href="mailto:rgb.for.business&#64;gmail.com">rgb.for.business&#64;gmail.com</a>
             </div>
             <div class="info-item">
-              <strong>Response Time:</strong>
-              <span>Usually within 24 hours</span>
+              <strong>{{ 'contact.info.responseTime' | translate }}:</strong>
+              <span>{{ 'contact.info.responseValue' | translate }}</span>
             </div>
           </div>
 
           <div class="card faq-card">
-            <h3>❓ Quick FAQ</h3>
+            <h3>❓ {{ 'contact.faq.title' | translate }}</h3>
             <div class="faq-item">
-              <strong>Can I upgrade my plan?</strong>
-              <p>Yes! Go to Pricing and choose your plan.</p>
+              <strong>{{ 'contact.faq.q1' | translate }}</strong>
+              <p>{{ 'contact.faq.a1' | translate }}</p>
             </div>
             <div class="faq-item">
-              <strong>How do I export code?</strong>
-              <p>Pro users can export regex to Java, JavaScript, and Python from the tester.</p>
+              <strong>{{ 'contact.faq.q2' | translate }}</strong>
+              <p>{{ 'contact.faq.a2' | translate }}</p>
             </div>
             <div class="faq-item">
-              <strong>Need help with regex?</strong>
-              <p>Check our pattern library for common examples and explanations.</p>
+              <strong>{{ 'contact.faq.q3' | translate }}</strong>
+              <p>{{ 'contact.faq.a3' | translate }}</p>
             </div>
           </div>
 
           <div class="card social-card">
-            <h3>🌐 Follow Us</h3>
+            <h3>🌐 {{ 'contact.social.title' | translate }}</h3>
             <div class="social-links">
               <a href="https://github.com/rgual27" target="_blank" rel="noopener noreferrer" class="social-link">
                 <span>GitHub</span>

@@ -3,51 +3,52 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { SubscriptionService } from '../../services/subscription.service';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <div class="container">
       <div class="account-header">
-        <h1>My Account</h1>
-        <p>Manage your subscription and account settings</p>
+        <h1>{{ 'account.title' | translate }}</h1>
+        <p>{{ 'account.subtitle' | translate }}</p>
       </div>
 
       <div class="account-grid">
         <!-- User Information -->
         <div class="card account-info">
-          <h2>👤 Profile Information</h2>
+          <h2>👤 {{ 'account.profile.title' | translate }}</h2>
           <div class="info-row" *ngIf="user">
-            <span class="label">Full Name:</span>
+            <span class="label">{{ 'account.profile.fullName' | translate }}:</span>
             <span class="value">{{ user.fullName }}</span>
           </div>
           <div class="info-row" *ngIf="user">
-            <span class="label">Email:</span>
+            <span class="label">{{ 'account.profile.email' | translate }}:</span>
             <span class="value">{{ user.email }}</span>
           </div>
           <div class="info-row" *ngIf="user">
-            <span class="label">Member Since:</span>
+            <span class="label">{{ 'account.profile.memberSince' | translate }}:</span>
             <span class="value">{{ user.createdAt | date }}</span>
           </div>
         </div>
 
         <!-- Subscription Information -->
         <div class="card subscription-info">
-          <h2>💳 Subscription</h2>
+          <h2>💳 {{ 'account.subscription.title' | translate }}</h2>
           <div class="current-plan">
             <div class="plan-badge" [class]="subscriptionTier.toLowerCase()">
               {{ subscriptionTier }}
             </div>
             <p class="plan-description" *ngIf="subscriptionTier === 'FREE'">
-              You're currently on the free plan with limited features.
+              {{ 'account.subscription.freeDesc' | translate }}
             </p>
             <p class="plan-description" *ngIf="subscriptionTier === 'PRO'">
-              You have access to all Pro features including unlimited patterns and code export.
+              {{ 'account.subscription.proDesc' | translate }}
             </p>
             <p class="plan-description" *ngIf="subscriptionTier === 'TEAM'">
-              You have access to all Team features including collaboration and API access.
+              {{ 'account.subscription.teamDesc' | translate }}
             </p>
           </div>
 
@@ -56,59 +57,59 @@ import { Router } from '@angular/router';
               class="btn btn-primary"
               (click)="goToPricing()"
               *ngIf="subscriptionTier === 'FREE'">
-              Upgrade Plan
+              {{ 'account.subscription.upgrade' | translate }}
             </button>
             <button
               class="btn btn-secondary"
               (click)="manageBilling()"
               *ngIf="subscriptionTier !== 'FREE'">
-              Manage Billing
+              {{ 'account.subscription.manageBilling' | translate }}
             </button>
             <button
               class="btn btn-danger"
               (click)="cancelSubscription()"
               *ngIf="subscriptionTier !== 'FREE'"
               [disabled]="loading">
-              {{ loading ? 'Canceling...' : 'Cancel Subscription' }}
+              {{ loading ? ('account.subscription.canceling' | translate) : ('account.subscription.cancel' | translate) }}
             </button>
           </div>
         </div>
 
         <!-- Usage Statistics -->
         <div class="card usage-stats">
-          <h2>📊 Usage Statistics</h2>
+          <h2>📊 {{ 'account.usage.title' | translate }}</h2>
           <div class="stat-item">
-            <span class="stat-label">Saved Patterns:</span>
+            <span class="stat-label">{{ 'account.usage.savedPatterns' | translate }}:</span>
             <span class="stat-value">{{ savedPatternsCount }} / {{ maxPatterns }}</span>
           </div>
           <div class="stat-item">
-            <span class="stat-label">Tests Run:</span>
+            <span class="stat-label">{{ 'account.usage.testsRun' | translate }}:</span>
             <span class="stat-value">∞</span>
           </div>
           <div class="stat-item" *ngIf="subscriptionTier === 'TEAM'">
-            <span class="stat-label">Team Members:</span>
-            <span class="stat-value">1 / Unlimited</span>
+            <span class="stat-label">{{ 'account.usage.teamMembers' | translate }}:</span>
+            <span class="stat-value">1 / {{ 'account.usage.unlimited' | translate }}</span>
           </div>
         </div>
 
         <!-- Quick Actions -->
         <div class="card quick-actions">
-          <h2>⚡ Quick Actions</h2>
+          <h2>⚡ {{ 'account.actions.title' | translate }}</h2>
           <button class="action-btn" (click)="goToTester()">
             <span class="icon">🔍</span>
-            <span class="text">Test Regex</span>
+            <span class="text">{{ 'account.actions.testRegex' | translate }}</span>
           </button>
           <button class="action-btn" (click)="goToLibrary()">
             <span class="icon">📚</span>
-            <span class="text">Pattern Library</span>
+            <span class="text">{{ 'account.actions.library' | translate }}</span>
           </button>
           <button class="action-btn" (click)="goToContact()">
             <span class="icon">📧</span>
-            <span class="text">Contact Support</span>
+            <span class="text">{{ 'account.actions.contact' | translate }}</span>
           </button>
           <button class="action-btn danger" (click)="logout()">
             <span class="icon">🚪</span>
-            <span class="text">Logout</span>
+            <span class="text">{{ 'account.actions.logout' | translate }}</span>
           </button>
         </div>
       </div>
