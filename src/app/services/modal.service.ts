@@ -45,7 +45,7 @@ export class ModalService {
     this.modal$.next(config);
 
     const result = await firstValueFrom(
-      this.result$.pipe(filter(r => r !== null && r.id === id))
+      this.result$.pipe(filter((r): r is ModalResult => r !== null && r.id === id))
     );
 
     this.modal$.next(null);
@@ -71,7 +71,7 @@ export class ModalService {
     this.modal$.next(config);
 
     const result = await firstValueFrom(
-      this.result$.pipe(filter(r => r !== null && r.id === id))
+      this.result$.pipe(filter((r): r is ModalResult => r !== null && r.id === id))
     );
 
     this.modal$.next(null);
