@@ -2,12 +2,17 @@
   "nav": {
     "tester": "Probador",
     "library": "Biblioteca",
+    "features": "Funcionalidades",
+    "folders": "Carpetas",
+    "teams": "Equipos",
+    "apiKeys": "API Keys",
     "pricing": "Precios",
     "contact": "Contacto",
     "myAccount": "Mi Cuenta",
     "login": "Iniciar Sesión",
     "signup": "Registrarse",
-    "logout": "Cerrar Sesión"
+    "logout": "Cerrar Sesión",
+    "versions": "Historial de Versiones"
   },
   "hero": {
     "title": "Prueba tus Patrones Regex",
@@ -15,9 +20,17 @@
   },
   "common": {
     "save": "Guardar",
+    "saving": "Guardando...",
     "cancel": "Cancelar",
     "delete": "Eliminar",
+    "deleting": "Eliminando...",
     "edit": "Editar",
+    "create": "Crear",
+    "creating": "Creando...",
+    "close": "Cerrar",
+    "copy": "Copiar",
+    "adding": "Agregando...",
+    "restoring": "Restaurando...",
     "loading": "Cargando...",
     "error": "Error",
     "success": "Éxito",
@@ -189,7 +202,79 @@
     "flags": "Modificadores",
     "description": "Descripción",
     "descriptionPlaceholder": "¿Qué hace este patrón?",
-    "makePublic": "Hacer este patrón público"
+    "makePublic": "Hacer este patrón público",
+    "folder": "Carpeta",
+    "noFolder": "Sin carpeta"
+  },
+  "folders": {
+    "title": "Carpetas",
+    "create": "Crear Carpeta",
+    "edit": "Editar Carpeta",
+    "name": "Nombre de Carpeta",
+    "description": "Descripción",
+    "color": "Color",
+    "patterns": "patrones",
+    "empty": {
+      "title": "Aún no hay carpetas",
+      "description": "Crea carpetas para organizar tus patrones"
+    },
+    "deleteConfirm": "Eliminar Carpeta",
+    "deleteWarning": "¿Estás seguro de que deseas eliminar esta carpeta? Los patrones dentro no se eliminarán."
+  },
+  "teams": {
+    "title": "Equipos",
+    "create": "Crear Equipo",
+    "edit": "Editar Equipo",
+    "name": "Nombre del Equipo",
+    "description": "Descripción",
+    "members": "Miembros",
+    "viewMembers": "Ver Miembros",
+    "addMember": "Agregar Miembro",
+    "memberEmail": "Email del Miembro",
+    "noMembers": "Aún no hay miembros",
+    "empty": {
+      "title": "Aún no hay equipos",
+      "description": "Crea equipos para colaborar con tus colegas"
+    },
+    "deleteConfirm": "Eliminar Equipo",
+    "deleteWarning": "¿Estás seguro de que deseas eliminar este equipo? Esta acción no se puede deshacer."
+  },
+  "apiKeys": {
+    "title": "API Keys",
+    "subtitle": "Administra tus claves de acceso a la API",
+    "create": "Crear API Key",
+    "name": "Nombre de la Clave",
+    "nameHint": "Dale a tu API key un nombre descriptivo",
+    "usage": "Uso Hoy",
+    "info": {
+      "title": "Información de API Key",
+      "description": "Usa API keys para acceder a la API de Regex Playground programáticamente. Cada clave tiene un límite diario de 1000 llamadas."
+    },
+    "newKey": {
+      "title": "API Key Creada",
+      "warning": "¡Copia tu API key ahora! No podrás verla nuevamente."
+    },
+    "deleteConfirm": "Eliminar API Key",
+    "deleteWarning": "¿Estás seguro de que deseas eliminar esta API key? Las aplicaciones que la usen dejarán de funcionar.",
+    "empty": {
+      "title": "Aún no hay API keys",
+      "description": "Crea una API key para acceder a la API de Regex Playground"
+    },
+    "docs": {
+      "title": "Documentación de API",
+      "intro": "Usa tu API key para probar patrones regex programáticamente:",
+      "example": "Ejemplo de Solicitud",
+      "viewFull": "Ver Documentación Completa"
+    }
+  },
+  "versions": {
+    "title": "Historial de Versiones",
+    "current": "Actual",
+    "pattern": "Patrón",
+    "flags": "Modificadores",
+    "changes": "Cambios",
+    "restore": "Restaurar",
+    "noHistory": "No hay historial de versiones disponible"
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Hecho con ❤️ para desarrolladores."
