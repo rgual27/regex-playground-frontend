@@ -229,25 +229,40 @@ export class RegexTesterComponent implements OnInit {
     this.patternChange$.pipe(debounceTime(500)).subscribe(() => this.testPattern());
     this.testStringChange$.pipe(debounceTime(500)).subscribe(() => this.testPattern());
 
-    // Listen for pattern loaded from library
+    // Check if there's a pattern to load from sessionStorage (from library)
+    const patternToLoad = this.patternService.getPatternToLoad();
+    if (patternToLoad) {
+      this.loadPatternFromLibrary(patternToLoad);
+    }
+
+    // Listen for pattern loaded from library (backup method)
     this.patternService.selectedPattern$.subscribe(pattern => {
       if (pattern) {
-        this.pattern = pattern.pattern;
-        this.testString = pattern.testString || '';
-
-        // Parse flags from pattern
-        if (pattern.flags) {
-          this.flags.i = pattern.flags.includes('i');
-          this.flags.m = pattern.flags.includes('m');
-          this.flags.s = pattern.flags.includes('s');
-          this.updateFlagsString();
-        }
-
-        this.testPattern();
-        this.patternService.clearSelectedPattern();
-        this.notificationService.success(`Pattern "${pattern.name}" loaded successfully!`);
+        this.loadPatternFromLibrary(pattern);
       }
     });
+  }
+
+  private loadPatternFromLibrary(pattern: RegexPattern) {
+    this.pattern = pattern.pattern;
+    this.testString = pattern.testString || '';
+
+    // Parse flags from pattern
+    if (pattern.flags) {
+      this.flags.i = pattern.flags.includes('i');
+      this.flags.m = pattern.flags.includes('m');
+      this.flags.s = pattern.flags.includes('s');
+      this.updateFlagsString();
+    } else {
+      // Reset flags if no flags provided
+      this.flags.i = false;
+      this.flags.m = false;
+      this.flags.s = false;
+      this.updateFlagsString();
+    }
+
+    this.testPattern();
+    this.notificationService.success(`Pattern "${pattern.name}" loaded successfully!`);
   }
 
   onPatternChange() {

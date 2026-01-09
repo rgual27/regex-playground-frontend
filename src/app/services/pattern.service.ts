@@ -59,10 +59,22 @@ export class PatternService {
   }
 
   loadPatternIntoTester(pattern: RegexPattern): void {
+    // Store in sessionStorage for cross-component communication
+    sessionStorage.setItem('loadPattern', JSON.stringify(pattern));
     this.selectedPatternSubject.next(pattern);
   }
 
   clearSelectedPattern(): void {
+    sessionStorage.removeItem('loadPattern');
     this.selectedPatternSubject.next(null);
+  }
+
+  getPatternToLoad(): RegexPattern | null {
+    const stored = sessionStorage.getItem('loadPattern');
+    if (stored) {
+      sessionStorage.removeItem('loadPattern');
+      return JSON.parse(stored);
+    }
+    return null;
   }
 }
