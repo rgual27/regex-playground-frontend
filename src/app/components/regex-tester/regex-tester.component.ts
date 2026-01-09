@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RegexService, RegexTestRequest, RegexTestResponse } from '../../services/regex.service';
 import { PatternService, RegexPattern } from '../../services/pattern.service';
 import { AuthService } from '../../services/auth.service';
+import { SubscriptionService } from '../../services/subscription.service';
 import { debounceTime, Subject } from 'rxjs';
 
 import { RouterLink } from '@angular/router';
@@ -155,7 +156,7 @@ import { NotificationService } from '../../services/notification.service';
             <button class="btn btn-secondary w-full" (click)="savePattern()" [disabled]="!pattern || !isAuthenticated">💾 {{ 'common.savePattern' | translate }}</button>
             <button class="btn btn-secondary w-full" [disabled]="true">📤 {{ 'common.share' | translate }}</button>
             <button class="btn btn-secondary w-full" [disabled]="true">💻 {{ 'common.exportCode' | translate }}</button>
-            <button class="btn btn-primary w-full" routerLink="/pricing">⭐ {{ 'common.upgradeToPro' | translate }}</button>
+            <button class="btn btn-primary w-full" routerLink="/pricing" *ngIf="showUpgradeButton">⭐ {{ 'common.upgradeToPro' | translate }}</button>
           </div>
           <p *ngIf="!isAuthenticated" class="text-sm text-secondary">{{ 'common.loginToSave' | translate }}</p>
           <p *ngIf="saveMessage" [class]="saveMessageType === 'success' ? 'text-success' : 'text-error'">{{ saveMessage }}</p>
@@ -211,11 +212,14 @@ export class RegexTesterComponent implements OnInit {
 
   saveMessage: string = '';
   saveMessageType: 'success' | 'error' = 'success';
+  currentTier: string = 'FREE';
+  showUpgradeButton: boolean = true;
 
   constructor(
     private regexService: RegexService,
     private patternService: PatternService,
     private authService: AuthService,
+    private subscriptionService: SubscriptionService,
     private modalService: ModalService,
     private notificationService: NotificationService
   ) {}
@@ -229,11 +233,29 @@ export class RegexTesterComponent implements OnInit {
     this.patternChange$.pipe(debounceTime(500)).subscribe(() => this.testPattern());
     this.testStringChange$.pipe(debounceTime(500)).subscribe(() => this.testPattern());
 
+    // Load subscription tier to determine upgrade button visibility
+    if (this.isAuthenticated) {
+      this.loadSubscriptionTier();
+    }
+
     // Check if there's a pattern to load from sessionStorage (from library)
     const patternToLoad = this.patternService.getPatternToLoad();
     if (patternToLoad) {
       this.loadPatternFromLibrary(patternToLoad);
     }
+  }
+
+  loadSubscriptionTier() {
+    this.subscriptionService.getSubscriptionStatus().subscribe({
+      next: (response) => {
+        this.currentTier = response.tier || 'FREE';
+        this.showUpgradeButton = this.currentTier === 'FREE';
+      },
+      error: (error) => {
+        console.error('Error loading subscription tier:', error);
+        this.showUpgradeButton = true;
+      }
+    });
   }
 
   private loadPatternFromLibrary(pattern: RegexPattern) {

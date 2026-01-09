@@ -18,7 +18,7 @@ import { NotificationService } from '../../services/notification.service';
 
       <div class="pricing-grid">
         <!-- Free Plan -->
-        <div class="pricing-card" [class.current]="currentTier === 'FREE'">
+        <div class="pricing-card" [class.current]="currentTier === 'FREE'" *ngIf="!tierLoading">
           <div class="plan-badge" *ngIf="currentTier === 'FREE'">{{ 'pricing.currentPlan' | translate }}</div>
           <h3>{{ 'pricing.free.title' | translate }}</h3>
           <div class="price">
@@ -39,7 +39,7 @@ import { NotificationService } from '../../services/notification.service';
         </div>
 
         <!-- Pro Plan -->
-        <div class="pricing-card featured" [class.current]="currentTier === 'PRO'">
+        <div class="pricing-card featured" [class.current]="currentTier === 'PRO'" *ngIf="!tierLoading">
           <div class="plan-badge pro" *ngIf="currentTier === 'PRO'">{{ 'pricing.currentPlan' | translate }}</div>
           <div class="plan-badge pro" *ngIf="currentTier !== 'PRO'">{{ 'pricing.mostPopular' | translate }}</div>
           <h3>{{ 'pricing.pro.title' | translate }}</h3>
@@ -72,7 +72,7 @@ import { NotificationService } from '../../services/notification.service';
         </div>
 
         <!-- Team Plan -->
-        <div class="pricing-card" [class.current]="currentTier === 'TEAM'">
+        <div class="pricing-card" [class.current]="currentTier === 'TEAM'" *ngIf="!tierLoading">
           <div class="plan-badge" *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</div>
           <div class="plan-badge" *ngIf="currentTier !== 'TEAM'">{{ 'pricing.bestValue' | translate }}</div>
           <h3>{{ 'pricing.team.title' | translate }}</h3>
@@ -264,7 +264,8 @@ import { NotificationService } from '../../services/notification.service';
 export class PricingComponent implements OnInit {
   loading = false;
   selectedTier: string = '';
-  currentTier: string = 'FREE';
+  currentTier: string | null = null;
+  tierLoading = true;
 
   constructor(
     private subscriptionService: SubscriptionService,
@@ -275,16 +276,23 @@ export class PricingComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isAuthenticated) {
       this.loadCurrentPlan();
+    } else {
+      this.currentTier = 'FREE';
+      this.tierLoading = false;
     }
   }
 
   loadCurrentPlan() {
+    this.tierLoading = true;
     this.subscriptionService.getSubscriptionStatus().subscribe({
       next: (response) => {
         this.currentTier = response.tier || 'FREE';
+        this.tierLoading = false;
       },
       error: (error) => {
         console.error('Error loading subscription status:', error);
+        this.currentTier = 'FREE';
+        this.tierLoading = false;
       }
     });
   }
