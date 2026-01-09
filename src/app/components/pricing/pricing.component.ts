@@ -119,11 +119,13 @@ import { NotificationService } from '../../services/notification.service';
             <li>✅ {{ 'pricing.team.features.7' | translate }}</li>
           </ul>
           <button
+            id="team-button"
             class="btn w-full btn-primary"
+            onclick="alert('ONCLICK WORKS!'); console.log('onclick fired')"
             (click)="subscribe('TEAM')"
-            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 1000; background: #3b82f6 !important; opacity: 1 !important;">
+            style="pointer-events: auto !important; cursor: pointer !important; position: relative; z-index: 10000 !important; background: #3b82f6 !important; opacity: 1 !important; border: 5px solid red !important;">
             <span>
-              {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : 'UPGRADE TO TEAM (CLICK ME!)' }}
+              CLICK THIS TEAM BUTTON!
             </span>
           </button>
           <p style="font-size: 10px; color: red;">DEBUG: Was disabled={{loading || currentTier === 'TEAM'}}, loading={{loading}}, currentTier={{currentTier}}</p>
