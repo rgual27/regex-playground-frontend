@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
 interface Language {
   code: string;
   name: string;
-  flag: string;
 }
 
 @Component({
@@ -15,9 +14,9 @@ interface Language {
   template: `
     <div class="language-switcher">
       <button class="language-button" (click)="toggleDropdown()">
-        <span class="flag">{{ currentLanguage.flag }}</span>
-        <span class="language-name">{{ currentLanguage.name }}</span>
-        <span class="arrow">▼</span>
+        <span class="language-code">{{ currentLanguage.code.toUpperCase() }}</span>
+        <span class="arrow" *ngIf="isOpen">▲</span>
+        <span class="arrow" *ngIf="!isOpen">▼</span>
       </button>
 
       <div class="language-dropdown" *ngIf="isOpen">
@@ -26,7 +25,7 @@ interface Language {
           class="language-option"
           [class.active]="lang.code === currentLanguage.code"
           (click)="changeLanguage(lang)">
-          <span class="flag">{{ lang.flag }}</span>
+          <span class="language-code">{{ lang.code.toUpperCase() }}</span>
           <span class="language-name">{{ lang.name }}</span>
         </button>
       </div>
@@ -50,6 +49,7 @@ interface Language {
       font-size: 0.875rem;
       transition: all 0.2s;
       color: var(--text-primary);
+      min-width: 65px;
 
       &:hover {
         background-color: var(--bg-secondary);
@@ -57,16 +57,14 @@ interface Language {
       }
     }
 
-    .flag {
-      font-size: 1.25rem;
-    }
-
-    .language-name {
-      font-weight: 500;
+    .language-code {
+      font-weight: 700;
+      font-size: 0.875rem;
+      letter-spacing: 0.5px;
     }
 
     .arrow {
-      font-size: 0.75rem;
+      font-size: 0.625rem;
       color: var(--text-secondary);
     }
 
@@ -78,7 +76,7 @@ interface Language {
       border: 1px solid var(--border-color);
       border-radius: 0.5rem;
       box-shadow: var(--shadow-lg);
-      min-width: 180px;
+      min-width: 160px;
       z-index: 1000;
       overflow: hidden;
     }
@@ -104,30 +102,33 @@ interface Language {
         background-color: var(--primary-color);
         color: white;
 
-        .flag {
-          filter: brightness(1.2);
+        .language-code {
+          font-weight: 800;
         }
       }
-    }
 
-    @media (max-width: 768px) {
+      .language-code {
+        font-weight: 700;
+        min-width: 25px;
+      }
+
       .language-name {
-        display: none;
+        font-weight: 500;
       }
     }
   `]
 })
-export class LanguageSwitcherComponent {
+export class LanguageSwitcherComponent implements OnInit {
   isOpen = false;
 
   languages: Language[] = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-    { code: 'it', name: 'Italiano', flag: '🇮🇹' },
-    { code: 'pt', name: 'Português', flag: '🇵🇹' },
-    { code: 'ru', name: 'Русский', flag: '🇷🇺' }
+    { code: 'en', name: 'English' },
+    { code: 'es', name: 'Español' },
+    { code: 'fr', name: 'Français' },
+    { code: 'de', name: 'Deutsch' },
+    { code: 'it', name: 'Italiano' },
+    { code: 'pt', name: 'Português' },
+    { code: 'ru', name: 'Русский' }
   ];
 
   currentLanguage: Language;
@@ -135,6 +136,20 @@ export class LanguageSwitcherComponent {
   constructor(private translate: TranslateService) {
     const savedLang = localStorage.getItem('language') || 'en';
     this.currentLanguage = this.languages.find(l => l.code === savedLang) || this.languages[0];
+  }
+
+  ngOnInit() {
+    // Ensure the translate service uses the saved language
+    this.translate.use(this.currentLanguage.code);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const clickedInside = target.closest('.language-switcher');
+    if (!clickedInside && this.isOpen) {
+      this.isOpen = false;
+    }
   }
 
   toggleDropdown() {
