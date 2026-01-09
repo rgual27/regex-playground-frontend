@@ -20,29 +20,48 @@
     "edit": "Editar",
     "loading": "Cargando...",
     "error": "Error",
-    "success": "Éxito"
+    "success": "Éxito",
+    "regex": "Expresión Regular",
+    "testString": "Cadena de Prueba",
+    "match": "coincidencia",
+    "matches": "coincidencias",
+    "group": "Grupo",
+    "explanation": "Explicación del patrón",
+    "enterPattern": "Ingresa tu patrón regex",
+    "enterTestString": "Ingresa la cadena de prueba aquí...",
+    "quickReference": "Referencia Rápida",
+    "actions": "Acciones",
+    "savePattern": "Guardar Patrón",
+    "share": "Compartir",
+    "exportCode": "Exportar Código",
+    "upgradeToPro": "Actualizar a Pro",
+    "loginToSave": "Inicia sesión para guardar patrones",
+    "commonPatterns": "Patrones Comunes"
   },
   "pricing": {
     "title": "Precios Simples y Transparentes",
-    "subtitle": "Elige el plan que se adapte a tus necesidades. Todos los planes incluyen 14 días de prueba gratuita.",
+    "subtitle": "Elige el plan que se ajuste a tus necesidades. Todos los planes incluyen 14 días de prueba gratuita.",
     "currentPlan": "PLAN ACTUAL",
     "mostPopular": "MÁS POPULAR",
     "bestValue": "MEJOR VALOR",
+    "startTrial": "Comenzar Prueba Gratuita",
+    "trialNote": "No se requiere tarjeta de crédito para la prueba",
     "free": {
-      "name": "Gratis",
-      "price": "$0",
+      "title": "Gratis",
       "period": "/mes",
       "features": [
-        "Pruebas regex ilimitadas",
+        "Pruebas de regex ilimitadas",
         "Resultados en tiempo real",
         "5 patrones guardados",
         "Explicaciones de patrones",
-        "Referencia rápida"
+        "Referencia rápida",
+        "Exportación de código",
+        "Patrones privados",
+        "Compartir en equipo"
       ]
     },
     "pro": {
-      "name": "Pro",
-      "price": "$7",
+      "title": "Pro",
       "period": "/mes",
       "features": [
         "Todo en Gratis",
@@ -51,62 +70,104 @@
         "Exportar código (Java, JS, Python)",
         "Patrones privados",
         "Historial de versiones",
-        "Soporte prioritario"
+        "Soporte prioritario",
+        "Colaboración en equipo"
       ]
     },
     "team": {
-      "name": "Equipo",
-      "price": "$25",
+      "title": "Equipo",
       "period": "/mes",
       "features": [
         "Todo en Pro",
-        "Miembros ilimitados",
-        "Biblioteca compartida",
-        "Analíticas de equipo",
+        "Miembros de equipo ilimitados",
+        "Biblioteca de patrones compartida",
+        "Análisis de equipo",
         "Acceso API (1000 llamadas/día)",
-        "Integración Slack",
+        "Integración con Slack",
         "SSO (opcional)",
         "Soporte prioritario"
       ]
     },
-    "startTrial": "Iniciar Prueba Gratuita",
-    "trialNote": "No se requiere tarjeta de crédito"
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "q1": "¿Puedo cancelar en cualquier momento?",
+      "a1": "¡Sí! Puedes cancelar tu suscripción en cualquier momento. Sin preguntas.",
+      "q2": "¿Ofrecen reembolsos?",
+      "a2": "Sí, ofrecemos garantía de devolución de dinero de 30 días para todos los planes pagos.",
+      "q3": "¿Qué métodos de pago aceptan?",
+      "a3": "Aceptamos todas las principales tarjetas de crédito a través de Stripe. Los planes empresariales pueden pagar por factura.",
+      "q4": "¿Hay descuento por facturación anual?",
+      "a4": "¡Sí! Ahorra 20% pagando anualmente. Contáctanos para más detalles."
+    }
   },
   "account": {
     "title": "Mi Cuenta",
-    "subtitle": "Gestiona tu suscripción y configuración de cuenta",
-    "profile": "Información del Perfil",
-    "fullName": "Nombre Completo",
-    "email": "Correo Electrónico",
-    "memberSince": "Miembro Desde",
-    "subscription": "Suscripción",
-    "upgradePlan": "Mejorar Plan",
-    "manageBilling": "Gestionar Facturación",
-    "cancelSubscription": "Cancelar Suscripción",
-    "usageStats": "Estadísticas de Uso",
-    "savedPatterns": "Patrones Guardados",
-    "testsRun": "Pruebas Realizadas",
-    "teamMembers": "Miembros del Equipo",
-    "quickActions": "Acciones Rápidas",
-    "testRegex": "Probar Regex",
-    "patternLibrary": "Biblioteca de Patrones",
-    "contactSupport": "Contactar Soporte"
+    "subtitle": "Administra tu suscripción y configuración de cuenta",
+    "profile": {
+      "title": "Información del Perfil",
+      "fullName": "Nombre Completo",
+      "email": "Correo Electrónico",
+      "memberSince": "Miembro Desde"
+    },
+    "subscription": {
+      "title": "Suscripción",
+      "freeDesc": "Actualmente estás en el plan gratuito con funciones limitadas.",
+      "proDesc": "Tienes acceso a todas las funciones Pro incluyendo patrones ilimitados y exportación de código.",
+      "teamDesc": "Tienes acceso a todas las funciones de Equipo incluyendo colaboración y acceso API.",
+      "upgrade": "Actualizar Plan",
+      "manageBilling": "Administrar Facturación",
+      "cancel": "Cancelar Suscripción",
+      "canceling": "Cancelando..."
+    },
+    "usage": {
+      "title": "Estadísticas de Uso",
+      "savedPatterns": "Patrones Guardados",
+      "testsRun": "Pruebas Ejecutadas",
+      "teamMembers": "Miembros del Equipo",
+      "unlimited": "Ilimitado"
+    },
+    "actions": {
+      "title": "Acciones Rápidas",
+      "testRegex": "Probar Regex",
+      "library": "Biblioteca de Patrones",
+      "contact": "Soporte de Contacto",
+      "logout": "Cerrar Sesión"
+    }
   },
   "contact": {
     "title": "Contáctanos",
-    "subtitle": "¿Tienes preguntas? Nos encantaría saber de ti. Envíanos un mensaje y te responderemos lo antes posible.",
-    "sendMessage": "Envíanos un mensaje",
-    "yourName": "Tu Nombre",
-    "yourEmail": "Tu Correo",
-    "subject": "Asunto",
-    "message": "Mensaje",
-    "send": "Enviar Mensaje",
-    "sending": "Enviando...",
-    "getInTouch": "Ponte en Contacto",
-    "responseTime": "Tiempo de Respuesta",
-    "within24h": "Generalmente en 24 horas",
-    "followUs": "Síguenos",
-    "quickFaq": "Preguntas Frecuentes"
+    "subtitle": "¿Tienes preguntas? Nos encantaría saber de ti. Envíanos un mensaje y responderemos lo antes posible.",
+    "form": {
+      "title": "Envíanos un mensaje",
+      "name": "Tu Nombre",
+      "namePlaceholder": "Juan Pérez",
+      "email": "Tu Correo",
+      "emailPlaceholder": "juan@ejemplo.com",
+      "subject": "Asunto",
+      "subjectPlaceholder": "¿Cómo podemos ayudarte?",
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntanos más sobre tu pregunta o comentario...",
+      "send": "Enviar Mensaje",
+      "sending": "Enviando..."
+    },
+    "info": {
+      "title": "Ponte en Contacto",
+      "email": "Correo",
+      "responseTime": "Tiempo de Respuesta",
+      "responseValue": "Normalmente dentro de 24 horas"
+    },
+    "faq": {
+      "title": "FAQ Rápido",
+      "q1": "¿Puedo actualizar mi plan?",
+      "a1": "¡Sí! Ve a Precios y elige tu plan.",
+      "q2": "¿Cómo exporto código?",
+      "a2": "Los usuarios Pro pueden exportar regex a Java, JavaScript y Python desde el probador.",
+      "q3": "¿Necesitas ayuda con regex?",
+      "a3": "Consulta nuestra biblioteca de patrones para ejemplos comunes y explicaciones."
+    },
+    "social": {
+      "title": "Síguenos"
+    }
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Hecho con ❤️ para desarrolladores."
