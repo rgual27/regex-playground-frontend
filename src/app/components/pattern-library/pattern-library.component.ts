@@ -112,6 +112,94 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
         </div>
       </div>
 
+      <!-- Edit Pattern Modal -->
+      <div class="modal-overlay" *ngIf="showEditPatternModal" (click)="closeEditPatternModal()">
+        <div class="modal-content new-pattern-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>{{ 'library.editPattern' | translate }}</h3>
+            <button class="modal-close" (click)="closeEditPatternModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="updatePattern()" #editForm="ngForm">
+              <div class="form-group">
+                <label for="editPatternName">{{ 'library.patternName' | translate }}</label>
+                <input
+                  type="text"
+                  id="editPatternName"
+                  [(ngModel)]="editingPattern.name"
+                  name="patternName"
+                  [placeholder]="'library.patternNamePlaceholder' | translate"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="editPattern">{{ 'common.regex' | translate }}</label>
+                <input
+                  type="text"
+                  id="editPattern"
+                  [(ngModel)]="editingPattern.pattern"
+                  name="pattern"
+                  [placeholder]="'common.enterPattern' | translate"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="editFlags">{{ 'library.flags' | translate }}</label>
+                <input
+                  type="text"
+                  id="editFlags"
+                  [(ngModel)]="editingPattern.flags"
+                  name="flags"
+                  placeholder="gim"
+                  maxlength="10">
+              </div>
+
+              <div class="form-group">
+                <label for="editDescription">{{ 'library.description' | translate }}</label>
+                <textarea
+                  id="editDescription"
+                  [(ngModel)]="editingPattern.description"
+                  name="description"
+                  [placeholder]="'library.descriptionPlaceholder' | translate"
+                  rows="3"></textarea>
+              </div>
+
+              <div class="form-group" *ngIf="(userTier === 'PRO' || userTier === 'TEAM') && folders.length > 0">
+                <label for="editFolder">📁 {{ 'library.folder' | translate }}</label>
+                <select
+                  id="editFolder"
+                  [(ngModel)]="editingPattern.folderId"
+                  name="folder"
+                  class="form-control">
+                  <option [ngValue]="null">{{ 'library.noFolder' | translate }}</option>
+                  <option *ngFor="let folder of folders" [ngValue]="folder.id">
+                    📁 {{ folder.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <label>
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="editingPattern.isPublic"
+                    name="isPublic">
+                  <span>{{ 'library.makePublic' | translate }}</span>
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditPatternModal()">
+              {{ 'common.cancel' | translate }}
+            </button>
+            <button type="button" class="btn btn-primary" (click)="updatePattern()" [disabled]="!editingPattern.name || !editingPattern.pattern">
+              {{ 'common.save' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="upgrade-banner" *ngIf="isAuthenticated && userTier === 'FREE' && patterns.length >= 5">
         <div class="banner-content">
           <h3>🔒 {{ 'library.limitReached' | translate }}</h3>
@@ -142,6 +230,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
           <div class="pattern-header">
             <h3>{{ pattern.name }}</h3>
             <div class="pattern-actions">
+              <button class="btn-icon" (click)="editPattern(pattern)" [title]="'common.edit' | translate">✏️</button>
               <button class="btn-icon" (click)="showVersionHistory(pattern)" [title]="'library.versions' | translate" *ngIf="userTier === 'PRO' || userTier === 'TEAM'">📜</button>
               <button class="btn-icon" (click)="deletePattern(pattern.id!)" [title]="'library.delete' | translate">🗑️</button>
             </div>
@@ -516,9 +605,18 @@ export class PatternLibraryComponent implements OnInit {
   folders: Folder[] = [];
   loading = false;
   showNewPatternModal = false;
+  showEditPatternModal = false;
   showVersionHistoryModal = false;
   selectedPatternForHistory: RegexPattern | null = null;
   newPattern: RegexPattern = {
+    name: '',
+    pattern: '',
+    description: '',
+    flags: '',
+    isPublic: false,
+    folderId: null
+  };
+  editingPattern: RegexPattern = {
     name: '',
     pattern: '',
     description: '',
@@ -653,6 +751,42 @@ export class PatternLibraryComponent implements OnInit {
       error: (error) => {
         console.error('Error creating pattern:', error);
         this.notificationService.error(error.error?.message || 'Failed to create pattern. Please try again.');
+      }
+    });
+  }
+
+  editPattern(pattern: RegexPattern) {
+    this.editingPattern = { ...pattern };
+    this.showEditPatternModal = true;
+  }
+
+  closeEditPatternModal() {
+    this.showEditPatternModal = false;
+    this.editingPattern = {
+      name: '',
+      pattern: '',
+      description: '',
+      flags: '',
+      isPublic: false,
+      folderId: null
+    };
+  }
+
+  updatePattern() {
+    if (!this.editingPattern.name || !this.editingPattern.pattern || !this.editingPattern.id) {
+      this.notificationService.error('Please fill in all required fields');
+      return;
+    }
+
+    this.patternService.updatePattern(this.editingPattern.id, this.editingPattern).subscribe({
+      next: () => {
+        this.notificationService.success('Pattern updated successfully!');
+        this.loadPatterns(); // Reload to get updated data
+        this.closeEditPatternModal();
+      },
+      error: (error) => {
+        console.error('Error updating pattern:', error);
+        this.notificationService.error(error.error?.message || 'Failed to update pattern. Please try again.');
       }
     });
   }
