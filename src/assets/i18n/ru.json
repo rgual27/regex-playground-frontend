@@ -182,7 +182,13 @@
     "emptyMessage": "Начните тестировать regex паттерны и сохраните ваши избранные здесь",
     "goToTester": "Перейти к Тестеру",
     "delete": "Удалить",
-    "loadInTester": "Загрузить в Тестер"
+    "loadInTester": "Загрузить в Тестер",
+    "patternName": "Название Паттерна",
+    "patternNamePlaceholder": "Мой regex паттерн",
+    "flags": "Флаги",
+    "description": "Описание",
+    "descriptionPlaceholder": "Что делает этот паттерн?",
+    "makePublic": "Сделать этот паттерн публичным"
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Сделано с ❤️ для разработчиков."

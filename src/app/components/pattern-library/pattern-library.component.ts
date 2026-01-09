@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { PatternService, RegexPattern } from '../../services/pattern.service';
 import { AuthService } from '../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -10,7 +11,7 @@ import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'app-pattern-library',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslateModule],
+  imports: [CommonModule, RouterLink, TranslateModule, FormsModule],
   template: `
     <div class="container">
       <div class="library-header">
@@ -18,7 +19,82 @@ import { NotificationService } from '../../services/notification.service';
           <h1>{{ 'library.title' | translate }}</h1>
           <p>{{ 'library.subtitle' | translate }}</p>
         </div>
-        <button class="btn btn-primary">+ {{ 'library.newPattern' | translate }}</button>
+        <button class="btn btn-primary" (click)="openNewPatternModal()">+ {{ 'library.newPattern' | translate }}</button>
+      </div>
+
+      <!-- New Pattern Modal -->
+      <div class="modal-overlay" *ngIf="showNewPatternModal" (click)="closeNewPatternModal()">
+        <div class="modal-content new-pattern-modal" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>{{ 'library.newPattern' | translate }}</h3>
+            <button class="modal-close" (click)="closeNewPatternModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="createPattern()">
+              <div class="form-group">
+                <label for="patternName">{{ 'library.patternName' | translate }}</label>
+                <input
+                  type="text"
+                  id="patternName"
+                  [(ngModel)]="newPattern.name"
+                  name="patternName"
+                  [placeholder]="'library.patternNamePlaceholder' | translate"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="pattern">{{ 'common.regex' | translate }}</label>
+                <input
+                  type="text"
+                  id="pattern"
+                  [(ngModel)]="newPattern.pattern"
+                  name="pattern"
+                  [placeholder]="'common.enterPattern' | translate"
+                  required>
+              </div>
+
+              <div class="form-group">
+                <label for="flags">{{ 'library.flags' | translate }}</label>
+                <input
+                  type="text"
+                  id="flags"
+                  [(ngModel)]="newPattern.flags"
+                  name="flags"
+                  placeholder="gim"
+                  maxlength="10">
+              </div>
+
+              <div class="form-group">
+                <label for="description">{{ 'library.description' | translate }}</label>
+                <textarea
+                  id="description"
+                  [(ngModel)]="newPattern.description"
+                  name="description"
+                  [placeholder]="'library.descriptionPlaceholder' | translate"
+                  rows="3"></textarea>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <label>
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="newPattern.isPublic"
+                    name="isPublic">
+                  <span>{{ 'library.makePublic' | translate }}</span>
+                </label>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeNewPatternModal()">
+                  {{ 'common.cancel' | translate }}
+                </button>
+                <button type="submit" class="btn btn-primary" [disabled]="!newPattern.name || !newPattern.pattern">
+                  {{ 'common.save' | translate }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="upgrade-banner" *ngIf="isAuthenticated && userTier === 'FREE' && patterns.length >= 5">
@@ -60,7 +136,7 @@ import { NotificationService } from '../../services/notification.service';
           </div>
           <div class="pattern-footer">
             <span class="pattern-date">{{ formatDate(pattern.updatedAt) }}</span>
-            <button class="btn btn-sm btn-secondary" routerLink="/">{{ 'library.loadInTester' | translate }}</button>
+            <button class="btn btn-sm btn-secondary" (click)="loadInTester(pattern)">{{ 'library.loadInTester' | translate }}</button>
           </div>
         </div>
       </div>
@@ -249,17 +325,92 @@ import { NotificationService } from '../../services/notification.service';
       padding: 0.375rem 0.75rem;
       font-size: 0.875rem;
     }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      animation: fadeIn 0.2s ease-out;
+      backdrop-filter: blur(4px);
+    }
+
+    .new-pattern-modal {
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+      }
+
+      input, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+
+        &:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          background: var(--bg-primary);
+        }
+      }
+
+      textarea {
+        resize: vertical;
+      }
+    }
+
+    .checkbox-group {
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+          width: auto;
+        }
+      }
+    }
   `]
 })
 export class PatternLibraryComponent implements OnInit {
   patterns: RegexPattern[] = [];
   loading = false;
+  showNewPatternModal = false;
+  newPattern: RegexPattern = {
+    name: '',
+    pattern: '',
+    description: '',
+    flags: '',
+    isPublic: false
+  };
 
   constructor(
     private patternService: PatternService,
     private authService: AuthService,
     private modalService: ModalService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
 
   get isAuthenticated(): boolean {
@@ -318,5 +469,58 @@ export class PatternLibraryComponent implements OnInit {
     if (!date) return '';
     const d = new Date(date);
     return d.toLocaleDateString();
+  }
+
+  openNewPatternModal() {
+    if (!this.isAuthenticated) {
+      this.notificationService.warning('Please login to create patterns');
+      return;
+    }
+
+    if (this.userTier === 'FREE' && this.patterns.length >= 5) {
+      this.notificationService.warning('You have reached the free plan limit. Upgrade to Pro for unlimited patterns!');
+      return;
+    }
+
+    this.showNewPatternModal = true;
+  }
+
+  closeNewPatternModal() {
+    this.showNewPatternModal = false;
+    this.resetNewPattern();
+  }
+
+  resetNewPattern() {
+    this.newPattern = {
+      name: '',
+      pattern: '',
+      description: '',
+      flags: '',
+      isPublic: false
+    };
+  }
+
+  createPattern() {
+    if (!this.newPattern.name || !this.newPattern.pattern) {
+      this.notificationService.error('Please fill in all required fields');
+      return;
+    }
+
+    this.patternService.savePattern(this.newPattern).subscribe({
+      next: (pattern) => {
+        this.notificationService.success('Pattern created successfully!');
+        this.patterns.unshift(pattern as any); // Add to beginning of list
+        this.closeNewPatternModal();
+      },
+      error: (error) => {
+        console.error('Error creating pattern:', error);
+        this.notificationService.error(error.error?.message || 'Failed to create pattern. Please try again.');
+      }
+    });
+  }
+
+  loadInTester(pattern: RegexPattern) {
+    this.patternService.loadPatternIntoTester(pattern);
+    this.router.navigate(['/']);
   }
 }

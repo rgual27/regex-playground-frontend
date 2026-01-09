@@ -228,6 +228,26 @@ export class RegexTesterComponent implements OnInit {
     // Debounce pattern and test string changes
     this.patternChange$.pipe(debounceTime(500)).subscribe(() => this.testPattern());
     this.testStringChange$.pipe(debounceTime(500)).subscribe(() => this.testPattern());
+
+    // Listen for pattern loaded from library
+    this.patternService.selectedPattern$.subscribe(pattern => {
+      if (pattern) {
+        this.pattern = pattern.pattern;
+        this.testString = pattern.testString || '';
+
+        // Parse flags from pattern
+        if (pattern.flags) {
+          this.flags.i = pattern.flags.includes('i');
+          this.flags.m = pattern.flags.includes('m');
+          this.flags.s = pattern.flags.includes('s');
+          this.updateFlagsString();
+        }
+
+        this.testPattern();
+        this.patternService.clearSelectedPattern();
+        this.notificationService.success(`Pattern "${pattern.name}" loaded successfully!`);
+      }
+    });
   }
 
   onPatternChange() {

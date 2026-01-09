@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface RegexPattern {
@@ -8,6 +8,7 @@ export interface RegexPattern {
   name: string;
   pattern: string;
   description?: string;
+  testString?: string;
   flags?: string;
   testCases?: TestCase[];
   tags?: string[];
@@ -28,6 +29,8 @@ export interface TestCase {
 })
 export class PatternService {
   private apiUrl = environment.apiUrl;
+  private selectedPatternSubject = new BehaviorSubject<RegexPattern | null>(null);
+  public selectedPattern$ = this.selectedPatternSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -53,5 +56,13 @@ export class PatternService {
 
   getPublicPatterns(): Observable<RegexPattern[]> {
     return this.http.get<RegexPattern[]>(`${this.apiUrl}/api/patterns/public`);
+  }
+
+  loadPatternIntoTester(pattern: RegexPattern): void {
+    this.selectedPatternSubject.next(pattern);
+  }
+
+  clearSelectedPattern(): void {
+    this.selectedPatternSubject.next(null);
   }
 }

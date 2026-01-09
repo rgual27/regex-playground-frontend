@@ -182,7 +182,13 @@
     "emptyMessage": "Commencez à tester des patterns regex et enregistrez vos favoris ici",
     "goToTester": "Aller au Testeur",
     "delete": "Supprimer",
-    "loadInTester": "Charger dans le Testeur"
+    "loadInTester": "Charger dans le Testeur",
+    "patternName": "Nom du Pattern",
+    "patternNamePlaceholder": "Mon pattern regex",
+    "flags": "Modificateurs",
+    "description": "Description",
+    "descriptionPlaceholder": "Que fait ce pattern?",
+    "makePublic": "Rendre ce pattern public"
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Fait avec ❤️ pour les développeurs."

@@ -182,7 +182,13 @@
     "emptyMessage": "Beginnen Sie mit dem Testen von Regex-Mustern und speichern Sie Ihre Favoriten hier",
     "goToTester": "Zum Tester Gehen",
     "delete": "Löschen",
-    "loadInTester": "Im Tester Laden"
+    "loadInTester": "Im Tester Laden",
+    "patternName": "Mustername",
+    "patternNamePlaceholder": "Mein Regex-Muster",
+    "flags": "Flags",
+    "description": "Beschreibung",
+    "descriptionPlaceholder": "Was macht dieses Muster?",
+    "makePublic": "Dieses Muster öffentlich machen"
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Mit ❤️ für Entwickler gemacht."

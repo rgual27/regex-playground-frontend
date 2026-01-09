@@ -182,7 +182,13 @@
     "emptyMessage": "Comece a testar padrões regex e salve seus favoritos aqui",
     "goToTester": "Ir para o Testador",
     "delete": "Excluir",
-    "loadInTester": "Carregar no Testador"
+    "loadInTester": "Carregar no Testador",
+    "patternName": "Nome do Padrão",
+    "patternNamePlaceholder": "Meu padrão regex",
+    "flags": "Flags",
+    "description": "Descrição",
+    "descriptionPlaceholder": "O que este padrão faz?",
+    "makePublic": "Tornar este padrão público"
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Feito com ❤️ para desenvolvedores."
