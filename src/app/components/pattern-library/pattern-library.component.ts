@@ -45,8 +45,8 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
             class="folder-chip"
             [class.active]="selectedFolderFilter === folder.id"
             [style.border-color]="folder.color"
-            (click)="selectedFolderFilter = folder.id">
-            📁 {{ folder.name }} ({{ getPatternsInFolder(folder.id).length }})
+            (click)="folder.id && (selectedFolderFilter = folder.id)">
+            📁 {{ folder.name }} ({{ getPatternsInFolder(folder.id || null).length }})
           </button>
         </div>
       </div>
