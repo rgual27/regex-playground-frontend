@@ -83,7 +83,8 @@ import { NotificationService } from '../../services/notification.service';
             [class.btn-primary]="currentTier !== 'PRO'"
             [class.btn-secondary]="currentTier === 'PRO'"
             (click)="subscribe('PRO')"
-            [disabled]="loading || currentTier === 'PRO'">
+            [disabled]="loading || currentTier === 'PRO'"
+            style="pointer-events: auto; cursor: pointer;">
             <span *ngIf="currentTier === 'PRO'">{{ 'pricing.currentPlan' | translate }}</span>
             <span *ngIf="currentTier !== 'PRO'">
               {{ loading && selectedTier === 'PRO' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
@@ -117,7 +118,8 @@ import { NotificationService } from '../../services/notification.service';
             [class.btn-primary]="currentTier !== 'TEAM'"
             [class.btn-secondary]="currentTier === 'TEAM'"
             (click)="subscribe('TEAM')"
-            [disabled]="loading || currentTier === 'TEAM'">
+            [disabled]="loading || currentTier === 'TEAM'"
+            style="pointer-events: auto; cursor: pointer;">
             <span *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</span>
             <span *ngIf="currentTier !== 'TEAM'">
               {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : ('pricing.startTrial' | translate) }}
@@ -385,6 +387,7 @@ export class PricingComponent implements OnInit {
   }
 
   subscribe(tier: string) {
+    alert('Button clicked! Tier: ' + tier);
     console.log('Subscribe button clicked! Tier:', tier, 'Billing:', this.billingPeriod);
     console.log('Is authenticated:', this.authService.isAuthenticated);
 
