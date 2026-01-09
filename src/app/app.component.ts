@@ -20,16 +20,16 @@ import { LanguageSwitcherComponent } from './components/language-switcher/langua
             </div>
             <div class="nav-links">
               <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                Tester
+                {{ 'nav.tester' | translate }}
               </a>
               <a routerLink="/library" routerLinkActive="active">
-                Library
+                {{ 'nav.library' | translate }}
               </a>
               <a routerLink="/pricing" routerLinkActive="active">
-                Pricing
+                {{ 'nav.pricing' | translate }}
               </a>
               <a routerLink="/contact" routerLinkActive="active">
-                Contact
+                {{ 'nav.contact' | translate }}
               </a>
             </div>
             <div class="nav-actions">
@@ -53,9 +53,9 @@ import { LanguageSwitcherComponent } from './components/language-switcher/langua
 
       <footer class="footer">
         <div class="container">
-          <p>© 2025 Regex Playground. Built with ❤️ for developers.</p>
+          <p>{{ 'footer.copyright' | translate }}</p>
           <div class="footer-links">
-            <a routerLink="/contact">Contact</a>
+            <a routerLink="/contact">{{ 'nav.contact' | translate }}</a>
             <a href="https://github.com/rgual27" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://x.com/RGBCuba" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
             <a href="https://www.linkedin.com/in/rafael-gual-borges-a0ab03128/" target="_blank" rel="noopener noreferrer">LinkedIn</a>

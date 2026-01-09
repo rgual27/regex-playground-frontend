@@ -169,6 +169,21 @@
       "title": "Siga-nos"
     }
   },
+  "library": {
+    "title": "Biblioteca de Padrões",
+    "subtitle": "Salve, organize e compartilhe seus padrões regex",
+    "newPattern": "Novo Padrão",
+    "limitReached": "Limite de Padrões Atingido",
+    "limitMessage": "Você atingiu o limite do plano gratuito de 5 padrões. Faça upgrade para Pro para padrões ilimitados!",
+    "upgradeButton": "Fazer Upgrade para Pro - $7/mês",
+    "loginTitle": "Faça login para ver seus padrões",
+    "loginMessage": "Salve e organize seus padrões regex fazendo login",
+    "emptyTitle": "Nenhum padrão salvo ainda",
+    "emptyMessage": "Comece a testar padrões regex e salve seus favoritos aqui",
+    "goToTester": "Ir para o Testador",
+    "delete": "Excluir",
+    "loadInTester": "Carregar no Testador"
+  },
   "footer": {
     "copyright": "© 2025 Regex Playground. Feito com ❤️ para desenvolvedores."
   }

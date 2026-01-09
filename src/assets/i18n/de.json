@@ -169,6 +169,21 @@
       "title": "Folgen Sie Uns"
     }
   },
+  "library": {
+    "title": "Musterbibliothek",
+    "subtitle": "Speichern, organisieren und teilen Sie Ihre Regex-Muster",
+    "newPattern": "Neues Muster",
+    "limitReached": "Musterlimit Erreicht",
+    "limitMessage": "Sie haben das Limit von 5 Mustern des kostenlosen Plans erreicht. Upgraden Sie auf Pro für unbegrenzte Muster!",
+    "upgradeButton": "Auf Pro Upgraden - 7$/Monat",
+    "loginTitle": "Anmelden, um Ihre Muster zu sehen",
+    "loginMessage": "Speichern und organisieren Sie Ihre Regex-Muster durch Anmeldung",
+    "emptyTitle": "Noch keine gespeicherten Muster",
+    "emptyMessage": "Beginnen Sie mit dem Testen von Regex-Mustern und speichern Sie Ihre Favoriten hier",
+    "goToTester": "Zum Tester Gehen",
+    "delete": "Löschen",
+    "loadInTester": "Im Tester Laden"
+  },
   "footer": {
     "copyright": "© 2025 Regex Playground. Mit ❤️ für Entwickler gemacht."
   }

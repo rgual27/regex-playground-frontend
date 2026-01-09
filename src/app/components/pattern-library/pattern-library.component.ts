@@ -3,43 +3,44 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { PatternService, RegexPattern } from '../../services/pattern.service';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pattern-library',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
   template: `
     <div class="container">
       <div class="library-header">
         <div>
-          <h1>Pattern Library</h1>
-          <p>Save, organize, and share your regex patterns</p>
+          <h1>{{ 'library.title' | translate }}</h1>
+          <p>{{ 'library.subtitle' | translate }}</p>
         </div>
-        <button class="btn btn-primary">+ New Pattern</button>
+        <button class="btn btn-primary">+ {{ 'library.newPattern' | translate }}</button>
       </div>
 
       <div class="upgrade-banner" *ngIf="isAuthenticated && userTier === 'FREE' && patterns.length >= 5">
         <div class="banner-content">
-          <h3>🔒 Pattern Limit Reached</h3>
-          <p>You've reached the free tier limit of 5 patterns. Upgrade to Pro for unlimited patterns!</p>
+          <h3>🔒 {{ 'library.limitReached' | translate }}</h3>
+          <p>{{ 'library.limitMessage' | translate }}</p>
         </div>
-        <button class="btn btn-primary" routerLink="/pricing">Upgrade to Pro - $7/month</button>
+        <button class="btn btn-primary" routerLink="/pricing">{{ 'library.upgradeButton' | translate }}</button>
       </div>
 
       <div class="library-empty" *ngIf="!isAuthenticated">
         <div class="empty-state">
           <div class="empty-icon">🔐</div>
-          <h3>Login to view your patterns</h3>
-          <p>Save and organize your regex patterns by logging in</p>
+          <h3>{{ 'library.loginTitle' | translate }}</h3>
+          <p>{{ 'library.loginMessage' | translate }}</p>
         </div>
       </div>
 
       <div class="library-empty" *ngIf="isAuthenticated && patterns.length === 0 && !loading">
         <div class="empty-state">
           <div class="empty-icon">📝</div>
-          <h3>No saved patterns yet</h3>
-          <p>Start testing regex patterns and save your favorites here</p>
-          <button class="btn btn-primary" routerLink="/">Go to Tester</button>
+          <h3>{{ 'library.emptyTitle' | translate }}</h3>
+          <p>{{ 'library.emptyMessage' | translate }}</p>
+          <button class="btn btn-primary" routerLink="/">{{ 'library.goToTester' | translate }}</button>
         </div>
       </div>
 
@@ -48,7 +49,7 @@ import { AuthService } from '../../services/auth.service';
           <div class="pattern-header">
             <h3>{{ pattern.name }}</h3>
             <div class="pattern-actions">
-              <button class="btn-icon" (click)="deletePattern(pattern.id!)" title="Delete">🗑️</button>
+              <button class="btn-icon" (click)="deletePattern(pattern.id!)" [title]="'library.delete' | translate">🗑️</button>
             </div>
           </div>
           <div class="pattern-content">
@@ -57,7 +58,7 @@ import { AuthService } from '../../services/auth.service';
           </div>
           <div class="pattern-footer">
             <span class="pattern-date">{{ formatDate(pattern.updatedAt) }}</span>
-            <button class="btn btn-sm btn-secondary" routerLink="/">Load in Tester</button>
+            <button class="btn btn-sm btn-secondary" routerLink="/">{{ 'library.loadInTester' | translate }}</button>
           </div>
         </div>
       </div>

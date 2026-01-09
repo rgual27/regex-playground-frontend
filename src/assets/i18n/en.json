@@ -169,6 +169,21 @@
       "title": "Follow Us"
     }
   },
+  "library": {
+    "title": "Pattern Library",
+    "subtitle": "Save, organize, and share your regex patterns",
+    "newPattern": "New Pattern",
+    "limitReached": "Pattern Limit Reached",
+    "limitMessage": "You've reached the free tier limit of 5 patterns. Upgrade to Pro for unlimited patterns!",
+    "upgradeButton": "Upgrade to Pro - $7/month",
+    "loginTitle": "Login to view your patterns",
+    "loginMessage": "Save and organize your regex patterns by logging in",
+    "emptyTitle": "No saved patterns yet",
+    "emptyMessage": "Start testing regex patterns and save your favorites here",
+    "goToTester": "Go to Tester",
+    "delete": "Delete",
+    "loadInTester": "Load in Tester"
+  },
   "footer": {
     "copyright": "© 2025 Regex Playground. Built with ❤️ for developers."
   }
