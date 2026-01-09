@@ -869,6 +869,7 @@ export class PatternLibraryComponent implements OnInit {
 
   editPattern(pattern: RegexPattern) {
     // Explicitly copy all properties including folderId
+    // Use undefined if no folderId to match the Folder type
     this.editingPattern = {
       id: pattern.id,
       name: pattern.name,
@@ -876,9 +877,11 @@ export class PatternLibraryComponent implements OnInit {
       description: pattern.description || '',
       flags: pattern.flags || '',
       isPublic: pattern.isPublic || false,
-      folderId: pattern.folderId || null,
+      folderId: pattern.folderId !== undefined && pattern.folderId !== null ? pattern.folderId : null,
       testString: pattern.testString
     };
+    console.log('Editing pattern with folderId:', this.editingPattern.folderId);
+    console.log('Available folders:', this.folders);
     this.showEditPatternModal = true;
   }
 

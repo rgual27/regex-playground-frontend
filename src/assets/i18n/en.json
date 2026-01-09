@@ -187,6 +187,7 @@
     "title": "Pattern Library",
     "subtitle": "Save, organize, and share your regex patterns",
     "newPattern": "New Pattern",
+    "editPattern": "Edit Pattern",
     "limitReached": "Pattern Limit Reached",
     "limitMessage": "You've reached the free tier limit of 5 patterns. Upgrade to Pro for unlimited patterns!",
     "upgradeButton": "Upgrade to Pro - $7/month",
@@ -204,7 +205,8 @@
     "descriptionPlaceholder": "What does this pattern do?",
     "makePublic": "Make this pattern public",
     "folder": "Folder",
-    "noFolder": "No folder"
+    "noFolder": "No folder",
+    "versions": "Version History"
   },
   "folders": {
     "title": "Folders",

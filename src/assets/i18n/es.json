@@ -187,6 +187,7 @@
     "title": "Biblioteca de Patrones",
     "subtitle": "Guarda, organiza y comparte tus patrones regex",
     "newPattern": "Nuevo Patrón",
+    "editPattern": "Editar Patrón",
     "limitReached": "Límite de Patrones Alcanzado",
     "limitMessage": "Has alcanzado el límite del plan gratuito de 5 patrones. ¡Actualiza a Pro para patrones ilimitados!",
     "upgradeButton": "Actualizar a Pro - $7/mes",
@@ -204,7 +205,8 @@
     "descriptionPlaceholder": "¿Qué hace este patrón?",
     "makePublic": "Hacer este patrón público",
     "folder": "Carpeta",
-    "noFolder": "Sin carpeta"
+    "noFolder": "Sin carpeta",
+    "versions": "Historial de Versiones"
   },
   "folders": {
     "title": "Carpetas",
