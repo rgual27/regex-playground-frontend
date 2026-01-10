@@ -117,32 +117,51 @@ import { NotificationService } from '../../services/notification.service';
 
     .export-tabs {
       display: flex;
-      gap: 8px;
+      gap: 12px;
       padding: 16px 24px;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 2px solid var(--border-color);
       background: var(--bg-secondary);
+      overflow-x: auto;
     }
 
     .tab-btn {
-      padding: 8px 16px;
-      background: var(--bg-primary);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
+      padding: 10px 20px;
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 8px;
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      position: relative;
     }
 
-    .tab-btn:hover {
-      background: var(--bg-tertiary);
-      border-color: var(--accent);
+    .tab-btn:hover:not(.active) {
+      background: var(--bg-primary);
+      border-color: #3b82f6;
+      color: var(--text-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
     }
 
     .tab-btn.active {
-      background: var(--accent);
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
       color: white;
-      border-color: var(--accent);
+      border-color: #3b82f6;
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+      font-weight: 600;
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #3b82f6;
     }
 
     .code-preview {
