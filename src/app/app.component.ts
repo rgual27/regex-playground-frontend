@@ -27,16 +27,13 @@ import { filter } from 'rxjs/operators';
                   Learn ▾
                 </button>
                 <div class="dropdown-menu" *ngIf="showLearnMenu">
-                  <a routerLink="/blog" routerLinkActive="active">Blog</a>
                   <a routerLink="/examples" routerLinkActive="active">Examples</a>
                   <a routerLink="/challenges" routerLinkActive="active">Challenges</a>
                   <a routerLink="/cheat-sheet" routerLinkActive="active">Cheat Sheet</a>
                 </div>
               </div>
-              <a routerLink="/library" routerLinkActive="active">Library</a>
-              <a routerLink="/community" routerLinkActive="active">Community</a>
-              <a routerLink="/leaderboard" routerLinkActive="active">Leaderboard</a>
-              <a routerLink="/pricing" routerLinkActive="active">Pricing</a>
+              <a routerLink="/library" routerLinkActive="active">{{ 'nav.library' | translate }}</a>
+              <a routerLink="/pricing" routerLinkActive="active">{{ 'nav.pricing' | translate }}</a>
             </div>
             <div class="nav-actions">
               <app-language-switcher></app-language-switcher>
