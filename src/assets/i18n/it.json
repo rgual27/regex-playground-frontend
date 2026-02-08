@@ -7,7 +7,11 @@
     "myAccount": "Il Mio Account",
     "login": "Accedi",
     "signup": "Registrati",
-    "logout": "Esci"
+    "logout": "Esci",
+    "learn": "Impara",
+    "examples": "Esempi",
+    "challenges": "Sfide",
+    "cheatSheet": "Guida Rapida"
   },
   "hero": {
     "title": "Testa i Tuoi Pattern Regex",
@@ -193,5 +197,18 @@
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Fatto con ❤️ per gli sviluppatori."
+  },
+  "examples": {
+    "title": "Libreria di Esempi Regex",
+    "subtitle": "Impara con esempi di pattern regex comuni",
+    "tryIt": "Prova"
+  },
+  "challenges": {
+    "title": "Sfide Regex Quotidiane",
+    "subtitle": "Padroneggia regex con sfide progressive"
+  },
+  "cheatSheet": {
+    "title": "Guida Rapida Regex",
+    "subtitle": "Riferimento rapido per i pattern di espressioni regolari"
   }
 }

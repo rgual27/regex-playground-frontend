@@ -7,7 +7,11 @@
     "myAccount": "Мой Аккаунт",
     "login": "Войти",
     "signup": "Регистрация",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "learn": "Учиться",
+    "examples": "Примеры",
+    "challenges": "Задачи",
+    "cheatSheet": "Шпаргалка"
   },
   "hero": {
     "title": "Тестируйте Ваши Regex Паттерны",
@@ -193,5 +197,18 @@
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Сделано с ❤️ для разработчиков."
+  },
+  "examples": {
+    "title": "Библиотека Примеров Regex",
+    "subtitle": "Учитесь на примерах распространенных шаблонов regex",
+    "tryIt": "Попробовать"
+  },
+  "challenges": {
+    "title": "Ежедневные Задачи Regex",
+    "subtitle": "Освойте regex с прогрессивными задачами"
+  },
+  "cheatSheet": {
+    "title": "Шпаргалка по Regex",
+    "subtitle": "Быстрая справка по шаблонам регулярных выражений"
   }
 }

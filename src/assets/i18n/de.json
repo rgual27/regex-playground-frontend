@@ -7,7 +7,11 @@
     "myAccount": "Mein Konto",
     "login": "Anmelden",
     "signup": "Registrieren",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "learn": "Lernen",
+    "examples": "Beispiele",
+    "challenges": "Herausforderungen",
+    "cheatSheet": "Spickzettel"
   },
   "hero": {
     "title": "Testen Sie Ihre Regex-Muster",
@@ -193,5 +197,85 @@
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Mit ❤️ für Entwickler gemacht."
+  },
+  "examples": {
+    "title": "Regex-Beispielbibliothek",
+    "subtitle": "Lernen Sie anhand von Beispielen mit gängigen Regex-Mustern",
+    "tryIt": "Ausprobieren",
+    "categories": {
+      "all": "Alle",
+      "validation": "Validierung",
+      "extraction": "Extraktion",
+      "search": "Suche",
+      "formatting": "Formatierung"
+    },
+    "difficulty": {
+      "beginner": "Anfänger",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Experte"
+    },
+    "items": {
+      "email": { "title": "E-Mail-Validierung", "description": "E-Mail-Adressen mit korrekter Formatprüfung validieren", "useCases": ["Formularvalidierung", "Benutzerregistrierung", "Kontaktformulare", "Newsletter-Anmeldung"] },
+      "url": { "title": "URL/Link-Extraktor", "description": "HTTP/HTTPS-URLs aus Text extrahieren", "useCases": ["Link-Extraktion", "Web Scraping", "Inhaltsanalyse", "SEO-Tools"] },
+      "phoneUs": { "title": "US-Telefonnummer", "description": "US-Telefonnummern in verschiedenen Formaten abgleichen", "useCases": ["Kontaktformulare", "Kundendatenbank", "CRM-Systeme", "SMS-Dienste"] },
+      "date": { "title": "Datumsformat (JJJJ-MM-TT)", "description": "ISO-Datumsformat abgleichen", "useCases": ["Datumseingabevalidierung", "Log-Parsing", "Datenimport", "API-Validierung"] },
+      "hexColor": { "title": "Hex-Farbcode", "description": "Hexadezimale Farbcodes abgleichen", "useCases": ["CSS-Parsing", "Design-Tools", "Farbextraktion", "Theme-Generierung"] },
+      "ipv4": { "title": "IPv4-Adresse", "description": "Gültige IPv4-Adressen abgleichen", "useCases": ["Netzwerkkonfiguration", "Server-Logs", "Sicherheitstools", "IP-Filterung"] },
+      "creditCard": { "title": "Kreditkartennummer", "description": "Kreditkartennummern abgleichen (13-19 Ziffern)", "useCases": ["Zahlungsformulare", "PCI-Compliance", "Transaktionsvalidierung", "Finanzsysteme"] },
+      "password": { "title": "Starkes Passwort", "description": "Starke Passwörter validieren (8+ Zeichen, Groß-/Kleinschreibung, Zahlen, Symbole)", "useCases": ["Benutzerregistrierung", "Sicherheitsdurchsetzung", "Passwort-Reset", "Kontoerstellung"] },
+      "htmlTags": { "title": "HTML-Tag-Entferner", "description": "Alle HTML-Tags aus Text entfernen", "useCases": ["Textbereinigung", "Inhaltsextraktion", "Datenbereinigung", "Sicherheit"] },
+      "username": { "title": "Benutzername", "description": "Benutzernamen validieren (alphanumerisch, Bindestriche, 3-16 Zeichen)", "useCases": ["Benutzerregistrierung", "Profilvalidierung", "Soziale Netzwerke", "Auth-Systeme"] },
+      "slug": { "title": "URL-Slug", "description": "SEO-freundliche URL-Slugs validieren", "useCases": ["URL-Generierung", "SEO", "CMS", "Blog-Permalinks"] },
+      "time24h": { "title": "24h-Zeitformat", "description": "Zeit im 24-Stunden-Format validieren (HH:MM)", "useCases": ["Zeiteingabe", "Terminplanung", "Log-Analyse", "Buchungssysteme"] },
+      "twitterHandle": { "title": "Twitter-Handle", "description": "Twitter/X-Handles aus Text extrahieren", "useCases": ["Social-Media-Analyse", "Erwähnungsverfolgung", "Datenextraktion", "Marketing"] },
+      "hashtag": { "title": "Hashtags", "description": "Social-Media-Hashtags extrahieren", "useCases": ["Trendanalyse", "Inhaltskategorisierung", "Social-Media-Analyse", "Marketing"] },
+      "markdownLinks": { "title": "Markdown-Links", "description": "Markdown-Format-Links extrahieren [text](url)", "useCases": ["Markdown-Parsing", "Dokumentation", "CMS", "Statische Site-Generatoren"] },
+      "jsonString": { "title": "JSON-Zeichenfolge", "description": "Zeichenfolgenwerte aus JSON extrahieren", "useCases": ["API-Parsing", "Config-Datei-Lesen", "Datenextraktion", "Log-Analyse"] },
+      "whitespace": { "title": "Mehrfache Leerzeichen", "description": "Mehrfache Leerzeichen durch einzelnes Leerzeichen ersetzen", "useCases": ["Textnormalisierung", "Datenbereinigung", "Eingabebereinigung", "Formatkorrektur"] },
+      "fileExtension": { "title": "Dateierweiterung", "description": "Dateierweiterungen aus Dateinamen extrahieren", "useCases": ["Dateitypvalidierung", "Upload-Filterung", "Dateiorganisation", "MIME-Erkennung"] },
+      "semver": { "title": "Semantische Version", "description": "Semantische Versionierung abgleichen (major.minor.patch)", "useCases": ["Paketverwaltung", "Versionsvergleich", "Release-Automatisierung", "Abhängigkeitsprüfung"] },
+      "uuid": { "title": "UUID-Validator", "description": "UUID v4-Format abgleichen", "useCases": ["Datenbank-IDs", "API-Tokens", "Eindeutige Identifikatoren", "Verteilte Systeme"] }
+    }
+  },
+  "challenges": {
+    "title": "Tägliche Regex-Herausforderungen",
+    "subtitle": "Meistern Sie Regex mit progressiven Herausforderungen",
+    "solved": "Gelöst",
+    "points": "Punkte",
+    "streak": "Tagesfolge",
+    "challengeOfDay": "Herausforderung des Tages",
+    "tryChallenge": "Diese Herausforderung ausprobieren",
+    "difficulty": { "all": "Alle", "easy": "Einfach", "medium": "Mittel", "hard": "Schwer" },
+    "solvedBadge": "Gelöst",
+    "solve": "Lösen",
+    "task": "Aufgabe",
+    "testCases": "Testfälle",
+    "shouldMatch": "Sollte übereinstimmen",
+    "shouldNotMatch": "Sollte NICHT übereinstimmen",
+    "yourSolution": "Ihre Lösung",
+    "enterPattern": "Geben Sie Ihr Regex-Muster ein...",
+    "testSolution": "Lösung testen",
+    "showHint": "Hinweis anzeigen",
+    "showSolution": "Lösung anzeigen",
+    "hint": "Hinweis",
+    "solution": "Lösung",
+    "pass": "BESTANDEN",
+    "fail": "FEHLGESCHLAGEN",
+    "congratulations": "Glückwunsch!",
+    "challengeSolved": "Sie haben die Herausforderung gelöst!",
+    "earnedPoints": "Punkte verdient"
+  },
+  "cheatSheet": {
+    "title": "Regex-Spickzettel",
+    "subtitle": "Schnellreferenz für reguläre Ausdrucksmuster",
+    "copy": "Kopieren",
+    "sections": {
+      "basics": { "title": "Grundlagen", "items": { "dot": "Beliebiges Zeichen außer Zeilenumbruch", "wordChar": "Wortzeichen (a-z, A-Z, 0-9, _)", "notWordChar": "Kein Wortzeichen", "digit": "Ziffer (0-9)", "notDigit": "Keine Ziffer", "whitespace": "Leerzeichen", "notWhitespace": "Kein Leerzeichen" } },
+      "quantifiers": { "title": "Quantifizierer", "items": { "zeroOrMore": "0 oder mehr Male", "oneOrMore": "1 oder mehr Male", "zeroOrOne": "0 oder 1 Mal (optional)", "exactly": "Genau n Male", "atLeast": "Mindestens n Male", "between": "Zwischen n und m Male" } },
+      "anchors": { "title": "Anker", "items": { "start": "Zeilenanfang", "end": "Zeilenende", "wordBoundary": "Wortgrenze", "notWordBoundary": "Keine Wortgrenze" } },
+      "groups": { "title": "Gruppen", "items": { "capturing": "Erfassungsgruppe", "nonCapturing": "Nicht-erfassende Gruppe", "namedGroup": "Benannte Gruppe", "backreference": "Rückverweis" } },
+      "charClasses": { "title": "Zeichenklassen", "items": { "set": "Zeichensatz", "negatedSet": "Negierter Satz", "range": "Zeichenbereich", "or": "Alternierung (ODER)" } },
+      "lookaround": { "title": "Lookaround", "items": { "positiveLookahead": "Positiver Lookahead", "negativeLookahead": "Negativer Lookahead", "positiveLookbehind": "Positiver Lookbehind", "negativeLookbehind": "Negativer Lookbehind" } }
+    }
   }
 }

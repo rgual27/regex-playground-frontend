@@ -7,7 +7,11 @@
     "myAccount": "Minha Conta",
     "login": "Entrar",
     "signup": "Cadastrar",
-    "logout": "Sair"
+    "logout": "Sair",
+    "learn": "Aprender",
+    "examples": "Exemplos",
+    "challenges": "Desafios",
+    "cheatSheet": "Guia Rápido"
   },
   "hero": {
     "title": "Teste Seus Padrões Regex",
@@ -193,5 +197,18 @@
   },
   "footer": {
     "copyright": "© 2025 Regex Playground. Feito com ❤️ para desenvolvedores."
+  },
+  "examples": {
+    "title": "Biblioteca de Exemplos Regex",
+    "subtitle": "Aprenda com exemplos de padrões regex comuns",
+    "tryIt": "Experimentar"
+  },
+  "challenges": {
+    "title": "Desafios Diários de Regex",
+    "subtitle": "Domine regex com desafios progressivos"
+  },
+  "cheatSheet": {
+    "title": "Guia Rápido de Regex",
+    "subtitle": "Referência rápida para padrões de expressões regulares"
   }
 }
