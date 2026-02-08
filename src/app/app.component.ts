@@ -24,12 +24,12 @@ import { filter } from 'rxjs/operators';
             <div class="nav-links">
               <div class="dropdown">
                 <button class="dropdown-toggle" (click)="toggleLearnMenu()">
-                  Learn ▾
+                  {{ 'nav.learn' | translate }} ▾
                 </button>
                 <div class="dropdown-menu" *ngIf="showLearnMenu">
-                  <a routerLink="/examples" routerLinkActive="active">Examples</a>
-                  <a routerLink="/challenges" routerLinkActive="active">Challenges</a>
-                  <a routerLink="/cheat-sheet" routerLinkActive="active">Cheat Sheet</a>
+                  <a routerLink="/examples" routerLinkActive="active">{{ 'nav.examples' | translate }}</a>
+                  <a routerLink="/challenges" routerLinkActive="active">{{ 'nav.challenges' | translate }}</a>
+                  <a routerLink="/cheat-sheet" routerLinkActive="active">{{ 'nav.cheatSheet' | translate }}</a>
                 </div>
               </div>
               <a routerLink="/library" routerLinkActive="active">{{ 'nav.library' | translate }}</a>

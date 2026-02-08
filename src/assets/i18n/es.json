@@ -12,7 +12,11 @@
     "login": "Iniciar Sesión",
     "signup": "Registrarse",
     "logout": "Cerrar Sesión",
-    "versions": "Historial de Versiones"
+    "versions": "Historial de Versiones",
+    "learn": "Aprender",
+    "examples": "Ejemplos",
+    "challenges": "Desafíos",
+    "cheatSheet": "Guía Rápida"
   },
   "hero": {
     "title": "Prueba tus Patrones Regex",
