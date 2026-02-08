@@ -25,21 +25,28 @@ import { filter } from 'rxjs/operators';
               <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 {{ 'nav.tester' | translate }}
               </a>
-              <a routerLink="/examples" routerLinkActive="active">
-                📚 Examples
-              </a>
-              <a routerLink="/challenges" routerLinkActive="active">
-                🏆 Challenges
-              </a>
-              <a routerLink="/cheat-sheet" routerLinkActive="active">
-                📖 Cheat Sheet
-              </a>
+              <div class="dropdown">
+                <button class="dropdown-toggle" (click)="toggleLearnMenu()">
+                  📚 Learn ▾
+                </button>
+                <div class="dropdown-menu" *ngIf="showLearnMenu">
+                  <a routerLink="/examples" routerLinkActive="active">
+                    📚 Examples
+                  </a>
+                  <a routerLink="/challenges" routerLinkActive="active">
+                    🏆 Challenges
+                  </a>
+                  <a routerLink="/cheat-sheet" routerLinkActive="active">
+                    📖 Cheat Sheet
+                  </a>
+                </div>
+              </div>
               <a routerLink="/library" routerLinkActive="active">
                 {{ 'nav.library' | translate }}
               </a>
               <div class="dropdown" *ngIf="(currentUser$ | async) && userTier === 'PRO'">
                 <button class="dropdown-toggle" (click)="toggleFeaturesMenu()">
-                  {{ 'nav.features' | translate }} ▾
+                  ⚡ Pro ▾
                 </button>
                 <div class="dropdown-menu" *ngIf="showFeaturesMenu">
                   <a routerLink="/folders" routerLinkActive="active">
@@ -121,17 +128,21 @@ import { filter } from 'rxjs/operators';
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1rem;
       flex: 1;
       justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
       color: #334155;
-      font-weight: 600;
-      padding: 0.5rem 0;
+      font-weight: 500;
+      padding: 0.5rem 0.75rem;
       border-bottom: 2px solid transparent;
-      transition: transform 0.2s, opacity 0.2s;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+      white-space: nowrap;
     }
 
     .nav-links a:hover,
@@ -253,6 +264,47 @@ import { filter } from 'rxjs/operators';
       font-size: 0.875rem;
     }
 
+    @media (max-width: 1200px) {
+      .nav-links {
+        gap: 0.75rem;
+      }
+
+      .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.5rem;
+      }
+    }
+
+    @media (max-width: 968px) {
+      .nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .logo {
+        flex: 1;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.6rem;
+      }
+
+      .nav-actions {
+        order: 2;
+        gap: 0.5rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .nav {
         flex-direction: column;
@@ -260,19 +312,26 @@ import { filter } from 'rxjs/operators';
       }
 
       .nav-links {
-        justify-content: flex-start;
-        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
       }
 
       .nav-actions {
         width: 100%;
-        justify-content: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
       }
 
       .footer .container {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+      }
+
+      .footer-links {
+        flex-direction: column;
+        gap: 0.5rem;
       }
     }
   `]
@@ -281,6 +340,7 @@ export class AppComponent implements OnInit {
   @ViewChild(AuthComponent) authComponent!: AuthComponent;
   currentUser$;
   showFeaturesMenu = false;
+  showLearnMenu = false;
 
   constructor(
     private authService: AuthService,
@@ -299,16 +359,23 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang('en');
     this.translate.use(savedLang);
 
-    // Close features menu on navigation
+    // Close dropdown menus on navigation
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.showFeaturesMenu = false;
+      this.showLearnMenu = false;
     });
   }
 
   toggleFeaturesMenu(): void {
     this.showFeaturesMenu = !this.showFeaturesMenu;
+    this.showLearnMenu = false;
+  }
+
+  toggleLearnMenu(): void {
+    this.showLearnMenu = !this.showLearnMenu;
+    this.showFeaturesMenu = false;
   }
 
   openLogin(): void {
