@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface RegexExample {
   id: string;
@@ -33,7 +33,7 @@ interface RegexExample {
           class="category-btn"
           [class.active]="selectedCategory === cat"
           (click)="selectedCategory = cat">
-          {{ cat }}
+          {{ getCategoryTranslation(cat) | translate }}
         </button>
       </div>
 
@@ -47,27 +47,27 @@ interface RegexExample {
           (click)="tryExample(example)">
 
           <div class="example-header">
-            <h3>{{ example.title }}</h3>
+            <h3>{{ getExampleTranslation(example.id, 'title') | translate }}</h3>
             <span class="difficulty-badge" [class]="example.difficulty">
-              {{ example.difficulty }}
+              {{ 'examples.difficulty.' + example.difficulty | translate }}
             </span>
           </div>
 
-          <p class="example-description">{{ example.description }}</p>
+          <p class="example-description">{{ getExampleTranslation(example.id, 'description') | translate }}</p>
 
           <div class="example-pattern">
             <code>/{{ example.pattern }}/{{ example.flags }}</code>
           </div>
 
           <div class="example-meta">
-            <span class="category-tag">{{ example.category }}</span>
+            <span class="category-tag">{{ getCategoryTranslation(example.category) | translate }}</span>
             <button class="try-btn">
               🚀 {{ 'examples.tryIt' | translate }}
             </button>
           </div>
 
           <div class="use-cases">
-            <div class="use-case" *ngFor="let useCase of example.useCases.slice(0, 2)">
+            <div class="use-case" *ngFor="let useCase of getExampleUseCases(example.id); let i = index">
               ✓ {{ useCase }}
             </div>
           </div>
@@ -515,7 +515,10 @@ export class ExamplesComponent implements OnInit {
 
   filteredExamples: RegexExample[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     this.filterExamples();
@@ -539,5 +542,64 @@ export class ExamplesComponent implements OnInit {
         example: example.id
       }
     });
+  }
+
+  getCategoryTranslation(category: string): string {
+    const categoryMap: { [key: string]: string } = {
+      'All': 'examples.categories.all',
+      'Validation': 'examples.categories.validation',
+      'Extraction': 'examples.categories.extraction',
+      'Search': 'examples.categories.search',
+      'Formatting': 'examples.categories.formatting'
+    };
+    return categoryMap[category] || category;
+  }
+
+  getExampleTranslation(exampleId: string, field: 'title' | 'description'): string {
+    const idMap: { [key: string]: string } = {
+      'email': 'email',
+      'url': 'url',
+      'phone-us': 'phoneUs',
+      'date': 'date',
+      'hex-color': 'hexColor',
+      'ipv4': 'ipv4',
+      'credit-card': 'creditCard',
+      'password': 'password',
+      'html-tags': 'htmlTags',
+      'username': 'username',
+      'slug': 'slug',
+      'time-24h': 'time24h'
+    };
+    const mappedId = idMap[exampleId] || exampleId;
+    return `examples.items.${mappedId}.${field}`;
+  }
+
+  getExampleUseCases(exampleId: string): string[] {
+    const idMap: { [key: string]: string } = {
+      'email': 'email',
+      'url': 'url',
+      'phone-us': 'phoneUs',
+      'date': 'date',
+      'hex-color': 'hexColor',
+      'ipv4': 'ipv4',
+      'credit-card': 'creditCard',
+      'password': 'password',
+      'html-tags': 'htmlTags',
+      'username': 'username',
+      'slug': 'slug',
+      'time-24h': 'time24h'
+    };
+    const mappedId = idMap[exampleId] || exampleId;
+    const key = `examples.items.${mappedId}.useCases`;
+    const translated = this.translate.instant(key);
+
+    // If translation exists and is an array, return first 2 items
+    if (Array.isArray(translated)) {
+      return translated.slice(0, 2);
+    }
+
+    // Fallback to English use cases from example data
+    const example = this.examples.find(ex => ex.id === exampleId);
+    return example ? example.useCases.slice(0, 2) : [];
   }
 }

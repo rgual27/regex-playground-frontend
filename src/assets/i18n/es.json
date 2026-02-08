@@ -56,7 +56,180 @@
   "examples": {
     "title": "Biblioteca de Ejemplos Regex",
     "subtitle": "Aprende con ejemplos de patrones regex comunes",
-    "tryIt": "Pruébalo"
+    "tryIt": "Pruébalo",
+    "categories": {
+      "all": "Todos",
+      "validation": "Validación",
+      "extraction": "Extracción",
+      "search": "Búsqueda",
+      "formatting": "Formato"
+    },
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "items": {
+      "email": {
+        "title": "Validación de Email",
+        "description": "Valida direcciones de correo con verificación de formato adecuado",
+        "useCases": ["Validación de formularios", "Registro de usuarios", "Formularios de contacto", "Suscripción newsletter"]
+      },
+      "url": {
+        "title": "Extractor de URLs",
+        "description": "Extrae URLs HTTP/HTTPS del texto",
+        "useCases": ["Extracción de enlaces", "Web scraping", "Análisis de contenido", "Herramientas SEO"]
+      },
+      "phoneUs": {
+        "title": "Teléfono US",
+        "description": "Valida números telefónicos US en varios formatos",
+        "useCases": ["Formularios de contacto", "Base de datos de clientes", "Sistemas CRM", "Servicios SMS"]
+      },
+      "date": {
+        "title": "Formato de Fecha (YYYY-MM-DD)",
+        "description": "Valida formato de fecha ISO",
+        "useCases": ["Validación de entrada de fecha", "Análisis de logs", "Importación de datos", "Validación API"]
+      },
+      "hexColor": {
+        "title": "Código de Color Hex",
+        "description": "Valida códigos de color hexadecimal",
+        "useCases": ["Análisis CSS", "Herramientas de diseño", "Extracción de colores", "Generación de temas"]
+      },
+      "ipv4": {
+        "title": "Dirección IPv4",
+        "description": "Valida direcciones IPv4 válidas",
+        "useCases": ["Configuración de red", "Logs de servidor", "Herramientas de seguridad", "Filtrado de IP"]
+      },
+      "creditCard": {
+        "title": "Número de Tarjeta",
+        "description": "Valida números de tarjeta de crédito (13-19 dígitos)",
+        "useCases": ["Formularios de pago", "Cumplimiento PCI", "Validación de transacciones", "Sistemas financieros"]
+      },
+      "password": {
+        "title": "Contraseña Fuerte",
+        "description": "Valida contraseñas fuertes (8+ chars, mayús/minús, números, símbolos)",
+        "useCases": ["Registro de usuarios", "Aplicación de seguridad", "Reseteo de contraseña", "Creación de cuenta"]
+      },
+      "htmlTags": {
+        "title": "Eliminar Tags HTML",
+        "description": "Elimina todas las etiquetas HTML del texto",
+        "useCases": ["Sanitización de texto", "Extracción de contenido", "Limpieza de datos", "Seguridad"]
+      },
+      "username": {
+        "title": "Nombre de Usuario",
+        "description": "Valida nombres de usuario (alfanumérico, guiones, 3-16 chars)",
+        "useCases": ["Registro de usuarios", "Validación de perfil", "Redes sociales", "Sistemas de autenticación"]
+      },
+      "slug": {
+        "title": "URL Slug",
+        "description": "Valida slugs URL amigables para SEO",
+        "useCases": ["Generación de URLs", "SEO", "CMS", "Permalinks de blog"]
+      },
+      "time24h": {
+        "title": "Formato de Hora 24h",
+        "description": "Valida hora en formato 24 horas (HH:MM)",
+        "useCases": ["Entrada de hora", "Programación", "Análisis de logs", "Sistemas de reserva"]
+      }
+    }
+  },
+  "challenges": {
+    "title": "Desafíos Diarios de Regex",
+    "subtitle": "Domina regex con desafíos progresivos",
+    "solved": "Resueltos",
+    "points": "Puntos",
+    "streak": "Racha de Días",
+    "challengeOfDay": "Desafío del Día",
+    "tryChallenge": "Probar Este Desafío",
+    "difficulty": {
+      "all": "Todos",
+      "easy": "Fácil",
+      "medium": "Medio",
+      "hard": "Difícil"
+    },
+    "solvedBadge": "Resuelto",
+    "solve": "Resolver",
+    "task": "Tarea",
+    "testCases": "Casos de Prueba",
+    "shouldMatch": "Debe coincidir",
+    "shouldNotMatch": "NO debe coincidir",
+    "yourSolution": "Tu Solución",
+    "enterPattern": "Ingresa tu patrón regex...",
+    "testSolution": "Probar Solución",
+    "showHint": "Mostrar Pista",
+    "showSolution": "Mostrar Solución",
+    "hint": "Pista",
+    "solution": "Solución",
+    "pass": "APROBADO",
+    "fail": "FALLIDO",
+    "congratulations": "¡Felicidades!",
+    "challengeSolved": "¡Has resuelto el desafío!",
+    "earnedPoints": "puntos ganados"
+  },
+  "cheatSheet": {
+    "title": "Guía Rápida de Regex",
+    "subtitle": "Referencia rápida para patrones de expresiones regulares",
+    "copy": "Copiar",
+    "sections": {
+      "basics": {
+        "title": "Básicos",
+        "items": {
+          "dot": "Cualquier carácter excepto nueva línea",
+          "wordChar": "Carácter de palabra (a-z, A-Z, 0-9, _)",
+          "notWordChar": "No carácter de palabra",
+          "digit": "Dígito (0-9)",
+          "notDigit": "No dígito",
+          "whitespace": "Espacio en blanco",
+          "notWhitespace": "No espacio en blanco"
+        }
+      },
+      "quantifiers": {
+        "title": "Cuantificadores",
+        "items": {
+          "zeroOrMore": "0 o más veces",
+          "oneOrMore": "1 o más veces",
+          "zeroOrOne": "0 o 1 vez (opcional)",
+          "exactly": "Exactamente n veces",
+          "atLeast": "Al menos n veces",
+          "between": "Entre n y m veces"
+        }
+      },
+      "anchors": {
+        "title": "Anclas",
+        "items": {
+          "start": "Inicio de línea",
+          "end": "Final de línea",
+          "wordBoundary": "Límite de palabra",
+          "notWordBoundary": "No límite de palabra"
+        }
+      },
+      "groups": {
+        "title": "Grupos",
+        "items": {
+          "capturing": "Grupo de captura",
+          "nonCapturing": "Grupo sin captura",
+          "namedGroup": "Grupo nombrado",
+          "backreference": "Referencia anterior"
+        }
+      },
+      "charClasses": {
+        "title": "Clases de Caracteres",
+        "items": {
+          "set": "Conjunto de caracteres",
+          "negatedSet": "Conjunto negado",
+          "range": "Rango de caracteres",
+          "or": "Alternación (O)"
+        }
+      },
+      "lookaround": {
+        "title": "Lookaround",
+        "items": {
+          "positiveLookahead": "Lookahead positivo",
+          "negativeLookahead": "Lookahead negativo",
+          "positiveLookbehind": "Lookbehind positivo",
+          "negativeLookbehind": "Lookbehind negativo"
+        }
+      }
+    }
   },
   "explainer": {
     "title": "Desglose del Patrón",

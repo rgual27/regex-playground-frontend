@@ -24,20 +24,20 @@ interface Challenge {
   template: `
     <div class="challenges-container">
       <div class="challenges-header">
-        <h1>🏆 Daily Regex Challenges</h1>
-        <p class="subtitle">Master regex with progressive challenges</p>
+        <h1>🏆 {{ 'challenges.title' | translate }}</h1>
+        <p class="subtitle">{{ 'challenges.subtitle' | translate }}</p>
         <div class="stats">
           <div class="stat-card">
             <span class="stat-value">{{ solvedCount }}</span>
-            <span class="stat-label">Solved</span>
+            <span class="stat-label">{{ 'challenges.solved' | translate }}</span>
           </div>
           <div class="stat-card">
             <span class="stat-value">{{ totalPoints }}</span>
-            <span class="stat-label">Points</span>
+            <span class="stat-label">{{ 'challenges.points' | translate }}</span>
           </div>
           <div class="stat-card">
             <span class="stat-value">{{ streak }}</span>
-            <span class="stat-label">Day Streak</span>
+            <span class="stat-label">{{ 'challenges.streak' | translate }}</span>
           </div>
         </div>
       </div>
