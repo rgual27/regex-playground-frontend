@@ -133,6 +133,46 @@
         "title": "Formato de Hora 24h",
         "description": "Valida hora en formato 24 horas (HH:MM)",
         "useCases": ["Entrada de hora", "Programación", "Análisis de logs", "Sistemas de reserva"]
+      },
+      "twitterHandle": {
+        "title": "Usuario de Twitter",
+        "description": "Extrae usuarios de Twitter/X del texto",
+        "useCases": ["Análisis de redes sociales", "Monitoreo de menciones", "Extracción de datos", "Marketing"]
+      },
+      "hashtag": {
+        "title": "Hashtags",
+        "description": "Extrae hashtags de redes sociales",
+        "useCases": ["Análisis de tendencias", "Categorización de contenido", "Social media analytics", "Marketing"]
+      },
+      "markdownLinks": {
+        "title": "Enlaces Markdown",
+        "description": "Extrae enlaces formato Markdown [texto](url)",
+        "useCases": ["Parseo de Markdown", "Documentación", "CMS", "Generadores de sitios"]
+      },
+      "jsonString": {
+        "title": "Cadena JSON",
+        "description": "Extrae valores de cadena de JSON",
+        "useCases": ["Parseo de API", "Lectura de archivos config", "Extracción de datos", "Análisis de logs"]
+      },
+      "whitespace": {
+        "title": "Espacios Múltiples",
+        "description": "Reemplaza múltiples espacios con uno solo",
+        "useCases": ["Normalización de texto", "Limpieza de datos", "Sanitización de entrada", "Corrección de formato"]
+      },
+      "fileExtension": {
+        "title": "Extensión de Archivo",
+        "description": "Extrae extensiones de nombres de archivo",
+        "useCases": ["Validación de tipo de archivo", "Filtrado de uploads", "Organización de archivos", "Detección MIME"]
+      },
+      "semver": {
+        "title": "Versión Semántica",
+        "description": "Valida versionado semántico (major.minor.patch)",
+        "useCases": ["Gestión de paquetes", "Comparación de versiones", "Automatización de releases", "Verificación de dependencias"]
+      },
+      "uuid": {
+        "title": "Validador UUID",
+        "description": "Valida formato UUID v4",
+        "useCases": ["IDs de base de datos", "Tokens API", "Identificadores únicos", "Sistemas distribuidos"]
       }
     }
   },

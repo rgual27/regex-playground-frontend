@@ -568,7 +568,15 @@ export class ExamplesComponent implements OnInit {
       'html-tags': 'htmlTags',
       'username': 'username',
       'slug': 'slug',
-      'time-24h': 'time24h'
+      'time-24h': 'time24h',
+      'twitter-handle': 'twitterHandle',
+      'hashtag': 'hashtag',
+      'markdown-links': 'markdownLinks',
+      'json-string': 'jsonString',
+      'whitespace': 'whitespace',
+      'file-extension': 'fileExtension',
+      'semver': 'semver',
+      'uuid': 'uuid'
     };
     const mappedId = idMap[exampleId] || exampleId;
     return `examples.items.${mappedId}.${field}`;
@@ -587,7 +595,15 @@ export class ExamplesComponent implements OnInit {
       'html-tags': 'htmlTags',
       'username': 'username',
       'slug': 'slug',
-      'time-24h': 'time24h'
+      'time-24h': 'time24h',
+      'twitter-handle': 'twitterHandle',
+      'hashtag': 'hashtag',
+      'markdown-links': 'markdownLinks',
+      'json-string': 'jsonString',
+      'whitespace': 'whitespace',
+      'file-extension': 'fileExtension',
+      'semver': 'semver',
+      'uuid': 'uuid'
     };
     const mappedId = idMap[exampleId] || exampleId;
     const key = `examples.items.${mappedId}.useCases`;

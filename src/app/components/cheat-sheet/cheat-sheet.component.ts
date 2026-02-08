@@ -21,8 +21,8 @@ interface CheatSection {
   template: `
     <div class="cheat-sheet-container">
       <div class="cheat-header">
-        <h1>📖 Regex Cheat Sheet</h1>
-        <p class="subtitle">Quick reference for regular expression patterns</p>
+        <h1>📖 {{ 'cheatSheet.title' | translate }}</h1>
+        <p class="subtitle">{{ 'cheatSheet.subtitle' | translate }}</p>
       </div>
 
       <div class="sections-grid">

@@ -43,18 +43,18 @@ interface Challenge {
       </div>
 
       <div class="daily-challenge" *ngIf="todayChallenge">
-        <div class="challenge-badge">⭐ Challenge of the Day</div>
+        <div class="challenge-badge">⭐ {{ 'challenges.challengeOfDay' | translate }}</div>
         <h2>{{ todayChallenge.title }}</h2>
         <p class="challenge-desc">{{ todayChallenge.description }}</p>
         <div class="challenge-meta">
           <span class="difficulty-badge" [class]="todayChallenge.difficulty">
-            {{ todayChallenge.difficulty }}
+            {{ 'challenges.difficulty.' + todayChallenge.difficulty.toLowerCase() | translate }}
           </span>
-          <span class="points-badge">{{ todayChallenge.points }} points</span>
+          <span class="points-badge">{{ todayChallenge.points }} {{ 'challenges.points' | translate | lowercase }}</span>
           <span class="category-badge">{{ todayChallenge.category }}</span>
         </div>
         <button class="try-challenge-btn" (click)="tryChallenge(todayChallenge)">
-          🚀 Try This Challenge
+          🚀 {{ 'challenges.tryChallenge' | translate }}
         </button>
       </div>
 
@@ -64,7 +64,7 @@ interface Challenge {
           class="filter-btn"
           [class.active]="selectedDifficulty === diff"
           (click)="selectedDifficulty = diff; filterChallenges()">
-          {{ diff }}
+          {{ getDifficultyTranslation(diff) | translate }}
         </button>
       </div>
 
@@ -77,7 +77,7 @@ interface Challenge {
 
           <div class="challenge-header">
             <h3>{{ challenge.title }}</h3>
-            <span class="solved-badge" *ngIf="isSolved(challenge.id)">✓ Solved</span>
+            <span class="solved-badge" *ngIf="isSolved(challenge.id)">✓ {{ 'challenges.solvedBadge' | translate }}</span>
           </div>
 
           <p class="challenge-description">{{ challenge.description }}</p>
@@ -85,7 +85,7 @@ interface Challenge {
           <div class="challenge-footer">
             <div class="challenge-meta">
               <span class="difficulty-badge" [class]="challenge.difficulty">
-                {{ challenge.difficulty }}
+                {{ 'challenges.difficulty.' + challenge.difficulty | translate }}
               </span>
               <span class="points-badge">{{ challenge.points }}pts</span>
             </div>
@@ -93,7 +93,7 @@ interface Challenge {
               class="solve-btn"
               (click)="tryChallenge(challenge)"
               [disabled]="isSolved(challenge.id)">
-              {{ isSolved(challenge.id) ? '✓ Solved' : 'Solve' }}
+              {{ isSolved(challenge.id) ? ('✓ ' + ('challenges.solvedBadge' | translate)) : ('challenges.solve' | translate) }}
             </button>
           </div>
         </div>
@@ -959,5 +959,15 @@ export class ChallengesComponent implements OnInit {
       solvedIds.push(challengeId);
       localStorage.setItem('solvedChallenges', JSON.stringify(solvedIds));
     }
+  }
+
+  getDifficultyTranslation(difficulty: string): string {
+    const diffMap: { [key: string]: string } = {
+      'All': 'challenges.difficulty.all',
+      'Easy': 'challenges.difficulty.easy',
+      'Medium': 'challenges.difficulty.medium',
+      'Hard': 'challenges.difficulty.hard'
+    };
+    return diffMap[difficulty] || difficulty;
   }
 }
