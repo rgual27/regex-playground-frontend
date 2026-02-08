@@ -63,13 +63,14 @@ import { NotificationService } from '../../services/notification.service';
             <button (click)="donate()" [disabled]="loading" class="support-btn primary">
               <span class="btn-icon">❤️</span>
               <div class="btn-content">
-                <strong>{{ loading ? 'Processing...' : 'Support with Stripe' }}</strong>
-                <small>Secure one-time donation</small>
+                <strong>{{ loading ? 'Processing...' : 'Donate Any Amount' }}</strong>
+                <small>Choose your amount • Secure with Stripe</small>
               </div>
             </button>
           </div>
 
           <p class="support-note">
+            💡 You can donate any amount you want - starting from $1, increasing by $1 increments!<br>
             Your support helps keep the servers running and enables me to add more features! 🚀
           </p>
 
