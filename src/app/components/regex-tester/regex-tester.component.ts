@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../services/modal.service';
 import { NotificationService } from '../../services/notification.service';
+import { ShareService } from '../../services/share.service';
 import { ExportModalComponent } from '../export-modal/export-modal.component';
 import { RegexExplainerComponent } from '../regex-explainer/regex-explainer.component';
 
@@ -170,7 +171,7 @@ import { RegexExplainerComponent } from '../regex-explainer/regex-explainer.comp
               title="Save as a new pattern (duplicate)">
               📋 Save as New
             </button>
-            <button class="btn btn-secondary w-full" [disabled]="true">📤 {{ 'common.share' | translate }}</button>
+            <button class="btn btn-secondary w-full" (click)="sharePattern()" [disabled]="!loadedPattern">🔗 {{ 'common.share' | translate }}</button>
             <button class="btn btn-secondary w-full" (click)="openExportModal()" [disabled]="!pattern">💻 {{ 'common.exportCode' | translate }}</button>
             <button class="btn btn-primary w-full" routerLink="/pricing" *ngIf="showUpgradeButton">⭐ {{ 'common.upgradeToPro' | translate }}</button>
           </div>
@@ -296,7 +297,8 @@ export class RegexTesterComponent implements OnInit {
     private subscriptionService: SubscriptionService,
     private folderService: FolderService,
     private modalService: ModalService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private shareService: ShareService
   ) {}
 
   get isAuthenticated(): boolean {
@@ -586,5 +588,45 @@ export class RegexTesterComponent implements OnInit {
 
   closeExportModal() {
     this.showExportModal = false;
+  }
+
+  async sharePattern() {
+    if (!this.loadedPattern || !this.loadedPattern.id) {
+      this.notificationService.warning('Please save the pattern first before sharing');
+      return;
+    }
+
+    this.shareService.generateShareCode(this.loadedPattern.id).subscribe({
+      next: async (response) => {
+        const shareUrl = response.shareUrl;
+
+        // Copy to clipboard
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+
+          // Show success modal with share URL
+          await this.modalService.confirm(
+            '🔗 Pattern Shared!',
+            `Share URL copied to clipboard!\n\n${shareUrl}\n\nShare this link with anyone to let them view and try your regex pattern.`,
+            'OK',
+            ''
+          );
+
+          this.notificationService.success('Share URL copied to clipboard!');
+        } catch (err) {
+          // Fallback if clipboard API fails
+          await this.modalService.confirm(
+            '🔗 Pattern Shared!',
+            `Share this URL:\n\n${shareUrl}\n\nCopy and paste to share with others.`,
+            'OK',
+            ''
+          );
+        }
+      },
+      error: (error) => {
+        console.error('Error generating share code:', error);
+        this.notificationService.error('Failed to generate share link. Please try again.');
+      }
+    });
   }
 }
