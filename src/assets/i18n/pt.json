@@ -263,10 +263,107 @@
     "fail": "REPROVADO",
     "congratulations": "Parabéns!",
     "challengeSolved": "Você resolveu o desafio!",
-    "earnedPoints": "Pontos Ganhos"
+    "earnedPoints": "pontos ganhos",
+    "nextChallenge": "Próximo Desafio"
   },
   "cheatSheet": {
     "title": "Guia Rápido de Regex",
-    "subtitle": "Referência rápida para padrões de expressões regulares"
+    "subtitle": "Referência rápida para padrões de expressões regulares",
+    "copy": "Copiar",
+    "sections": {
+      "charClasses": {
+        "title": "Classes de Caracteres",
+        "items": {
+          "dot": {"description": "Qualquer caractere exceto nova linha", "example": "a.c corresponde a 'abc', 'aXc'"},
+          "digit": {"description": "Qualquer dígito (0-9)", "example": "\\d\\d corresponde a '42', '99'"},
+          "notDigit": {"description": "Qualquer caractere não dígito", "example": "\\D+ corresponde a 'abc', 'XYZ'"},
+          "word": {"description": "Caractere de palavra (a-z, A-Z, 0-9, _)", "example": "\\w+ corresponde a 'ola123'"},
+          "notWord": {"description": "Caractere não palavra", "example": "\\W+ corresponde a '!@#', '   '"},
+          "whitespace": {"description": "Caractere de espaço (espaço, tab, nova linha)", "example": "\\s+ corresponde a '   ', '\t'"},
+          "notWhitespace": {"description": "Caractere não espaço", "example": "\\S+ corresponde a 'ola', '123'"},
+          "set": {"description": "Corresponde a qualquer caractere no conjunto", "example": "[aeiou] corresponde a qualquer vogal"},
+          "negatedSet": {"description": "Corresponde a qualquer caractere não no conjunto", "example": "[^aeiou] corresponde a consoantes"},
+          "range": {"description": "Corresponde ao caractere no intervalo", "example": "[a-z] corresponde a letras minúsculas"},
+          "digitRange": {"description": "Corresponde ao dígito no intervalo", "example": "[0-9] corresponde a qualquer dígito"}
+        }
+      },
+      "anchors": {
+        "title": "Âncoras",
+        "items": {
+          "start": {"description": "Início da string ou linha", "example": "^Olá corresponde a 'Olá mundo'"},
+          "end": {"description": "Fim da string ou linha", "example": "mundo$ corresponde a 'Olá mundo'"},
+          "wordBoundary": {"description": "Posição de limite de palavra", "example": "\\bpalavra\\b corresponde a 'palavra' não 'palavrão'"},
+          "notWordBoundary": {"description": "Sem limite de palavra", "example": "\\Bpalavra corresponde a 'senha' não 'palavra'"},
+          "stringStart": {"description": "Início absoluto da string", "example": "\\AOlá corresponde apenas no início"},
+          "stringEnd": {"description": "Fim absoluto da string", "example": "fim\\Z corresponde apenas no fim"}
+        }
+      },
+      "quantifiers": {
+        "title": "Quantificadores",
+        "items": {
+          "zeroOrMore": {"description": "Corresponde 0 ou mais vezes (ganancioso)", "example": "a* corresponde a '', 'a', 'aaa'"},
+          "oneOrMore": {"description": "Corresponde 1 ou mais vezes (ganancioso)", "example": "a+ corresponde a 'a', 'aaa'"},
+          "zeroOrOne": {"description": "Corresponde 0 ou 1 vez (opcional)", "example": "colou?r corresponde a 'color', 'colour'"},
+          "exactlyN": {"description": "Corresponde exatamente n vezes", "example": "a{3} corresponde a 'aaa'"},
+          "nOrMore": {"description": "Corresponde n ou mais vezes", "example": "a{2,} corresponde a 'aa', 'aaa'"},
+          "betweenNM": {"description": "Corresponde entre n e m vezes", "example": "a{2,4} corresponde a 'aa', 'aaa', 'aaaa'"},
+          "lazyZeroOrMore": {"description": "Corresponde 0 ou mais vezes (preguiçoso)", "example": "a*? corresponde ao mais curto possível"},
+          "lazyOneOrMore": {"description": "Corresponde 1 ou mais vezes (preguiçoso)", "example": "a+? corresponde ao mais curto possível"},
+          "lazyZeroOrOne": {"description": "Corresponde 0 ou 1 vez (preguiçoso)", "example": "a?? corresponde ao mais curto possível"}
+        }
+      },
+      "groups": {
+        "title": "Grupos e Alternância",
+        "items": {
+          "capturing": {"description": "Grupo de captura", "example": "(abc) captura 'abc' como grupo 1"},
+          "nonCapturing": {"description": "Grupo não capturador", "example": "(?:abc) agrupa sem capturar"},
+          "named": {"description": "Grupo de captura nomeado", "example": "(?<nome>abc) captura como 'nome'"},
+          "backreference": {"description": "Referência ao grupo capturado", "example": "(\\w)\\1 corresponde a 'aa', 'bb'"},
+          "alternation": {"description": "Corresponde a um ou outro padrão", "example": "gato|cachorro corresponde a 'gato' ou 'cachorro'"},
+          "positiveLookahead": {"description": "Corresponde se seguido pelo padrão", "example": "\\d(?=px) corresponde a '5' em '5px'"},
+          "negativeLookahead": {"description": "Corresponde se não seguido pelo padrão", "example": "\\d(?!px) corresponde a '5' não em '5px'"},
+          "positiveLookbehind": {"description": "Corresponde se precedido pelo padrão", "example": "(?<=\\$)\\d+ corresponde a '100' em '$100'"},
+          "negativeLookbehind": {"description": "Corresponde se não precedido pelo padrão", "example": "(?<!\\$)\\d+ corresponde a '100' não após '$'"}
+        }
+      },
+      "flags": {
+        "title": "Flags",
+        "items": {
+          "global": {"description": "Encontra todas as correspondências (não apenas a primeira)", "example": "/a/g encontra todos os caracteres 'a'"},
+          "caseInsensitive": {"description": "Correspondência sem diferenciação de maiúsculas", "example": "/ola/i corresponde a 'Ola', 'OLA'"},
+          "multiline": {"description": "^ e $ correspondem aos limites de linha", "example": "/^inicio/m corresponde a linhas que começam com 'inicio'"},
+          "dotAll": {"description": "O ponto corresponde aos caracteres de nova linha", "example": "/./s corresponde a qualquer caractere incluindo \\n"},
+          "unicode": {"description": "Ativa a correspondência Unicode completa", "example": "/\\u{1F600}/u corresponde a emoji"},
+          "sticky": {"description": "Corresponde da posição lastIndex", "example": "/a/y corresponde em posição específica"}
+        }
+      },
+      "escapes": {
+        "title": "Sequências de Escape",
+        "items": {
+          "tab": {"description": "Caractere de tabulação"},
+          "newline": {"description": "Nova linha (line feed)"},
+          "carriageReturn": {"description": "Retorno de carro"},
+          "verticalTab": {"description": "Tabulação vertical"},
+          "formFeed": {"description": "Avanço de formulário"},
+          "null": {"description": "Caractere nulo"},
+          "hex": {"description": "Caractere com código hexadecimal", "example": "\\x41 corresponde a 'A'"},
+          "unicode": {"description": "Caractere Unicode", "example": "\\u0041 corresponde a 'A'"},
+          "escape": {"description": "Escapar caractere especial", "example": "\\. corresponde ao '.' literal"}
+        }
+      },
+      "common": {
+        "title": "Padrões Comuns",
+        "items": {
+          "email": {"description": "Padrão de endereço de email"},
+          "url": {"description": "Padrão de URL/endereço web"},
+          "phone": {"description": "Padrão de número de telefone"},
+          "hexColor": {"description": "Código de cor hexadecimal (#RGB ou #RRGGBB)"},
+          "date": {"description": "Padrão de data (AAAA-MM-DD)"},
+          "password": {"description": "Senha forte (8+ caracteres, maiús/minús, números)"},
+          "slug": {"description": "Slug compatível com URL (minúsculas, hífens)"},
+          "version": {"description": "Versão semântica (X.Y.Z)"}
+        }
+      }
+    }
   }
 }

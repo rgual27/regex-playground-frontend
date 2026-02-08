@@ -263,10 +263,107 @@
     "fail": "ПРОВАЛЕНО",
     "congratulations": "Поздравляем!",
     "challengeSolved": "Вы решили задачу!",
-    "earnedPoints": "Заработано Очков"
+    "earnedPoints": "заработано очков",
+    "nextChallenge": "Следующая Задача"
   },
   "cheatSheet": {
     "title": "Шпаргалка по Regex",
-    "subtitle": "Быстрая справка по шаблонам регулярных выражений"
+    "subtitle": "Быстрая справка по шаблонам регулярных выражений",
+    "copy": "Копировать",
+    "sections": {
+      "charClasses": {
+        "title": "Классы Символов",
+        "items": {
+          "dot": {"description": "Любой символ кроме новой строки", "example": "a.c соответствует 'abc', 'aXc'"},
+          "digit": {"description": "Любая цифра (0-9)", "example": "\\d\\d соответствует '42', '99'"},
+          "notDigit": {"description": "Любой не-цифровой символ", "example": "\\D+ соответствует 'abc', 'XYZ'"},
+          "word": {"description": "Символ слова (a-z, A-Z, 0-9, _)", "example": "\\w+ соответствует 'привет123'"},
+          "notWord": {"description": "Не-символ слова", "example": "\\W+ соответствует '!@#', '   '"},
+          "whitespace": {"description": "Пробельный символ (пробел, таб, новая строка)", "example": "\\s+ соответствует '   ', '\t'"},
+          "notWhitespace": {"description": "Не-пробельный символ", "example": "\\S+ соответствует 'привет', '123'"},
+          "set": {"description": "Соответствует любому символу из набора", "example": "[aeiou] соответствует любой гласной"},
+          "negatedSet": {"description": "Соответствует любому символу не из набора", "example": "[^aeiou] соответствует согласным"},
+          "range": {"description": "Соответствует символу в диапазоне", "example": "[a-z] соответствует строчным буквам"},
+          "digitRange": {"description": "Соответствует цифре в диапазоне", "example": "[0-9] соответствует любой цифре"}
+        }
+      },
+      "anchors": {
+        "title": "Якоря",
+        "items": {
+          "start": {"description": "Начало строки или линии", "example": "^Привет соответствует 'Привет мир'"},
+          "end": {"description": "Конец строки или линии", "example": "мир$ соответствует 'Привет мир'"},
+          "wordBoundary": {"description": "Позиция границы слова", "example": "\\bслово\\b соответствует 'слово' не 'словарь'"},
+          "notWordBoundary": {"description": "Не граница слова", "example": "\\Bслово соответствует 'пароль' не 'слово'"},
+          "stringStart": {"description": "Абсолютное начало строки", "example": "\\AПривет соответствует только в начале"},
+          "stringEnd": {"description": "Абсолютный конец строки", "example": "конец\\Z соответствует только в конце"}
+        }
+      },
+      "quantifiers": {
+        "title": "Квантификаторы",
+        "items": {
+          "zeroOrMore": {"description": "Соответствует 0 или более раз (жадный)", "example": "a* соответствует '', 'a', 'aaa'"},
+          "oneOrMore": {"description": "Соответствует 1 или более раз (жадный)", "example": "a+ соответствует 'a', 'aaa'"},
+          "zeroOrOne": {"description": "Соответствует 0 или 1 раз (опционально)", "example": "colou?r соответствует 'color', 'colour'"},
+          "exactlyN": {"description": "Соответствует ровно n раз", "example": "a{3} соответствует 'aaa'"},
+          "nOrMore": {"description": "Соответствует n или более раз", "example": "a{2,} соответствует 'aa', 'aaa'"},
+          "betweenNM": {"description": "Соответствует от n до m раз", "example": "a{2,4} соответствует 'aa', 'aaa', 'aaaa'"},
+          "lazyZeroOrMore": {"description": "Соответствует 0 или более раз (ленивый)", "example": "a*? соответствует кратчайшему возможному"},
+          "lazyOneOrMore": {"description": "Соответствует 1 или более раз (ленивый)", "example": "a+? соответствует кратчайшему возможному"},
+          "lazyZeroOrOne": {"description": "Соответствует 0 или 1 раз (ленивый)", "example": "a?? соответствует кратчайшему возможному"}
+        }
+      },
+      "groups": {
+        "title": "Группы и Альтернация",
+        "items": {
+          "capturing": {"description": "Захватывающая группа", "example": "(abc) захватывает 'abc' как группу 1"},
+          "nonCapturing": {"description": "Незахватывающая группа", "example": "(?:abc) группирует без захвата"},
+          "named": {"description": "Именованная захватывающая группа", "example": "(?<имя>abc) захватывает как 'имя'"},
+          "backreference": {"description": "Ссылка на захваченную группу", "example": "(\\w)\\1 соответствует 'aa', 'bb'"},
+          "alternation": {"description": "Соответствует одному или другому шаблону", "example": "кот|собака соответствует 'кот' или 'собака'"},
+          "positiveLookahead": {"description": "Соответствует если за ним следует шаблон", "example": "\\d(?=px) соответствует '5' в '5px'"},
+          "negativeLookahead": {"description": "Соответствует если за ним не следует шаблон", "example": "\\d(?!px) соответствует '5' не в '5px'"},
+          "positiveLookbehind": {"description": "Соответствует если перед ним идет шаблон", "example": "(?<=\\$)\\d+ соответствует '100' в '$100'"},
+          "negativeLookbehind": {"description": "Соответствует если перед ним не идет шаблон", "example": "(?<!\\$)\\d+ соответствует '100' не после '$'"}
+        }
+      },
+      "flags": {
+        "title": "Флаги",
+        "items": {
+          "global": {"description": "Находит все совпадения (не только первое)", "example": "/a/g находит все символы 'a'"},
+          "caseInsensitive": {"description": "Совпадение без учета регистра", "example": "/привет/i соответствует 'Привет', 'ПРИВЕТ'"},
+          "multiline": {"description": "^ и $ соответствуют границам строк", "example": "/^начало/m соответствует строкам, начинающимся с 'начало'"},
+          "dotAll": {"description": "Точка соответствует символам новой строки", "example": "/./s соответствует любому символу включая \\n"},
+          "unicode": {"description": "Включает полное соответствие Unicode", "example": "/\\u{1F600}/u соответствует эмодзи"},
+          "sticky": {"description": "Соответствует с позиции lastIndex", "example": "/a/y соответствует в определенной позиции"}
+        }
+      },
+      "escapes": {
+        "title": "Экранирующие Последовательности",
+        "items": {
+          "tab": {"description": "Символ табуляции"},
+          "newline": {"description": "Новая строка (перевод строки)"},
+          "carriageReturn": {"description": "Возврат каретки"},
+          "verticalTab": {"description": "Вертикальная табуляция"},
+          "formFeed": {"description": "Перевод страницы"},
+          "null": {"description": "Нулевой символ"},
+          "hex": {"description": "Символ с шестнадцатеричным кодом", "example": "\\x41 соответствует 'A'"},
+          "unicode": {"description": "Символ Unicode", "example": "\\u0041 соответствует 'A'"},
+          "escape": {"description": "Экранировать специальный символ", "example": "\\. соответствует литеральной '.'"}
+        }
+      },
+      "common": {
+        "title": "Распространенные Шаблоны",
+        "items": {
+          "email": {"description": "Шаблон адреса электронной почты"},
+          "url": {"description": "Шаблон URL/веб-адреса"},
+          "phone": {"description": "Шаблон номера телефона"},
+          "hexColor": {"description": "Шестнадцатеричный код цвета (#RGB или #RRGGBB)"},
+          "date": {"description": "Шаблон даты (ГГГГ-ММ-ДД)"},
+          "password": {"description": "Надежный пароль (8+ символов, смешанный регистр, цифры)"},
+          "slug": {"description": "URL-дружественный слаг (строчные, дефисы)"},
+          "version": {"description": "Семантическая версия (X.Y.Z)"}
+        }
+      }
+    }
   }
 }

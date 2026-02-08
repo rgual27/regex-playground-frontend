@@ -263,10 +263,107 @@
     "fail": "FALLITO",
     "congratulations": "Congratulazioni!",
     "challengeSolved": "Hai risolto la sfida!",
-    "earnedPoints": "Punti Guadagnati"
+    "earnedPoints": "punti guadagnati",
+    "nextChallenge": "Sfida Successiva"
   },
   "cheatSheet": {
     "title": "Guida Rapida Regex",
-    "subtitle": "Riferimento rapido per i pattern di espressioni regolari"
+    "subtitle": "Riferimento rapido per i pattern di espressioni regolari",
+    "copy": "Copia",
+    "sections": {
+      "charClasses": {
+        "title": "Classi di Caratteri",
+        "items": {
+          "dot": {"description": "Qualsiasi carattere tranne nuova riga", "example": "a.c corrisponde a 'abc', 'aXc'"},
+          "digit": {"description": "Qualsiasi cifra (0-9)", "example": "\\d\\d corrisponde a '42', '99'"},
+          "notDigit": {"description": "Qualsiasi carattere non cifra", "example": "\\D+ corrisponde a 'abc', 'XYZ'"},
+          "word": {"description": "Carattere di parola (a-z, A-Z, 0-9, _)", "example": "\\w+ corrisponde a 'ciao123'"},
+          "notWord": {"description": "Carattere non parola", "example": "\\W+ corrisponde a '!@#', '   '"},
+          "whitespace": {"description": "Carattere di spaziatura (spazio, tab, nuova riga)", "example": "\\s+ corrisponde a '   ', '\t'"},
+          "notWhitespace": {"description": "Carattere non spaziatura", "example": "\\S+ corrisponde a 'ciao', '123'"},
+          "set": {"description": "Corrisponde a qualsiasi carattere nell'insieme", "example": "[aeiou] corrisponde a qualsiasi vocale"},
+          "negatedSet": {"description": "Corrisponde a qualsiasi carattere non nell'insieme", "example": "[^aeiou] corrisponde alle consonanti"},
+          "range": {"description": "Corrisponde al carattere nell'intervallo", "example": "[a-z] corrisponde alle lettere minuscole"},
+          "digitRange": {"description": "Corrisponde alla cifra nell'intervallo", "example": "[0-9] corrisponde a qualsiasi cifra"}
+        }
+      },
+      "anchors": {
+        "title": "Ancoraggi",
+        "items": {
+          "start": {"description": "Inizio della stringa o riga", "example": "^Ciao corrisponde a 'Ciao mondo'"},
+          "end": {"description": "Fine della stringa o riga", "example": "mondo$ corrisponde a 'Ciao mondo'"},
+          "wordBoundary": {"description": "Posizione del limite di parola", "example": "\\bparola\\b corrisponde a 'parola' non 'parolaccia'"},
+          "notWordBoundary": {"description": "Nessun limite di parola", "example": "\\Bparola corrisponde a 'password' non 'parola'"},
+          "stringStart": {"description": "Inizio assoluto della stringa", "example": "\\ACiao corrisponde solo all'inizio"},
+          "stringEnd": {"description": "Fine assoluta della stringa", "example": "fine\\Z corrisponde solo alla fine"}
+        }
+      },
+      "quantifiers": {
+        "title": "Quantificatori",
+        "items": {
+          "zeroOrMore": {"description": "Corrisponde 0 o più volte (greedy)", "example": "a* corrisponde a '', 'a', 'aaa'"},
+          "oneOrMore": {"description": "Corrisponde 1 o più volte (greedy)", "example": "a+ corrisponde a 'a', 'aaa'"},
+          "zeroOrOne": {"description": "Corrisponde 0 o 1 volta (opzionale)", "example": "colou?r corrisponde a 'color', 'colour'"},
+          "exactlyN": {"description": "Corrisponde esattamente n volte", "example": "a{3} corrisponde a 'aaa'"},
+          "nOrMore": {"description": "Corrisponde n o più volte", "example": "a{2,} corrisponde a 'aa', 'aaa'"},
+          "betweenNM": {"description": "Corrisponde tra n e m volte", "example": "a{2,4} corrisponde a 'aa', 'aaa', 'aaaa'"},
+          "lazyZeroOrMore": {"description": "Corrisponde 0 o più volte (lazy)", "example": "a*? corrisponde al più breve possibile"},
+          "lazyOneOrMore": {"description": "Corrisponde 1 o più volte (lazy)", "example": "a+? corrisponde al più breve possibile"},
+          "lazyZeroOrOne": {"description": "Corrisponde 0 o 1 volta (lazy)", "example": "a?? corrisponde al più breve possibile"}
+        }
+      },
+      "groups": {
+        "title": "Gruppi e Alternanza",
+        "items": {
+          "capturing": {"description": "Gruppo di cattura", "example": "(abc) cattura 'abc' come gruppo 1"},
+          "nonCapturing": {"description": "Gruppo non catturante", "example": "(?:abc) raggruppa senza catturare"},
+          "named": {"description": "Gruppo di cattura nominato", "example": "(?<nome>abc) cattura come 'nome'"},
+          "backreference": {"description": "Riferimento al gruppo catturato", "example": "(\\w)\\1 corrisponde a 'aa', 'bb'"},
+          "alternation": {"description": "Corrisponde a uno o l'altro pattern", "example": "gatto|cane corrisponde a 'gatto' o 'cane'"},
+          "positiveLookahead": {"description": "Corrisponde se seguito da pattern", "example": "\\d(?=px) corrisponde a '5' in '5px'"},
+          "negativeLookahead": {"description": "Corrisponde se non seguito da pattern", "example": "\\d(?!px) corrisponde a '5' non in '5px'"},
+          "positiveLookbehind": {"description": "Corrisponde se preceduto da pattern", "example": "(?<=\\$)\\d+ corrisponde a '100' in '$100'"},
+          "negativeLookbehind": {"description": "Corrisponde se non preceduto da pattern", "example": "(?<!\\$)\\d+ corrisponde a '100' non dopo '$'"}
+        }
+      },
+      "flags": {
+        "title": "Flag",
+        "items": {
+          "global": {"description": "Trova tutte le corrispondenze (non solo la prima)", "example": "/a/g trova tutti i caratteri 'a'"},
+          "caseInsensitive": {"description": "Corrispondenza senza distinzione maiuscole/minuscole", "example": "/ciao/i corrisponde a 'Ciao', 'CIAO'"},
+          "multiline": {"description": "^ e $ corrispondono ai limiti di riga", "example": "/^inizio/m corrisponde alle righe che iniziano con 'inizio'"},
+          "dotAll": {"description": "Il punto corrisponde ai caratteri di nuova riga", "example": "/./s corrisponde a qualsiasi carattere incluso \\n"},
+          "unicode": {"description": "Abilita la corrispondenza Unicode completa", "example": "/\\u{1F600}/u corrisponde agli emoji"},
+          "sticky": {"description": "Corrisponde dalla posizione lastIndex", "example": "/a/y corrisponde a una posizione specifica"}
+        }
+      },
+      "escapes": {
+        "title": "Sequenze di Escape",
+        "items": {
+          "tab": {"description": "Carattere di tabulazione"},
+          "newline": {"description": "Nuova riga (line feed)"},
+          "carriageReturn": {"description": "Ritorno a capo"},
+          "verticalTab": {"description": "Tabulazione verticale"},
+          "formFeed": {"description": "Avanzamento modulo"},
+          "null": {"description": "Carattere nullo"},
+          "hex": {"description": "Carattere con codice esadecimale", "example": "\\x41 corrisponde a 'A'"},
+          "unicode": {"description": "Carattere Unicode", "example": "\\u0041 corrisponde a 'A'"},
+          "escape": {"description": "Escape carattere speciale", "example": "\\. corrisponde al '.' letterale"}
+        }
+      },
+      "common": {
+        "title": "Pattern Comuni",
+        "items": {
+          "email": {"description": "Pattern di indirizzo email"},
+          "url": {"description": "Pattern di URL/indirizzo web"},
+          "phone": {"description": "Pattern di numero di telefono"},
+          "hexColor": {"description": "Codice colore esadecimale (#RGB o #RRGGBB)"},
+          "date": {"description": "Pattern di data (AAAA-MM-GG)"},
+          "password": {"description": "Password forte (8+ caratteri, maiuscole/minuscole, numeri)"},
+          "slug": {"description": "Slug compatibile URL (minuscole, trattini)"},
+          "version": {"description": "Versione semantica (X.Y.Z)"}
+        }
+      }
+    }
   }
 }

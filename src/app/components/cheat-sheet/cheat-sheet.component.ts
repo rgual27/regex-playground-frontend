@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface CheatItem {
   pattern: string;
-  description: string;
-  example?: string;
+  descriptionKey: string;
+  exampleKey?: string;
 }
 
 interface CheatSection {
-  title: string;
+  titleKey: string;
   icon: string;
   items: CheatItem[];
 }
@@ -29,7 +29,7 @@ interface CheatSection {
         <div class="section-card" *ngFor="let section of sections">
           <div class="section-header">
             <span class="section-icon">{{ section.icon }}</span>
-            <h3>{{ section.title }}</h3>
+            <h3>{{ section.titleKey | translate }}</h3>
           </div>
 
           <div class="items-list">
@@ -39,12 +39,12 @@ interface CheatSection {
                 <button
                   class="copy-btn"
                   (click)="copyToClipboard(item.pattern)"
-                  title="Copy to clipboard">
+                  [title]="'cheatSheet.copy' | translate">
                   📋
                 </button>
               </div>
-              <p class="item-description">{{ item.description }}</p>
-              <code class="item-example" *ngIf="item.example">{{ item.example }}</code>
+              <p class="item-description">{{ item.descriptionKey | translate }}</p>
+              <code class="item-example" *ngIf="item.exampleKey">{{ item.exampleKey | translate }}</code>
             </div>
           </div>
         </div>
@@ -197,105 +197,107 @@ interface CheatSection {
   `]
 })
 export class CheatSheetComponent {
+  constructor(private translate: TranslateService) {}
+
   sections: CheatSection[] = [
     {
-      title: 'Character Classes',
+      titleKey: 'cheatSheet.sections.charClasses.title',
       icon: '🔤',
       items: [
-        { pattern: '.', description: 'Any character except newline' },
-        { pattern: '\\d', description: 'Digit (0-9)', example: 'Matches: 0, 1, 2, ..., 9' },
-        { pattern: '\\D', description: 'Not a digit', example: 'Matches: a, Z, !, etc.' },
-        { pattern: '\\w', description: 'Word character (a-z, A-Z, 0-9, _)', example: 'Matches: a, Z, 5, _' },
-        { pattern: '\\W', description: 'Not a word character', example: 'Matches: !, @, space' },
-        { pattern: '\\s', description: 'Whitespace (space, tab, newline)', example: 'Matches: space, \\t, \\n' },
-        { pattern: '\\S', description: 'Not whitespace', example: 'Matches: any non-space char' },
-        { pattern: '[abc]', description: 'Any of a, b, or c', example: 'Matches: a, b, c' },
-        { pattern: '[^abc]', description: 'Not a, b, or c', example: 'Matches: d, e, 1, etc.' },
-        { pattern: '[a-z]', description: 'Character between a and z', example: 'Matches: a, b, ..., z' },
-        { pattern: '[0-9]', description: 'Digit between 0 and 9', example: 'Same as \\d' }
+        { pattern: '.', descriptionKey: 'cheatSheet.sections.charClasses.items.dot.description', exampleKey: 'cheatSheet.sections.charClasses.items.dot.example' },
+        { pattern: '\\d', descriptionKey: 'cheatSheet.sections.charClasses.items.digit.description', exampleKey: 'cheatSheet.sections.charClasses.items.digit.example' },
+        { pattern: '\\D', descriptionKey: 'cheatSheet.sections.charClasses.items.notDigit.description', exampleKey: 'cheatSheet.sections.charClasses.items.notDigit.example' },
+        { pattern: '\\w', descriptionKey: 'cheatSheet.sections.charClasses.items.word.description', exampleKey: 'cheatSheet.sections.charClasses.items.word.example' },
+        { pattern: '\\W', descriptionKey: 'cheatSheet.sections.charClasses.items.notWord.description', exampleKey: 'cheatSheet.sections.charClasses.items.notWord.example' },
+        { pattern: '\\s', descriptionKey: 'cheatSheet.sections.charClasses.items.whitespace.description', exampleKey: 'cheatSheet.sections.charClasses.items.whitespace.example' },
+        { pattern: '\\S', descriptionKey: 'cheatSheet.sections.charClasses.items.notWhitespace.description', exampleKey: 'cheatSheet.sections.charClasses.items.notWhitespace.example' },
+        { pattern: '[abc]', descriptionKey: 'cheatSheet.sections.charClasses.items.set.description', exampleKey: 'cheatSheet.sections.charClasses.items.set.example' },
+        { pattern: '[^abc]', descriptionKey: 'cheatSheet.sections.charClasses.items.negatedSet.description', exampleKey: 'cheatSheet.sections.charClasses.items.negatedSet.example' },
+        { pattern: '[a-z]', descriptionKey: 'cheatSheet.sections.charClasses.items.range.description', exampleKey: 'cheatSheet.sections.charClasses.items.range.example' },
+        { pattern: '[0-9]', descriptionKey: 'cheatSheet.sections.charClasses.items.digitRange.description', exampleKey: 'cheatSheet.sections.charClasses.items.digitRange.example' }
       ]
     },
     {
-      title: 'Anchors',
+      titleKey: 'cheatSheet.sections.anchors.title',
       icon: '⚓',
       items: [
-        { pattern: '^', description: 'Start of string or line', example: '^Hello matches "Hello World"' },
-        { pattern: '$', description: 'End of string or line', example: 'end$ matches "The end"' },
-        { pattern: '\\b', description: 'Word boundary', example: '\\bcat\\b matches "cat" not "category"' },
-        { pattern: '\\B', description: 'Not a word boundary', example: '\\Bcat matches "category"' },
-        { pattern: '\\A', description: 'Start of string (not line)', example: 'Ignores multiline flag' },
-        { pattern: '\\Z', description: 'End of string (not line)', example: 'Ignores multiline flag' }
+        { pattern: '^', descriptionKey: 'cheatSheet.sections.anchors.items.start.description', exampleKey: 'cheatSheet.sections.anchors.items.start.example' },
+        { pattern: '$', descriptionKey: 'cheatSheet.sections.anchors.items.end.description', exampleKey: 'cheatSheet.sections.anchors.items.end.example' },
+        { pattern: '\\b', descriptionKey: 'cheatSheet.sections.anchors.items.wordBoundary.description', exampleKey: 'cheatSheet.sections.anchors.items.wordBoundary.example' },
+        { pattern: '\\B', descriptionKey: 'cheatSheet.sections.anchors.items.notWordBoundary.description', exampleKey: 'cheatSheet.sections.anchors.items.notWordBoundary.example' },
+        { pattern: '\\A', descriptionKey: 'cheatSheet.sections.anchors.items.stringStart.description', exampleKey: 'cheatSheet.sections.anchors.items.stringStart.example' },
+        { pattern: '\\Z', descriptionKey: 'cheatSheet.sections.anchors.items.stringEnd.description', exampleKey: 'cheatSheet.sections.anchors.items.stringEnd.example' }
       ]
     },
     {
-      title: 'Quantifiers',
+      titleKey: 'cheatSheet.sections.quantifiers.title',
       icon: '🔢',
       items: [
-        { pattern: '*', description: 'Zero or more', example: 'a* matches "", "a", "aa", "aaa"' },
-        { pattern: '+', description: 'One or more', example: 'a+ matches "a", "aa", "aaa"' },
-        { pattern: '?', description: 'Zero or one (optional)', example: 'colou?r matches "color" and "colour"' },
-        { pattern: '{n}', description: 'Exactly n times', example: 'a{3} matches "aaa"' },
-        { pattern: '{n,}', description: 'n or more times', example: 'a{2,} matches "aa", "aaa", etc.' },
-        { pattern: '{n,m}', description: 'Between n and m times', example: 'a{2,4} matches "aa", "aaa", "aaaa"' },
-        { pattern: '*?', description: 'Lazy zero or more', example: 'Matches as few as possible' },
-        { pattern: '+?', description: 'Lazy one or more', example: 'Matches as few as possible' },
-        { pattern: '??', description: 'Lazy zero or one', example: 'Matches as few as possible' }
+        { pattern: '*', descriptionKey: 'cheatSheet.sections.quantifiers.items.zeroOrMore.description', exampleKey: 'cheatSheet.sections.quantifiers.items.zeroOrMore.example' },
+        { pattern: '+', descriptionKey: 'cheatSheet.sections.quantifiers.items.oneOrMore.description', exampleKey: 'cheatSheet.sections.quantifiers.items.oneOrMore.example' },
+        { pattern: '?', descriptionKey: 'cheatSheet.sections.quantifiers.items.zeroOrOne.description', exampleKey: 'cheatSheet.sections.quantifiers.items.zeroOrOne.example' },
+        { pattern: '{n}', descriptionKey: 'cheatSheet.sections.quantifiers.items.exactlyN.description', exampleKey: 'cheatSheet.sections.quantifiers.items.exactlyN.example' },
+        { pattern: '{n,}', descriptionKey: 'cheatSheet.sections.quantifiers.items.nOrMore.description', exampleKey: 'cheatSheet.sections.quantifiers.items.nOrMore.example' },
+        { pattern: '{n,m}', descriptionKey: 'cheatSheet.sections.quantifiers.items.betweenNM.description', exampleKey: 'cheatSheet.sections.quantifiers.items.betweenNM.example' },
+        { pattern: '*?', descriptionKey: 'cheatSheet.sections.quantifiers.items.lazyZeroOrMore.description', exampleKey: 'cheatSheet.sections.quantifiers.items.lazyZeroOrMore.example' },
+        { pattern: '+?', descriptionKey: 'cheatSheet.sections.quantifiers.items.lazyOneOrMore.description', exampleKey: 'cheatSheet.sections.quantifiers.items.lazyOneOrMore.example' },
+        { pattern: '??', descriptionKey: 'cheatSheet.sections.quantifiers.items.lazyZeroOrOne.description', exampleKey: 'cheatSheet.sections.quantifiers.items.lazyZeroOrOne.example' }
       ]
     },
     {
-      title: 'Groups & Alternation',
+      titleKey: 'cheatSheet.sections.groups.title',
       icon: '🎯',
       items: [
-        { pattern: '(abc)', description: 'Capturing group', example: '(\\d+) creates numbered backreference' },
-        { pattern: '(?:abc)', description: 'Non-capturing group', example: 'Groups without capturing' },
-        { pattern: '(?<name>abc)', description: 'Named capturing group', example: 'Creates named backreference' },
-        { pattern: '\\1', description: 'Backreference to group 1', example: '(\\w)\\1 matches "aa", "bb"' },
-        { pattern: 'a|b', description: 'Match a or b', example: 'cat|dog matches "cat" or "dog"' },
-        { pattern: '(?=abc)', description: 'Positive lookahead', example: '\\d(?=px) matches "5" in "5px"' },
-        { pattern: '(?!abc)', description: 'Negative lookahead', example: '\\d(?!px) matches "5" in "5em"' },
-        { pattern: '(?<=abc)', description: 'Positive lookbehind', example: '(?<=\\$)\\d+ matches "10" in "$10"' },
-        { pattern: '(?<!abc)', description: 'Negative lookbehind', example: '(?<!\\$)\\d+ matches "10" in "€10"' }
+        { pattern: '(abc)', descriptionKey: 'cheatSheet.sections.groups.items.capturing.description', exampleKey: 'cheatSheet.sections.groups.items.capturing.example' },
+        { pattern: '(?:abc)', descriptionKey: 'cheatSheet.sections.groups.items.nonCapturing.description', exampleKey: 'cheatSheet.sections.groups.items.nonCapturing.example' },
+        { pattern: '(?<name>abc)', descriptionKey: 'cheatSheet.sections.groups.items.named.description', exampleKey: 'cheatSheet.sections.groups.items.named.example' },
+        { pattern: '\\1', descriptionKey: 'cheatSheet.sections.groups.items.backreference.description', exampleKey: 'cheatSheet.sections.groups.items.backreference.example' },
+        { pattern: 'a|b', descriptionKey: 'cheatSheet.sections.groups.items.alternation.description', exampleKey: 'cheatSheet.sections.groups.items.alternation.example' },
+        { pattern: '(?=abc)', descriptionKey: 'cheatSheet.sections.groups.items.positiveLookahead.description', exampleKey: 'cheatSheet.sections.groups.items.positiveLookahead.example' },
+        { pattern: '(?!abc)', descriptionKey: 'cheatSheet.sections.groups.items.negativeLookahead.description', exampleKey: 'cheatSheet.sections.groups.items.negativeLookahead.example' },
+        { pattern: '(?<=abc)', descriptionKey: 'cheatSheet.sections.groups.items.positiveLookbehind.description', exampleKey: 'cheatSheet.sections.groups.items.positiveLookbehind.example' },
+        { pattern: '(?<!abc)', descriptionKey: 'cheatSheet.sections.groups.items.negativeLookbehind.description', exampleKey: 'cheatSheet.sections.groups.items.negativeLookbehind.example' }
       ]
     },
     {
-      title: 'Flags',
+      titleKey: 'cheatSheet.sections.flags.title',
       icon: '🚩',
       items: [
-        { pattern: 'g', description: 'Global (find all matches)', example: '/cat/g finds all "cat" occurrences' },
-        { pattern: 'i', description: 'Case insensitive', example: '/cat/i matches "cat", "Cat", "CAT"' },
-        { pattern: 'm', description: 'Multiline (^ and $ match line boundaries)', example: 'Each line treated separately' },
-        { pattern: 's', description: 'Dot matches newline', example: '. can match \\n with this flag' },
-        { pattern: 'u', description: 'Unicode', example: 'Proper Unicode character handling' },
-        { pattern: 'y', description: 'Sticky (match from lastIndex)', example: 'Anchors to lastIndex position' }
+        { pattern: 'g', descriptionKey: 'cheatSheet.sections.flags.items.global.description', exampleKey: 'cheatSheet.sections.flags.items.global.example' },
+        { pattern: 'i', descriptionKey: 'cheatSheet.sections.flags.items.caseInsensitive.description', exampleKey: 'cheatSheet.sections.flags.items.caseInsensitive.example' },
+        { pattern: 'm', descriptionKey: 'cheatSheet.sections.flags.items.multiline.description', exampleKey: 'cheatSheet.sections.flags.items.multiline.example' },
+        { pattern: 's', descriptionKey: 'cheatSheet.sections.flags.items.dotAll.description', exampleKey: 'cheatSheet.sections.flags.items.dotAll.example' },
+        { pattern: 'u', descriptionKey: 'cheatSheet.sections.flags.items.unicode.description', exampleKey: 'cheatSheet.sections.flags.items.unicode.example' },
+        { pattern: 'y', descriptionKey: 'cheatSheet.sections.flags.items.sticky.description', exampleKey: 'cheatSheet.sections.flags.items.sticky.example' }
       ]
     },
     {
-      title: 'Escape Sequences',
+      titleKey: 'cheatSheet.sections.escapes.title',
       icon: '🔐',
       items: [
-        { pattern: '\\t', description: 'Tab character' },
-        { pattern: '\\n', description: 'Newline character' },
-        { pattern: '\\r', description: 'Carriage return' },
-        { pattern: '\\v', description: 'Vertical tab' },
-        { pattern: '\\f', description: 'Form feed' },
-        { pattern: '\\0', description: 'Null character' },
-        { pattern: '\\xhh', description: 'Hex character code', example: '\\x41 matches "A"' },
-        { pattern: '\\uhhhh', description: 'Unicode character', example: '\\u0041 matches "A"' },
-        { pattern: '\\', description: 'Escape special character', example: '\\. matches literal "."' }
+        { pattern: '\\t', descriptionKey: 'cheatSheet.sections.escapes.items.tab.description' },
+        { pattern: '\\n', descriptionKey: 'cheatSheet.sections.escapes.items.newline.description' },
+        { pattern: '\\r', descriptionKey: 'cheatSheet.sections.escapes.items.carriageReturn.description' },
+        { pattern: '\\v', descriptionKey: 'cheatSheet.sections.escapes.items.verticalTab.description' },
+        { pattern: '\\f', descriptionKey: 'cheatSheet.sections.escapes.items.formFeed.description' },
+        { pattern: '\\0', descriptionKey: 'cheatSheet.sections.escapes.items.null.description' },
+        { pattern: '\\xhh', descriptionKey: 'cheatSheet.sections.escapes.items.hex.description', exampleKey: 'cheatSheet.sections.escapes.items.hex.example' },
+        { pattern: '\\uhhhh', descriptionKey: 'cheatSheet.sections.escapes.items.unicode.description', exampleKey: 'cheatSheet.sections.escapes.items.unicode.example' },
+        { pattern: '\\', descriptionKey: 'cheatSheet.sections.escapes.items.escape.description', exampleKey: 'cheatSheet.sections.escapes.items.escape.example' }
       ]
     },
     {
-      title: 'Common Patterns',
+      titleKey: 'cheatSheet.sections.common.title',
       icon: '⭐',
       items: [
-        { pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$', description: 'Email address' },
-        { pattern: '^https?:\\/\\/', description: 'URL starting with http/https' },
-        { pattern: '^\\d{3}-\\d{3}-\\d{4}$', description: 'US Phone number (123-456-7890)' },
-        { pattern: '^#[A-Fa-f0-9]{6}$', description: 'Hex color code' },
-        { pattern: '^\\d{4}-\\d{2}-\\d{2}$', description: 'Date (YYYY-MM-DD)' },
-        { pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$', description: 'Strong password (8+ chars, mixed case, digit)' },
-        { pattern: '^[a-z0-9-]+$', description: 'URL slug' },
-        { pattern: '^\\d+\\.\\d+\\.\\d+$', description: 'Version number (1.2.3)' }
+        { pattern: '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$', descriptionKey: 'cheatSheet.sections.common.items.email.description' },
+        { pattern: '^https?:\\/\\/', descriptionKey: 'cheatSheet.sections.common.items.url.description' },
+        { pattern: '^\\d{3}-\\d{3}-\\d{4}$', descriptionKey: 'cheatSheet.sections.common.items.phone.description' },
+        { pattern: '^#[A-Fa-f0-9]{6}$', descriptionKey: 'cheatSheet.sections.common.items.hexColor.description' },
+        { pattern: '^\\d{4}-\\d{2}-\\d{2}$', descriptionKey: 'cheatSheet.sections.common.items.date.description' },
+        { pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$', descriptionKey: 'cheatSheet.sections.common.items.password.description' },
+        { pattern: '^[a-z0-9-]+$', descriptionKey: 'cheatSheet.sections.common.items.slug.description' },
+        { pattern: '^\\d+\\.\\d+\\.\\d+$', descriptionKey: 'cheatSheet.sections.common.items.version.description' }
       ]
     }
   ];

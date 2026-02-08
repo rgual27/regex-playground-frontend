@@ -263,19 +263,267 @@
     "fail": "FEHLGESCHLAGEN",
     "congratulations": "Glückwunsch!",
     "challengeSolved": "Sie haben die Herausforderung gelöst!",
-    "earnedPoints": "Punkte verdient"
+    "earnedPoints": "Punkte verdient",
+    "nextChallenge": "Nächste Herausforderung"
   },
   "cheatSheet": {
     "title": "Regex-Spickzettel",
     "subtitle": "Schnellreferenz für reguläre Ausdrucksmuster",
     "copy": "Kopieren",
     "sections": {
-      "basics": { "title": "Grundlagen", "items": { "dot": "Beliebiges Zeichen außer Zeilenumbruch", "wordChar": "Wortzeichen (a-z, A-Z, 0-9, _)", "notWordChar": "Kein Wortzeichen", "digit": "Ziffer (0-9)", "notDigit": "Keine Ziffer", "whitespace": "Leerzeichen", "notWhitespace": "Kein Leerzeichen" } },
-      "quantifiers": { "title": "Quantifizierer", "items": { "zeroOrMore": "0 oder mehr Male", "oneOrMore": "1 oder mehr Male", "zeroOrOne": "0 oder 1 Mal (optional)", "exactly": "Genau n Male", "atLeast": "Mindestens n Male", "between": "Zwischen n und m Male" } },
-      "anchors": { "title": "Anker", "items": { "start": "Zeilenanfang", "end": "Zeilenende", "wordBoundary": "Wortgrenze", "notWordBoundary": "Keine Wortgrenze" } },
-      "groups": { "title": "Gruppen", "items": { "capturing": "Erfassungsgruppe", "nonCapturing": "Nicht-erfassende Gruppe", "namedGroup": "Benannte Gruppe", "backreference": "Rückverweis" } },
-      "charClasses": { "title": "Zeichenklassen", "items": { "set": "Zeichensatz", "negatedSet": "Negierter Satz", "range": "Zeichenbereich", "or": "Alternierung (ODER)" } },
-      "lookaround": { "title": "Lookaround", "items": { "positiveLookahead": "Positiver Lookahead", "negativeLookahead": "Negativer Lookahead", "positiveLookbehind": "Positiver Lookbehind", "negativeLookbehind": "Negativer Lookbehind" } }
+      "charClasses": {
+        "title": "Zeichenklassen",
+        "items": {
+          "dot": {
+            "description": "Beliebiges Zeichen außer Zeilenumbruch",
+            "example": "a.c entspricht 'abc', 'aXc'"
+          },
+          "digit": {
+            "description": "Beliebige Ziffer (0-9)",
+            "example": "\\d\\d entspricht '42', '99'"
+          },
+          "notDigit": {
+            "description": "Beliebiges Nicht-Ziffer-Zeichen",
+            "example": "\\D+ entspricht 'abc', 'XYZ'"
+          },
+          "word": {
+            "description": "Wortzeichen (a-z, A-Z, 0-9, _)",
+            "example": "\\w+ entspricht 'hallo123'"
+          },
+          "notWord": {
+            "description": "Nicht-Wortzeichen",
+            "example": "\\W+ entspricht '!@#', '   '"
+          },
+          "whitespace": {
+            "description": "Leerzeichen (Leerzeichen, Tab, Zeilenumbruch)",
+            "example": "\\s+ entspricht '   ', '\t'"
+          },
+          "notWhitespace": {
+            "description": "Nicht-Leerzeichen",
+            "example": "\\S+ entspricht 'hallo', '123'"
+          },
+          "set": {
+            "description": "Entspricht beliebigem Zeichen im Satz",
+            "example": "[aeiou] entspricht jedem Vokal"
+          },
+          "negatedSet": {
+            "description": "Entspricht beliebigem Zeichen nicht im Satz",
+            "example": "[^aeiou] entspricht Konsonanten"
+          },
+          "range": {
+            "description": "Entspricht Zeichen im Bereich",
+            "example": "[a-z] entspricht Kleinbuchstaben"
+          },
+          "digitRange": {
+            "description": "Entspricht Ziffer im Bereich",
+            "example": "[0-9] entspricht beliebiger Ziffer"
+          }
+        }
+      },
+      "anchors": {
+        "title": "Anker",
+        "items": {
+          "start": {
+            "description": "Anfang der Zeichenkette oder Zeile",
+            "example": "^Hallo entspricht 'Hallo Welt'"
+          },
+          "end": {
+            "description": "Ende der Zeichenkette oder Zeile",
+            "example": "Welt$ entspricht 'Hallo Welt'"
+          },
+          "wordBoundary": {
+            "description": "Wortgrenzenposition",
+            "example": "\\bwort\\b entspricht 'wort' nicht 'schwert'"
+          },
+          "notWordBoundary": {
+            "description": "Keine Wortgrenze",
+            "example": "\\Bwort entspricht 'passwort' nicht 'wort'"
+          },
+          "stringStart": {
+            "description": "Absoluter Anfang der Zeichenkette",
+            "example": "\\AHallo entspricht nur am Anfang"
+          },
+          "stringEnd": {
+            "description": "Absolutes Ende der Zeichenkette",
+            "example": "ende\\Z entspricht nur am Ende"
+          }
+        }
+      },
+      "quantifiers": {
+        "title": "Quantifizierer",
+        "items": {
+          "zeroOrMore": {
+            "description": "Entspricht 0 oder mehr Male (gierig)",
+            "example": "a* entspricht '', 'a', 'aaa'"
+          },
+          "oneOrMore": {
+            "description": "Entspricht 1 oder mehr Male (gierig)",
+            "example": "a+ entspricht 'a', 'aaa'"
+          },
+          "zeroOrOne": {
+            "description": "Entspricht 0 oder 1 Mal (optional)",
+            "example": "colou?r entspricht 'color', 'colour'"
+          },
+          "exactlyN": {
+            "description": "Entspricht genau n Male",
+            "example": "a{3} entspricht 'aaa'"
+          },
+          "nOrMore": {
+            "description": "Entspricht n oder mehr Male",
+            "example": "a{2,} entspricht 'aa', 'aaa'"
+          },
+          "betweenNM": {
+            "description": "Entspricht zwischen n und m Male",
+            "example": "a{2,4} entspricht 'aa', 'aaa', 'aaaa'"
+          },
+          "lazyZeroOrMore": {
+            "description": "Entspricht 0 oder mehr Male (nicht-gierig)",
+            "example": "a*? entspricht kürzest möglich"
+          },
+          "lazyOneOrMore": {
+            "description": "Entspricht 1 oder mehr Male (nicht-gierig)",
+            "example": "a+? entspricht kürzest möglich"
+          },
+          "lazyZeroOrOne": {
+            "description": "Entspricht 0 oder 1 Mal (nicht-gierig)",
+            "example": "a?? entspricht kürzest möglich"
+          }
+        }
+      },
+      "groups": {
+        "title": "Gruppen & Alternierung",
+        "items": {
+          "capturing": {
+            "description": "Erfassungsgruppe",
+            "example": "(abc) erfasst 'abc' als Gruppe 1"
+          },
+          "nonCapturing": {
+            "description": "Nicht-erfassende Gruppe",
+            "example": "(?:abc) gruppiert ohne zu erfassen"
+          },
+          "named": {
+            "description": "Benannte Erfassungsgruppe",
+            "example": "(?<name>abc) erfasst als 'name'"
+          },
+          "backreference": {
+            "description": "Verweis auf erfasste Gruppe",
+            "example": "(\\w)\\1 entspricht 'aa', 'bb'"
+          },
+          "alternation": {
+            "description": "Entspricht entweder Muster",
+            "example": "katze|hund entspricht 'katze' oder 'hund'"
+          },
+          "positiveLookahead": {
+            "description": "Entspricht wenn gefolgt von Muster",
+            "example": "\\d(?=px) entspricht '5' in '5px'"
+          },
+          "negativeLookahead": {
+            "description": "Entspricht wenn nicht gefolgt von Muster",
+            "example": "\\d(?!px) entspricht '5' nicht in '5px'"
+          },
+          "positiveLookbehind": {
+            "description": "Entspricht wenn vorangestellt von Muster",
+            "example": "(?<=\\$)\\d+ entspricht '100' in '$100'"
+          },
+          "negativeLookbehind": {
+            "description": "Entspricht wenn nicht vorangestellt von Muster",
+            "example": "(?<!\\$)\\d+ entspricht '100' nicht nach '$'"
+          }
+        }
+      },
+      "flags": {
+        "title": "Flags",
+        "items": {
+          "global": {
+            "description": "Findet alle Übereinstimmungen (nicht nur erste)",
+            "example": "/a/g findet alle 'a' Zeichen"
+          },
+          "caseInsensitive": {
+            "description": "Groß-/Kleinschreibung ignorieren",
+            "example": "/hallo/i entspricht 'Hallo', 'HALLO'"
+          },
+          "multiline": {
+            "description": "^ und $ entsprechen Zeilengrenzen",
+            "example": "/^start/m entspricht Zeilen die mit 'start' beginnen"
+          },
+          "dotAll": {
+            "description": "Punkt entspricht Zeilenumbruchzeichen",
+            "example": "/./s entspricht jedem Zeichen einschließlich \\n"
+          },
+          "unicode": {
+            "description": "Aktiviert vollständige Unicode-Übereinstimmung",
+            "example": "/\\u{1F600}/u entspricht Emoji"
+          },
+          "sticky": {
+            "description": "Entspricht ab lastIndex-Position",
+            "example": "/a/y entspricht an bestimmter Position"
+          }
+        }
+      },
+      "escapes": {
+        "title": "Escape-Sequenzen",
+        "items": {
+          "tab": {
+            "description": "Tabulatorzeichen"
+          },
+          "newline": {
+            "description": "Zeilenumbruch (Zeilenvorschub)"
+          },
+          "carriageReturn": {
+            "description": "Wagenrücklauf"
+          },
+          "verticalTab": {
+            "description": "Vertikaler Tabulator"
+          },
+          "formFeed": {
+            "description": "Seitenvorschub"
+          },
+          "null": {
+            "description": "Null-Zeichen"
+          },
+          "hex": {
+            "description": "Zeichen mit Hex-Code",
+            "example": "\\x41 entspricht 'A'"
+          },
+          "unicode": {
+            "description": "Unicode-Zeichen",
+            "example": "\\u0041 entspricht 'A'"
+          },
+          "escape": {
+            "description": "Sonderzeichen maskieren",
+            "example": "\\. entspricht literalem '.'"
+          }
+        }
+      },
+      "common": {
+        "title": "Häufige Muster",
+        "items": {
+          "email": {
+            "description": "E-Mail-Adressmuster"
+          },
+          "url": {
+            "description": "URL/Webadressmuster"
+          },
+          "phone": {
+            "description": "Telefonnummernmuster"
+          },
+          "hexColor": {
+            "description": "Hex-Farbcode (#RGB oder #RRGGBB)"
+          },
+          "date": {
+            "description": "Datumsmuster (JJJJ-MM-TT)"
+          },
+          "password": {
+            "description": "Starkes Passwort (8+ Zeichen, gemischt, Zahlen)"
+          },
+          "slug": {
+            "description": "URL-freundlicher Slug (Kleinbuchstaben, Bindestriche)"
+          },
+          "version": {
+            "description": "Semantische Version (X.Y.Z)"
+          }
+        }
+      }
     }
   }
 }

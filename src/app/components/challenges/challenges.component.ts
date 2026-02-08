@@ -109,54 +109,54 @@ interface Challenge {
 
           <div class="modal-body">
             <div class="task-section">
-              <h3>📝 Task</h3>
+              <h3>📝 {{ 'challenges.task' | translate }}</h3>
               <p>{{ activeChallenge.task }}</p>
             </div>
 
             <div class="test-cases-section">
-              <h3>🧪 Test Cases</h3>
+              <h3>🧪 {{ 'challenges.testCases' | translate }}</h3>
               <div class="test-case" *ngFor="let testCase of activeChallenge.testCases; let i = index">
                 <code>{{ testCase.input }}</code>
                 <span [class]="testCase.shouldMatch ? 'should-match' : 'should-not-match'">
-                  {{ testCase.shouldMatch ? '✓ Should match' : '✗ Should NOT match' }}
+                  {{ testCase.shouldMatch ? ('✓ ' + ('challenges.shouldMatch' | translate)) : ('✗ ' + ('challenges.shouldNotMatch' | translate)) }}
                 </span>
                 <span class="result-badge" *ngIf="testResults[i] !== undefined"
                       [class.pass]="testResults[i]"
                       [class.fail]="!testResults[i]">
-                  {{ testResults[i] ? '✓ PASS' : '✗ FAIL' }}
+                  {{ testResults[i] ? ('✓ ' + ('challenges.pass' | translate)) : ('✗ ' + ('challenges.fail' | translate)) }}
                 </span>
               </div>
             </div>
 
             <div class="solution-section">
-              <h3>💡 Your Solution</h3>
+              <h3>💡 {{ 'challenges.yourSolution' | translate }}</h3>
               <input
                 type="text"
                 [(ngModel)]="userPattern"
-                placeholder="Enter your regex pattern..."
+                [placeholder]="'challenges.enterPattern' | translate"
                 class="pattern-input"
                 (keyup.enter)="testSolution()">
               <div class="solution-actions">
-                <button class="test-btn" (click)="testSolution()">🧪 Test Solution</button>
-                <button class="hint-btn" (click)="showHint()" *ngIf="!hintShown">💡 Show Hint</button>
+                <button class="test-btn" (click)="testSolution()">🧪 {{ 'challenges.testSolution' | translate }}</button>
+                <button class="hint-btn" (click)="showHint()" *ngIf="!hintShown">💡 {{ 'challenges.showHint' | translate }}</button>
                 <button class="solution-btn" (click)="showSolution()" *ngIf="!solutionShown">
-                  👁️ Show Solution
+                  👁️ {{ 'challenges.showSolution' | translate }}
                 </button>
               </div>
 
               <div class="hint-box" *ngIf="hintShown">
-                <strong>💡 Hint:</strong> {{ activeChallenge.hints[currentHint] }}
+                <strong>💡 {{ 'challenges.hint' | translate }}:</strong> {{ activeChallenge.hints[currentHint] }}
               </div>
 
               <div class="solution-box" *ngIf="solutionShown">
-                <strong>✅ Solution:</strong>
+                <strong>✅ {{ 'challenges.solution' | translate }}:</strong>
                 <code>{{ activeChallenge.solution }}</code>
               </div>
 
               <div class="success-box" *ngIf="challengeSolved">
-                <h3>🎉 Challenge Completed!</h3>
-                <p>You earned {{ activeChallenge.points }} points!</p>
-                <button class="next-btn" (click)="nextChallenge()">Next Challenge →</button>
+                <h3>🎉 {{ 'challenges.congratulations' | translate }}</h3>
+                <p>{{ 'challenges.challengeSolved' | translate }} {{ activeChallenge.points }} {{ 'challenges.earnedPoints' | translate }}!</p>
+                <button class="next-btn" (click)="nextChallenge()">{{ 'challenges.nextChallenge' | translate }} →</button>
               </div>
             </div>
           </div>

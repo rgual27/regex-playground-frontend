@@ -207,70 +207,265 @@
     "fail": "FALLIDO",
     "congratulations": "¡Felicidades!",
     "challengeSolved": "¡Has resuelto el desafío!",
-    "earnedPoints": "puntos ganados"
+    "earnedPoints": "puntos ganados",
+    "nextChallenge": "Siguiente Desafío"
   },
   "cheatSheet": {
     "title": "Guía Rápida de Regex",
     "subtitle": "Referencia rápida para patrones de expresiones regulares",
     "copy": "Copiar",
     "sections": {
-      "basics": {
-        "title": "Básicos",
+      "charClasses": {
+        "title": "Clases de Caracteres",
         "items": {
-          "dot": "Cualquier carácter excepto nueva línea",
-          "wordChar": "Carácter de palabra (a-z, A-Z, 0-9, _)",
-          "notWordChar": "No carácter de palabra",
-          "digit": "Dígito (0-9)",
-          "notDigit": "No dígito",
-          "whitespace": "Espacio en blanco",
-          "notWhitespace": "No espacio en blanco"
-        }
-      },
-      "quantifiers": {
-        "title": "Cuantificadores",
-        "items": {
-          "zeroOrMore": "0 o más veces",
-          "oneOrMore": "1 o más veces",
-          "zeroOrOne": "0 o 1 vez (opcional)",
-          "exactly": "Exactamente n veces",
-          "atLeast": "Al menos n veces",
-          "between": "Entre n y m veces"
+          "dot": {
+            "description": "Cualquier carácter excepto nueva línea",
+            "example": "a.c coincide con 'abc', 'aXc'"
+          },
+          "digit": {
+            "description": "Cualquier dígito (0-9)",
+            "example": "\\d\\d coincide con '42', '99'"
+          },
+          "notDigit": {
+            "description": "Cualquier carácter no dígito",
+            "example": "\\D+ coincide con 'abc', 'XYZ'"
+          },
+          "word": {
+            "description": "Carácter de palabra (a-z, A-Z, 0-9, _)",
+            "example": "\\w+ coincide con 'hola123'"
+          },
+          "notWord": {
+            "description": "Carácter no palabra",
+            "example": "\\W+ coincide con '!@#', '   '"
+          },
+          "whitespace": {
+            "description": "Carácter de espacio (espacio, tabulador, nueva línea)",
+            "example": "\\s+ coincide con '   ', '\t'"
+          },
+          "notWhitespace": {
+            "description": "Carácter no espacio",
+            "example": "\\S+ coincide con 'hola', '123'"
+          },
+          "set": {
+            "description": "Coincide con cualquier carácter del conjunto",
+            "example": "[aeiou] coincide con cualquier vocal"
+          },
+          "negatedSet": {
+            "description": "Coincide con cualquier carácter no en el conjunto",
+            "example": "[^aeiou] coincide con consonantes"
+          },
+          "range": {
+            "description": "Coincide con carácter en el rango",
+            "example": "[a-z] coincide con letras minúsculas"
+          },
+          "digitRange": {
+            "description": "Coincide con dígito en el rango",
+            "example": "[0-9] coincide con cualquier dígito"
+          }
         }
       },
       "anchors": {
         "title": "Anclas",
         "items": {
-          "start": "Inicio de línea",
-          "end": "Final de línea",
-          "wordBoundary": "Límite de palabra",
-          "notWordBoundary": "No límite de palabra"
+          "start": {
+            "description": "Inicio de cadena o línea",
+            "example": "^Hola coincide con 'Hola mundo'"
+          },
+          "end": {
+            "description": "Final de cadena o línea",
+            "example": "mundo$ coincide con 'Hola mundo'"
+          },
+          "wordBoundary": {
+            "description": "Posición de límite de palabra",
+            "example": "\\bpalabra\\b coincide con 'palabra' no 'espada'"
+          },
+          "notWordBoundary": {
+            "description": "No límite de palabra",
+            "example": "\\Bpalabra coincide con 'contraseña' no 'palabra'"
+          },
+          "stringStart": {
+            "description": "Inicio absoluto de cadena",
+            "example": "\\AHola coincide solo al inicio"
+          },
+          "stringEnd": {
+            "description": "Final absoluto de cadena",
+            "example": "fin\\Z coincide solo al final"
+          }
+        }
+      },
+      "quantifiers": {
+        "title": "Cuantificadores",
+        "items": {
+          "zeroOrMore": {
+            "description": "Coincide 0 o más veces (codicioso)",
+            "example": "a* coincide con '', 'a', 'aaa'"
+          },
+          "oneOrMore": {
+            "description": "Coincide 1 o más veces (codicioso)",
+            "example": "a+ coincide con 'a', 'aaa'"
+          },
+          "zeroOrOne": {
+            "description": "Coincide 0 o 1 vez (opcional)",
+            "example": "colou?r coincide con 'color', 'colour'"
+          },
+          "exactlyN": {
+            "description": "Coincide exactamente n veces",
+            "example": "a{3} coincide con 'aaa'"
+          },
+          "nOrMore": {
+            "description": "Coincide n o más veces",
+            "example": "a{2,} coincide con 'aa', 'aaa'"
+          },
+          "betweenNM": {
+            "description": "Coincide entre n y m veces",
+            "example": "a{2,4} coincide con 'aa', 'aaa', 'aaaa'"
+          },
+          "lazyZeroOrMore": {
+            "description": "Coincide 0 o más veces (perezoso)",
+            "example": "a*? coincide con lo más corto posible"
+          },
+          "lazyOneOrMore": {
+            "description": "Coincide 1 o más veces (perezoso)",
+            "example": "a+? coincide con lo más corto posible"
+          },
+          "lazyZeroOrOne": {
+            "description": "Coincide 0 o 1 vez (perezoso)",
+            "example": "a?? coincide con lo más corto posible"
+          }
         }
       },
       "groups": {
-        "title": "Grupos",
+        "title": "Grupos y Alternancia",
         "items": {
-          "capturing": "Grupo de captura",
-          "nonCapturing": "Grupo sin captura",
-          "namedGroup": "Grupo nombrado",
-          "backreference": "Referencia anterior"
+          "capturing": {
+            "description": "Grupo de captura",
+            "example": "(abc) captura 'abc' como grupo 1"
+          },
+          "nonCapturing": {
+            "description": "Grupo sin captura",
+            "example": "(?:abc) agrupa sin capturar"
+          },
+          "named": {
+            "description": "Grupo de captura nombrado",
+            "example": "(?<nombre>abc) captura como 'nombre'"
+          },
+          "backreference": {
+            "description": "Referencia a grupo capturado",
+            "example": "(\\w)\\1 coincide con 'aa', 'bb'"
+          },
+          "alternation": {
+            "description": "Coincide con cualquier patrón",
+            "example": "gato|perro coincide con 'gato' o 'perro'"
+          },
+          "positiveLookahead": {
+            "description": "Coincide si es seguido por patrón",
+            "example": "\\d(?=px) coincide con '5' en '5px'"
+          },
+          "negativeLookahead": {
+            "description": "Coincide si no es seguido por patrón",
+            "example": "\\d(?!px) coincide con '5' no en '5px'"
+          },
+          "positiveLookbehind": {
+            "description": "Coincide si es precedido por patrón",
+            "example": "(?<=\\$)\\d+ coincide con '100' en '$100'"
+          },
+          "negativeLookbehind": {
+            "description": "Coincide si no es precedido por patrón",
+            "example": "(?<!\\$)\\d+ coincide con '100' no después de '$'"
+          }
         }
       },
-      "charClasses": {
-        "title": "Clases de Caracteres",
+      "flags": {
+        "title": "Modificadores",
         "items": {
-          "set": "Conjunto de caracteres",
-          "negatedSet": "Conjunto negado",
-          "range": "Rango de caracteres",
-          "or": "Alternación (O)"
+          "global": {
+            "description": "Encuentra todas las coincidencias (no solo la primera)",
+            "example": "/a/g encuentra todos los caracteres 'a'"
+          },
+          "caseInsensitive": {
+            "description": "Coincidencia sin distinción de mayúsculas",
+            "example": "/hola/i coincide con 'Hola', 'HOLA'"
+          },
+          "multiline": {
+            "description": "^ y $ coinciden con límites de línea",
+            "example": "/^inicio/m coincide con líneas que comienzan con 'inicio'"
+          },
+          "dotAll": {
+            "description": "El punto coincide con caracteres de nueva línea",
+            "example": "/./s coincide con cualquier carácter incluyendo \\n"
+          },
+          "unicode": {
+            "description": "Habilita coincidencia Unicode completa",
+            "example": "/\\u{1F600}/u coincide con emoji"
+          },
+          "sticky": {
+            "description": "Coincide desde la posición lastIndex",
+            "example": "/a/y coincide en posición específica"
+          }
         }
       },
-      "lookaround": {
-        "title": "Lookaround",
+      "escapes": {
+        "title": "Secuencias de Escape",
         "items": {
-          "positiveLookahead": "Lookahead positivo",
-          "negativeLookahead": "Lookahead negativo",
-          "positiveLookbehind": "Lookbehind positivo",
-          "negativeLookbehind": "Lookbehind negativo"
+          "tab": {
+            "description": "Carácter de tabulación"
+          },
+          "newline": {
+            "description": "Nueva línea (salto de línea)"
+          },
+          "carriageReturn": {
+            "description": "Retorno de carro"
+          },
+          "verticalTab": {
+            "description": "Tabulación vertical"
+          },
+          "formFeed": {
+            "description": "Salto de página"
+          },
+          "null": {
+            "description": "Carácter nulo"
+          },
+          "hex": {
+            "description": "Carácter con código hexadecimal",
+            "example": "\\x41 coincide con 'A'"
+          },
+          "unicode": {
+            "description": "Carácter Unicode",
+            "example": "\\u0041 coincide con 'A'"
+          },
+          "escape": {
+            "description": "Escapar carácter especial",
+            "example": "\\. coincide con '.' literal"
+          }
+        }
+      },
+      "common": {
+        "title": "Patrones Comunes",
+        "items": {
+          "email": {
+            "description": "Patrón de dirección de correo electrónico"
+          },
+          "url": {
+            "description": "Patrón de URL/dirección web"
+          },
+          "phone": {
+            "description": "Patrón de número de teléfono"
+          },
+          "hexColor": {
+            "description": "Código de color hexadecimal (#RGB o #RRGGBB)"
+          },
+          "date": {
+            "description": "Patrón de fecha (AAAA-MM-DD)"
+          },
+          "password": {
+            "description": "Contraseña fuerte (8+ caracteres, mayús/minús, números)"
+          },
+          "slug": {
+            "description": "Slug amigable para URL (minúsculas, guiones)"
+          },
+          "version": {
+            "description": "Versión semántica (X.Y.Z)"
+          }
         }
       }
     }

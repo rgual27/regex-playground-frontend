@@ -304,70 +304,265 @@
     "fail": "FAIL",
     "congratulations": "Congratulations!",
     "challengeSolved": "You solved the challenge!",
-    "earnedPoints": "points earned"
+    "earnedPoints": "points earned",
+    "nextChallenge": "Next Challenge"
   },
   "cheatSheet": {
     "title": "Regex Cheat Sheet",
     "subtitle": "Quick reference for regular expression patterns",
     "copy": "Copy",
     "sections": {
-      "basics": {
-        "title": "Basics",
+      "charClasses": {
+        "title": "Character Classes",
         "items": {
-          "dot": "Any character except newline",
-          "wordChar": "Word character (a-z, A-Z, 0-9, _)",
-          "notWordChar": "Not a word character",
-          "digit": "Digit (0-9)",
-          "notDigit": "Not a digit",
-          "whitespace": "Whitespace",
-          "notWhitespace": "Not whitespace"
-        }
-      },
-      "quantifiers": {
-        "title": "Quantifiers",
-        "items": {
-          "zeroOrMore": "0 or more times",
-          "oneOrMore": "1 or more times",
-          "zeroOrOne": "0 or 1 time (optional)",
-          "exactly": "Exactly n times",
-          "atLeast": "At least n times",
-          "between": "Between n and m times"
+          "dot": {
+            "description": "Any character except newline",
+            "example": "a.c matches 'abc', 'aXc'"
+          },
+          "digit": {
+            "description": "Any digit (0-9)",
+            "example": "\\d\\d matches '42', '99'"
+          },
+          "notDigit": {
+            "description": "Any non-digit character",
+            "example": "\\D+ matches 'abc', 'XYZ'"
+          },
+          "word": {
+            "description": "Word character (a-z, A-Z, 0-9, _)",
+            "example": "\\w+ matches 'hello123'"
+          },
+          "notWord": {
+            "description": "Non-word character",
+            "example": "\\W+ matches '!@#', '   '"
+          },
+          "whitespace": {
+            "description": "Whitespace character (space, tab, newline)",
+            "example": "\\s+ matches '   ', '\t'"
+          },
+          "notWhitespace": {
+            "description": "Non-whitespace character",
+            "example": "\\S+ matches 'hello', '123'"
+          },
+          "set": {
+            "description": "Match any character in the set",
+            "example": "[aeiou] matches any vowel"
+          },
+          "negatedSet": {
+            "description": "Match any character not in the set",
+            "example": "[^aeiou] matches consonants"
+          },
+          "range": {
+            "description": "Match character in range",
+            "example": "[a-z] matches lowercase letters"
+          },
+          "digitRange": {
+            "description": "Match digit in range",
+            "example": "[0-9] matches any digit"
+          }
         }
       },
       "anchors": {
         "title": "Anchors",
         "items": {
-          "start": "Start of line",
-          "end": "End of line",
-          "wordBoundary": "Word boundary",
-          "notWordBoundary": "Not word boundary"
+          "start": {
+            "description": "Start of string or line",
+            "example": "^Hello matches 'Hello world'"
+          },
+          "end": {
+            "description": "End of string or line",
+            "example": "world$ matches 'Hello world'"
+          },
+          "wordBoundary": {
+            "description": "Word boundary position",
+            "example": "\\bword\\b matches 'word' not 'sword'"
+          },
+          "notWordBoundary": {
+            "description": "Non-word boundary",
+            "example": "\\Bword matches 'password' not 'word'"
+          },
+          "stringStart": {
+            "description": "Absolute start of string",
+            "example": "\\AHello matches start only"
+          },
+          "stringEnd": {
+            "description": "Absolute end of string",
+            "example": "end\\Z matches end only"
+          }
+        }
+      },
+      "quantifiers": {
+        "title": "Quantifiers",
+        "items": {
+          "zeroOrMore": {
+            "description": "Match 0 or more times (greedy)",
+            "example": "a* matches '', 'a', 'aaa'"
+          },
+          "oneOrMore": {
+            "description": "Match 1 or more times (greedy)",
+            "example": "a+ matches 'a', 'aaa'"
+          },
+          "zeroOrOne": {
+            "description": "Match 0 or 1 time (optional)",
+            "example": "colou?r matches 'color', 'colour'"
+          },
+          "exactlyN": {
+            "description": "Match exactly n times",
+            "example": "a{3} matches 'aaa'"
+          },
+          "nOrMore": {
+            "description": "Match n or more times",
+            "example": "a{2,} matches 'aa', 'aaa'"
+          },
+          "betweenNM": {
+            "description": "Match between n and m times",
+            "example": "a{2,4} matches 'aa', 'aaa', 'aaaa'"
+          },
+          "lazyZeroOrMore": {
+            "description": "Match 0 or more times (lazy)",
+            "example": "a*? matches shortest possible"
+          },
+          "lazyOneOrMore": {
+            "description": "Match 1 or more times (lazy)",
+            "example": "a+? matches shortest possible"
+          },
+          "lazyZeroOrOne": {
+            "description": "Match 0 or 1 time (lazy)",
+            "example": "a?? matches shortest possible"
+          }
         }
       },
       "groups": {
-        "title": "Groups",
+        "title": "Groups & Alternation",
         "items": {
-          "capturing": "Capturing group",
-          "nonCapturing": "Non-capturing group",
-          "namedGroup": "Named group",
-          "backreference": "Backreference"
+          "capturing": {
+            "description": "Capturing group",
+            "example": "(abc) captures 'abc' as group 1"
+          },
+          "nonCapturing": {
+            "description": "Non-capturing group",
+            "example": "(?:abc) groups without capturing"
+          },
+          "named": {
+            "description": "Named capturing group",
+            "example": "(?<name>abc) captures as 'name'"
+          },
+          "backreference": {
+            "description": "Reference to captured group",
+            "example": "(\\w)\\1 matches 'aa', 'bb'"
+          },
+          "alternation": {
+            "description": "Match either pattern",
+            "example": "cat|dog matches 'cat' or 'dog'"
+          },
+          "positiveLookahead": {
+            "description": "Match if followed by pattern",
+            "example": "\\d(?=px) matches '5' in '5px'"
+          },
+          "negativeLookahead": {
+            "description": "Match if not followed by pattern",
+            "example": "\\d(?!px) matches '5' not in '5px'"
+          },
+          "positiveLookbehind": {
+            "description": "Match if preceded by pattern",
+            "example": "(?<=\\$)\\d+ matches '100' in '$100'"
+          },
+          "negativeLookbehind": {
+            "description": "Match if not preceded by pattern",
+            "example": "(?<!\\$)\\d+ matches '100' not after '$'"
+          }
         }
       },
-      "charClasses": {
-        "title": "Character Classes",
+      "flags": {
+        "title": "Flags",
         "items": {
-          "set": "Character set",
-          "negatedSet": "Negated set",
-          "range": "Character range",
-          "or": "Alternation (OR)"
+          "global": {
+            "description": "Find all matches (not just first)",
+            "example": "/a/g finds all 'a' characters"
+          },
+          "caseInsensitive": {
+            "description": "Case-insensitive matching",
+            "example": "/hello/i matches 'Hello', 'HELLO'"
+          },
+          "multiline": {
+            "description": "^ and $ match line boundaries",
+            "example": "/^start/m matches lines starting with 'start'"
+          },
+          "dotAll": {
+            "description": "Dot matches newline characters",
+            "example": "/./s matches any character including \\n"
+          },
+          "unicode": {
+            "description": "Enable full Unicode matching",
+            "example": "/\\u{1F600}/u matches emoji"
+          },
+          "sticky": {
+            "description": "Match from lastIndex position",
+            "example": "/a/y matches at specific position"
+          }
         }
       },
-      "lookaround": {
-        "title": "Lookaround",
+      "escapes": {
+        "title": "Escape Sequences",
         "items": {
-          "positiveLookahead": "Positive lookahead",
-          "negativeLookahead": "Negative lookahead",
-          "positiveLookbehind": "Positive lookbehind",
-          "negativeLookbehind": "Negative lookbehind"
+          "tab": {
+            "description": "Tab character"
+          },
+          "newline": {
+            "description": "Newline (line feed)"
+          },
+          "carriageReturn": {
+            "description": "Carriage return"
+          },
+          "verticalTab": {
+            "description": "Vertical tab"
+          },
+          "formFeed": {
+            "description": "Form feed"
+          },
+          "null": {
+            "description": "Null character"
+          },
+          "hex": {
+            "description": "Character with hex code",
+            "example": "\\x41 matches 'A'"
+          },
+          "unicode": {
+            "description": "Unicode character",
+            "example": "\\u0041 matches 'A'"
+          },
+          "escape": {
+            "description": "Escape special character",
+            "example": "\\. matches literal '.'"
+          }
+        }
+      },
+      "common": {
+        "title": "Common Patterns",
+        "items": {
+          "email": {
+            "description": "Email address pattern"
+          },
+          "url": {
+            "description": "URL/web address pattern"
+          },
+          "phone": {
+            "description": "Phone number pattern"
+          },
+          "hexColor": {
+            "description": "Hex color code (#RGB or #RRGGBB)"
+          },
+          "date": {
+            "description": "Date pattern (YYYY-MM-DD)"
+          },
+          "password": {
+            "description": "Strong password (8+ chars, mixed case, numbers)"
+          },
+          "slug": {
+            "description": "URL-friendly slug (lowercase, hyphens)"
+          },
+          "version": {
+            "description": "Semantic version (X.Y.Z)"
+          }
         }
       }
     }
