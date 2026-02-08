@@ -30,4 +30,8 @@ export class SubscriptionService {
   createBillingPortalSession(): Observable<{ url: string }> {
     return this.http.post<{ url: string }>(`${this.apiUrl}/api/subscriptions/billing-portal`, {});
   }
+
+  createDonationSession(): Observable<{ url: string }> {
+    return this.http.post<{ url: string }>(`${this.apiUrl}/api/subscriptions/donate`, {});
+  }
 }

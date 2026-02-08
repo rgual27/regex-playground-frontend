@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SubscriptionService } from '../../services/subscription.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-pricing-simple',
@@ -58,29 +60,13 @@ import { CommonModule } from '@angular/common';
           <p>If you find Regex Playground useful and want to support its development, you can:</p>
 
           <div class="support-options">
-            <a href="https://www.buymeacoffee.com/rgbtools" target="_blank" class="support-btn coffee">
-              <span class="btn-icon">☕</span>
+            <button (click)="donate()" [disabled]="loading" class="support-btn primary">
+              <span class="btn-icon">❤️</span>
               <div class="btn-content">
-                <strong>Buy Me a Coffee</strong>
-                <small>One-time donation</small>
+                <strong>{{ loading ? 'Processing...' : 'Support with Stripe' }}</strong>
+                <small>Secure one-time donation</small>
               </div>
-            </a>
-
-            <a href="https://github.com/sponsors/rgual27" target="_blank" class="support-btn github">
-              <span class="btn-icon">💖</span>
-              <div class="btn-content">
-                <strong>GitHub Sponsors</strong>
-                <small>Monthly support</small>
-              </div>
-            </a>
-
-            <a href="https://ko-fi.com/rgbtools" target="_blank" class="support-btn kofi">
-              <span class="btn-icon">🎁</span>
-              <div class="btn-content">
-                <strong>Ko-fi</strong>
-                <small>Support & tips</small>
-              </div>
-            </a>
+            </button>
           </div>
 
           <p class="support-note">
@@ -397,4 +383,28 @@ import { CommonModule } from '@angular/common';
     }
   `]
 })
-export class PricingSimpleComponent {}
+export class PricingSimpleComponent {
+  loading = false;
+
+  constructor(
+    private subscriptionService: SubscriptionService,
+    private notificationService: NotificationService
+  ) {}
+
+  donate() {
+    this.loading = true;
+
+    // Create Stripe checkout session for donation
+    this.subscriptionService.createDonationSession().subscribe({
+      next: (response) => {
+        // Redirect to Stripe checkout
+        window.location.href = response.url;
+      },
+      error: (error) => {
+        console.error('Error creating donation session:', error);
+        this.notificationService.error('Failed to process donation. Please try again.');
+        this.loading = false;
+      }
+    });
+  }
+}
