@@ -7,6 +7,26 @@ export const routes: Routes = [
       .then(m => m.RegexTesterComponent)
   },
   {
+    path: 'examples',
+    loadComponent: () => import('./components/examples/examples.component')
+      .then(m => m.ExamplesComponent)
+  },
+  {
+    path: 'challenges',
+    loadComponent: () => import('./components/challenges/challenges.component')
+      .then(m => m.ChallengesComponent)
+  },
+  {
+    path: 'cheat-sheet',
+    loadComponent: () => import('./components/cheat-sheet/cheat-sheet.component')
+      .then(m => m.CheatSheetComponent)
+  },
+  {
+    path: 'r/:shareCode',
+    loadComponent: () => import('./components/shared-pattern/shared-pattern.component')
+      .then(m => m.SharedPatternComponent)
+  },
+  {
     path: 'library',
     loadComponent: () => import('./components/pattern-library/pattern-library.component')
       .then(m => m.PatternLibraryComponent)

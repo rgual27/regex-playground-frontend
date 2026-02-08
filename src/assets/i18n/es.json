@@ -48,9 +48,20 @@
     "savePattern": "Guardar Patrón",
     "share": "Compartir",
     "exportCode": "Exportar Código",
+    "tryIt": "Pruébalo",
     "upgradeToPro": "Actualizar a Pro",
     "loginToSave": "Inicia sesión para guardar patrones",
     "commonPatterns": "Patrones Comunes"
+  },
+  "examples": {
+    "title": "Biblioteca de Ejemplos Regex",
+    "subtitle": "Aprende con ejemplos de patrones regex comunes",
+    "tryIt": "Pruébalo"
+  },
+  "explainer": {
+    "title": "Desglose del Patrón",
+    "subtitle": "Explicación visual de tu patrón regex",
+    "tips": "Consejos Rápidos"
   },
   "pricing": {
     "title": "Precios Simples y Transparentes",

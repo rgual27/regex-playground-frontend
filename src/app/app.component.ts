@@ -25,22 +25,25 @@ import { filter } from 'rxjs/operators';
               <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 {{ 'nav.tester' | translate }}
               </a>
+              <a routerLink="/examples" routerLinkActive="active">
+                📚 Examples
+              </a>
+              <a routerLink="/challenges" routerLinkActive="active">
+                🏆 Challenges
+              </a>
+              <a routerLink="/cheat-sheet" routerLinkActive="active">
+                📖 Cheat Sheet
+              </a>
               <a routerLink="/library" routerLinkActive="active">
                 {{ 'nav.library' | translate }}
               </a>
-              <div class="dropdown" *ngIf="(currentUser$ | async) && (userTier === 'PRO' || userTier === 'TEAM')">
+              <div class="dropdown" *ngIf="(currentUser$ | async) && userTier === 'PRO'">
                 <button class="dropdown-toggle" (click)="toggleFeaturesMenu()">
                   {{ 'nav.features' | translate }} ▾
                 </button>
                 <div class="dropdown-menu" *ngIf="showFeaturesMenu">
                   <a routerLink="/folders" routerLinkActive="active">
                     📁 {{ 'nav.folders' | translate }}
-                  </a>
-                  <a routerLink="/teams" routerLinkActive="active" *ngIf="userTier === 'TEAM'">
-                    👥 {{ 'nav.teams' | translate }}
-                  </a>
-                  <a routerLink="/api-keys" routerLinkActive="active" *ngIf="userTier === 'TEAM'">
-                    🔑 {{ 'nav.apiKeys' | translate }}
                   </a>
                 </div>
               </div>

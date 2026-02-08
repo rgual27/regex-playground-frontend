@@ -48,6 +48,7 @@
     "savePattern": "Save Pattern",
     "share": "Share",
     "exportCode": "Export Code",
+    "tryIt": "Try It",
     "upgradeToPro": "Upgrade to Pro",
     "loginToSave": "Login to save patterns",
     "commonPatterns": "Common Patterns"
@@ -148,6 +149,16 @@
       "contact": "Contact Support",
       "logout": "Logout"
     }
+  },
+  "examples": {
+    "title": "Regex Examples Library",
+    "subtitle": "Learn by example with common regex patterns",
+    "tryIt": "Try It"
+  },
+  "explainer": {
+    "title": "Pattern Breakdown",
+    "subtitle": "Visual explanation of your regex pattern",
+    "tips": "Quick Tips"
   },
   "contact": {
     "title": "Contact Us",

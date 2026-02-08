@@ -13,11 +13,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../services/modal.service';
 import { NotificationService } from '../../services/notification.service';
 import { ExportModalComponent } from '../export-modal/export-modal.component';
+import { RegexExplainerComponent } from '../regex-explainer/regex-explainer.component';
 
 @Component({
   selector: 'app-regex-tester',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, TranslateModule, ExportModalComponent],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule, ExportModalComponent, RegexExplainerComponent],
   template: `
     <div class="container">
       <div class="hero">
@@ -178,6 +179,13 @@ import { ExportModalComponent } from '../export-modal/export-modal.component';
           <p *ngIf="saveMessage" [class]="saveMessageType === 'success' ? 'text-success' : 'text-error'">{{ saveMessage }}</p>
         </div>
       </div>
+
+      <!-- Regex Explainer -->
+      <app-regex-explainer
+        *ngIf="pattern && result && result.isValid"
+        [pattern]="pattern"
+        [flags]="flagsString">
+      </app-regex-explainer>
 
       <!-- Common Patterns Section -->
       <div class="card common-patterns">
