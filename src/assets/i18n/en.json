@@ -12,7 +12,11 @@
     "login": "Login",
     "signup": "Sign Up",
     "logout": "Logout",
-    "versions": "Version History"
+    "versions": "Version History",
+    "learn": "Learn",
+    "examples": "Examples",
+    "challenges": "Challenges",
+    "cheatSheet": "Cheat Sheet"
   },
   "hero": {
     "title": "Test Your Regex Patterns",
@@ -153,7 +157,220 @@
   "examples": {
     "title": "Regex Examples Library",
     "subtitle": "Learn by example with common regex patterns",
-    "tryIt": "Try It"
+    "tryIt": "Try It",
+    "categories": {
+      "all": "All",
+      "validation": "Validation",
+      "extraction": "Extraction",
+      "search": "Search",
+      "formatting": "Formatting"
+    },
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "items": {
+      "email": {
+        "title": "Email Validation",
+        "description": "Validate email addresses with proper format checking",
+        "useCases": ["Form validation", "User registration", "Contact forms", "Newsletter signup"]
+      },
+      "url": {
+        "title": "URL/Link Extractor",
+        "description": "Extract HTTP/HTTPS URLs from text",
+        "useCases": ["Link extraction", "Web scraping", "Content analysis", "SEO tools"]
+      },
+      "phoneUs": {
+        "title": "US Phone Number",
+        "description": "Match US phone numbers in various formats",
+        "useCases": ["Contact forms", "Customer database", "CRM systems", "SMS services"]
+      },
+      "date": {
+        "title": "Date Format (YYYY-MM-DD)",
+        "description": "Match ISO date format",
+        "useCases": ["Date input validation", "Log parsing", "Data import", "API validation"]
+      },
+      "hexColor": {
+        "title": "Hex Color Code",
+        "description": "Match hexadecimal color codes",
+        "useCases": ["CSS parsing", "Design tools", "Color extraction", "Theme generation"]
+      },
+      "ipv4": {
+        "title": "IPv4 Address",
+        "description": "Match valid IPv4 addresses",
+        "useCases": ["Network configuration", "Server logs", "Security tools", "IP filtering"]
+      },
+      "creditCard": {
+        "title": "Credit Card Number",
+        "description": "Match credit card numbers (13-19 digits)",
+        "useCases": ["Payment forms", "PCI compliance", "Transaction validation", "Financial systems"]
+      },
+      "password": {
+        "title": "Strong Password",
+        "description": "Validate strong passwords (8+ chars, mixed case, numbers, symbols)",
+        "useCases": ["User registration", "Security enforcement", "Password reset", "Account creation"]
+      },
+      "htmlTags": {
+        "title": "HTML Tag Remover",
+        "description": "Remove all HTML tags from text",
+        "useCases": ["Text sanitization", "Content extraction", "Data cleaning", "Security"]
+      },
+      "username": {
+        "title": "Username",
+        "description": "Validate usernames (alphanumeric, hyphens, 3-16 chars)",
+        "useCases": ["User registration", "Profile validation", "Social networks", "Auth systems"]
+      },
+      "slug": {
+        "title": "URL Slug",
+        "description": "Validate SEO-friendly URL slugs",
+        "useCases": ["URL generation", "SEO", "CMS", "Blog permalinks"]
+      },
+      "time24h": {
+        "title": "24h Time Format",
+        "description": "Validate time in 24-hour format (HH:MM)",
+        "useCases": ["Time input", "Scheduling", "Log analysis", "Booking systems"]
+      },
+      "twitterHandle": {
+        "title": "Twitter Handle",
+        "description": "Extract Twitter/X handles from text",
+        "useCases": ["Social media analysis", "Mention tracking", "Data extraction", "Marketing"]
+      },
+      "hashtag": {
+        "title": "Hashtags",
+        "description": "Extract social media hashtags",
+        "useCases": ["Trend analysis", "Content categorization", "Social media analytics", "Marketing"]
+      },
+      "markdownLinks": {
+        "title": "Markdown Links",
+        "description": "Extract Markdown format links [text](url)",
+        "useCases": ["Markdown parsing", "Documentation", "CMS", "Static site generators"]
+      },
+      "jsonString": {
+        "title": "JSON String Value",
+        "description": "Extract string values from JSON",
+        "useCases": ["API parsing", "Config file reading", "Data extraction", "Log analysis"]
+      },
+      "whitespace": {
+        "title": "Multiple Whitespace",
+        "description": "Replace multiple spaces with single space",
+        "useCases": ["Text normalization", "Data cleaning", "Input sanitization", "Format fixing"]
+      },
+      "fileExtension": {
+        "title": "File Extension",
+        "description": "Extract file extensions from filenames",
+        "useCases": ["File type validation", "Upload filtering", "File organization", "MIME detection"]
+      },
+      "semver": {
+        "title": "Semantic Version",
+        "description": "Match semantic versioning (major.minor.patch)",
+        "useCases": ["Package management", "Version comparison", "Release automation", "Dependency checking"]
+      },
+      "uuid": {
+        "title": "UUID Validator",
+        "description": "Match UUID v4 format",
+        "useCases": ["Database IDs", "API tokens", "Unique identifiers", "Distributed systems"]
+      }
+    }
+  },
+  "challenges": {
+    "title": "Daily Regex Challenges",
+    "subtitle": "Master regex with progressive challenges",
+    "solved": "Solved",
+    "points": "Points",
+    "streak": "Day Streak",
+    "challengeOfDay": "Challenge of the Day",
+    "tryChallenge": "Try This Challenge",
+    "difficulty": {
+      "all": "All",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "solvedBadge": "Solved",
+    "solve": "Solve",
+    "task": "Task",
+    "testCases": "Test Cases",
+    "shouldMatch": "Should match",
+    "shouldNotMatch": "Should NOT match",
+    "yourSolution": "Your Solution",
+    "enterPattern": "Enter your regex pattern...",
+    "testSolution": "Test Solution",
+    "showHint": "Show Hint",
+    "showSolution": "Show Solution",
+    "hint": "Hint",
+    "solution": "Solution",
+    "pass": "PASS",
+    "fail": "FAIL",
+    "congratulations": "Congratulations!",
+    "challengeSolved": "You solved the challenge!",
+    "earnedPoints": "points earned"
+  },
+  "cheatSheet": {
+    "title": "Regex Cheat Sheet",
+    "subtitle": "Quick reference for regular expression patterns",
+    "copy": "Copy",
+    "sections": {
+      "basics": {
+        "title": "Basics",
+        "items": {
+          "dot": "Any character except newline",
+          "wordChar": "Word character (a-z, A-Z, 0-9, _)",
+          "notWordChar": "Not a word character",
+          "digit": "Digit (0-9)",
+          "notDigit": "Not a digit",
+          "whitespace": "Whitespace",
+          "notWhitespace": "Not whitespace"
+        }
+      },
+      "quantifiers": {
+        "title": "Quantifiers",
+        "items": {
+          "zeroOrMore": "0 or more times",
+          "oneOrMore": "1 or more times",
+          "zeroOrOne": "0 or 1 time (optional)",
+          "exactly": "Exactly n times",
+          "atLeast": "At least n times",
+          "between": "Between n and m times"
+        }
+      },
+      "anchors": {
+        "title": "Anchors",
+        "items": {
+          "start": "Start of line",
+          "end": "End of line",
+          "wordBoundary": "Word boundary",
+          "notWordBoundary": "Not word boundary"
+        }
+      },
+      "groups": {
+        "title": "Groups",
+        "items": {
+          "capturing": "Capturing group",
+          "nonCapturing": "Non-capturing group",
+          "namedGroup": "Named group",
+          "backreference": "Backreference"
+        }
+      },
+      "charClasses": {
+        "title": "Character Classes",
+        "items": {
+          "set": "Character set",
+          "negatedSet": "Negated set",
+          "range": "Character range",
+          "or": "Alternation (OR)"
+        }
+      },
+      "lookaround": {
+        "title": "Lookaround",
+        "items": {
+          "positiveLookahead": "Positive lookahead",
+          "negativeLookahead": "Negative lookahead",
+          "positiveLookbehind": "Positive lookbehind",
+          "negativeLookbehind": "Negative lookbehind"
+        }
+      }
+    }
   },
   "explainer": {
     "title": "Pattern Breakdown",
