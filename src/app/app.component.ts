@@ -24,48 +24,19 @@ import { filter } from 'rxjs/operators';
             <div class="nav-links">
               <div class="dropdown">
                 <button class="dropdown-toggle" (click)="toggleLearnMenu()">
-                  📚 Learn ▾
+                  Learn ▾
                 </button>
                 <div class="dropdown-menu" *ngIf="showLearnMenu">
-                  <a routerLink="/blog" routerLinkActive="active">
-                    ✍️ Blog
-                  </a>
-                  <a routerLink="/examples" routerLinkActive="active">
-                    📚 Examples
-                  </a>
-                  <a routerLink="/challenges" routerLinkActive="active">
-                    🏆 Challenges
-                  </a>
-                  <a routerLink="/cheat-sheet" routerLinkActive="active">
-                    📖 Cheat Sheet
-                  </a>
+                  <a routerLink="/blog" routerLinkActive="active">Blog</a>
+                  <a routerLink="/examples" routerLinkActive="active">Examples</a>
+                  <a routerLink="/challenges" routerLinkActive="active">Challenges</a>
+                  <a routerLink="/cheat-sheet" routerLinkActive="active">Cheat Sheet</a>
                 </div>
               </div>
-              <a routerLink="/library" routerLinkActive="active">
-                {{ 'nav.library' | translate }}
-              </a>
-              <a routerLink="/community" routerLinkActive="active">
-                🌐 Community
-              </a>
-              <a routerLink="/leaderboard" routerLinkActive="active">
-                🏆 Leaderboard
-              </a>
-              <div class="dropdown" *ngIf="(currentUser$ | async) && userTier === 'PRO'">
-                <button class="dropdown-toggle" (click)="toggleFeaturesMenu()">
-                  ⚡ Pro ▾
-                </button>
-                <div class="dropdown-menu" *ngIf="showFeaturesMenu">
-                  <a routerLink="/folders" routerLinkActive="active">
-                    📁 {{ 'nav.folders' | translate }}
-                  </a>
-                </div>
-              </div>
-              <a routerLink="/pricing" routerLinkActive="active">
-                {{ 'nav.pricing' | translate }}
-              </a>
-              <a routerLink="/contact" routerLinkActive="active">
-                {{ 'nav.contact' | translate }}
-              </a>
+              <a routerLink="/library" routerLinkActive="active">Library</a>
+              <a routerLink="/community" routerLinkActive="active">Community</a>
+              <a routerLink="/leaderboard" routerLinkActive="active">Leaderboard</a>
+              <a routerLink="/pricing" routerLinkActive="active">Pricing</a>
             </div>
             <div class="nav-actions">
               <app-language-switcher></app-language-switcher>
