@@ -13,8 +13,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalService } from '../../services/modal.service';
 import { NotificationService } from '../../services/notification.service';
 import { ShareService } from '../../services/share.service';
+import { KeyboardShortcutsService } from '../../services/keyboard-shortcuts.service';
 import { ExportModalComponent } from '../export-modal/export-modal.component';
 import { RegexExplainerComponent } from '../regex-explainer/regex-explainer.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regex-tester',
@@ -25,6 +27,20 @@ import { RegexExplainerComponent } from '../regex-explainer/regex-explainer.comp
       <div class="hero">
         <h1>🔍 {{ 'hero.title' | translate }}</h1>
         <p>{{ 'hero.subtitle' | translate }}</p>
+      </div>
+
+      <!-- Examples Banner -->
+      <div class="examples-banner" *ngIf="!pattern && !isAuthenticated">
+        <div class="banner-content">
+          <div class="banner-icon">📚</div>
+          <div class="banner-text">
+            <h3>New to regex?</h3>
+            <p>Check out our curated examples to get started!</p>
+          </div>
+          <a routerLink="/examples" class="banner-btn">
+            Browse Examples →
+          </a>
+        </div>
       </div>
 
       <div class="tester-grid">
@@ -298,7 +314,9 @@ export class RegexTesterComponent implements OnInit {
     private folderService: FolderService,
     private modalService: ModalService,
     private notificationService: NotificationService,
-    private shareService: ShareService
+    private shareService: ShareService,
+    private keyboardShortcuts: KeyboardShortcutsService,
+    private router: Router
   ) {}
 
   get isAuthenticated(): boolean {
@@ -321,6 +339,27 @@ export class RegexTesterComponent implements OnInit {
     if (patternToLoad) {
       this.loadPatternFromLibrary(patternToLoad);
     }
+
+    // Setup keyboard shortcuts
+    this.keyboardShortcuts.shortcuts$.subscribe(event => {
+      switch (event.action) {
+        case 'test':
+          this.testPattern();
+          this.notificationService.success('Pattern tested! (Ctrl+Enter)');
+          break;
+        case 'save':
+          if (this.pattern) {
+            this.savePattern();
+          }
+          break;
+        case 'cheatsheet':
+          this.router.navigate(['/cheat-sheet']);
+          break;
+        case 'examples':
+          this.router.navigate(['/examples']);
+          break;
+      }
+    });
   }
 
   loadFolders() {
