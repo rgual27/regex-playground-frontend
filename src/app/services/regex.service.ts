@@ -28,6 +28,14 @@ export interface RegexTestResponse {
   errorIndex?: number;
 }
 
+export interface EmbedStats {
+  totalViews: number;
+  totalInteractions: number;
+  viewsByDate: { [date: string]: number };
+  interactionsByDate: { [date: string]: number };
+  topReferrers: { [referrer: string]: number };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,5 +46,20 @@ export class RegexService {
 
   testRegex(request: RegexTestRequest): Observable<RegexTestResponse> {
     return this.http.post<RegexTestResponse>(`${this.apiUrl}/api/regex/test`, request);
+  }
+
+  // Track embed widget events (views and interactions)
+  trackEmbedEvent(eventType: 'view' | 'interaction'): Observable<void> {
+    const referrer = document.referrer || 'direct';
+    return this.http.post<void>(`${this.apiUrl}/api/embed/track`, {
+      eventType,
+      referrer,
+      timestamp: new Date().toISOString()
+    });
+  }
+
+  // Get embed analytics stats (admin only)
+  getEmbedStats(): Observable<EmbedStats> {
+    return this.http.get<EmbedStats>(`${this.apiUrl}/api/embed/stats`);
   }
 }

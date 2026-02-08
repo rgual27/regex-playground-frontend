@@ -57,4 +57,24 @@ export class TeamService {
   removeMember(teamId: number, memberId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/api/teams/${teamId}/members/${memberId}`);
   }
+
+  inviteMember(teamId: number, email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/teams/${teamId}/invite`, { email });
+  }
+
+  acceptInvitation(token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/teams/join/${token}`, {});
+  }
+
+  declineInvitation(token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/teams/decline/${token}`, {});
+  }
+
+  getTeamInvitations(teamId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/teams/${teamId}/invitations`);
+  }
+
+  getTeamPatterns(teamId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/api/teams/${teamId}/patterns`);
+  }
 }

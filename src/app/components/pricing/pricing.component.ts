@@ -89,6 +89,74 @@ import { NotificationService } from '../../services/notification.service';
           <p class="trial-note" *ngIf="currentTier !== 'PRO'">{{ 'pricing.trialNote' | translate }}</p>
         </div>
 
+        <!-- API Plan -->
+        <div class="pricing-card api-card" [class.current]="currentTier === 'API'" *ngIf="!tierLoading">
+          <div class="plan-badge api" *ngIf="currentTier === 'API'">{{ 'pricing.currentPlan' | translate }}</div>
+          <div class="plan-badge api" *ngIf="currentTier !== 'API'">Best for Developers</div>
+          <h3>API Access</h3>
+          <div class="price">
+            <span class="amount">{{ billingPeriod === 'monthly' ? '$19' : '$182' }}</span>
+            <span class="period">{{ billingPeriod === 'monthly' ? '/month' : '/year' }}</span>
+            <span class="savings" *ngIf="billingPeriod === 'annual'">Save $46/year</span>
+          </div>
+          <ul class="features">
+            <li>✅ All PRO features</li>
+            <li>✅ 10,000 API requests/month</li>
+            <li>✅ Full API access</li>
+            <li>✅ Webhooks support</li>
+            <li>✅ API documentation</li>
+            <li>✅ Rate limiting headers</li>
+            <li>✅ Priority support</li>
+            <li>✅ Code examples (curl, JS, Python, Java)</li>
+          </ul>
+          <button
+            class="btn w-full"
+            [class.btn-primary]="currentTier !== 'API'"
+            [class.btn-secondary]="currentTier === 'API'"
+            (click)="subscribe('API')"
+            [disabled]="loading || currentTier === 'API'">
+            <span *ngIf="currentTier === 'API'">{{ 'pricing.currentPlan' | translate }}</span>
+            <span *ngIf="currentTier !== 'API'">
+              {{ loading && selectedTier === 'API' ? ('common.loading' | translate) : 'Get Started' }}
+            </span>
+          </button>
+          <p class="trial-note" *ngIf="currentTier !== 'API'">Perfect for API integrations</p>
+        </div>
+
+        <!-- Team Plan -->
+        <div class="pricing-card team-card" [class.current]="currentTier === 'TEAM'" *ngIf="!tierLoading">
+          <div class="plan-badge team" *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</div>
+          <div class="plan-badge team" *ngIf="currentTier !== 'TEAM'">For Teams</div>
+          <h3>Team</h3>
+          <div class="price">
+            <span class="amount">{{ billingPeriod === 'monthly' ? '$49' : '$470' }}</span>
+            <span class="period">{{ billingPeriod === 'monthly' ? '/month' : '/year' }}</span>
+            <span class="savings" *ngIf="billingPeriod === 'annual'">Save $118/year</span>
+          </div>
+          <ul class="features">
+            <li>✅ Up to 5 team members</li>
+            <li>✅ Shared pattern library</li>
+            <li>✅ Team folders</li>
+            <li>✅ All PRO features for all members</li>
+            <li>✅ 50,000 API requests/month</li>
+            <li>✅ Team analytics</li>
+            <li>✅ Centralized billing</li>
+            <li>✅ Priority support</li>
+          </ul>
+          <button
+            class="btn w-full"
+            [class.btn-primary]="currentTier !== 'TEAM'"
+            [class.btn-secondary]="currentTier === 'TEAM'"
+            (click)="subscribe('TEAM')"
+            [disabled]="loading || currentTier === 'TEAM'">
+            <span *ngIf="currentTier === 'TEAM'">{{ 'pricing.currentPlan' | translate }}</span>
+            <span *ngIf="currentTier !== 'TEAM'">
+              {{ loading && selectedTier === 'TEAM' ? ('common.loading' | translate) : 'Get Started' }}
+            </span>
+          </button>
+          <p class="trial-note" *ngIf="currentTier !== 'TEAM'">Perfect for small development teams</p>
+        </div>
+
       </div>
 
       <div class="faq-section">
@@ -207,6 +275,16 @@ import { NotificationService } from '../../services/notification.service';
         border-color: var(--primary-color);
         box-shadow: var(--shadow-lg);
       }
+
+      &.api-card {
+        border-color: #8b5cf6;
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+      }
+
+      &.team-card {
+        border-color: #10b981;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+      }
     }
 
     .plan-badge {
@@ -223,6 +301,16 @@ import { NotificationService } from '../../services/notification.service';
 
       &.pro {
         background-color: var(--primary-color);
+        color: white;
+      }
+
+      &.api {
+        background-color: #8b5cf6;
+        color: white;
+      }
+
+      &.team {
+        background-color: #10b981;
         color: white;
       }
     }

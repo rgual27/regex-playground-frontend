@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiKeyService, ApiKey, ApiKeyResponse } from '../../services/apikey.service';
 import { NotificationService } from '../../services/notification.service';
+import { AuthService } from '../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -24,9 +26,14 @@ import { TranslateModule } from '@ngx-translate/core';
       <div class="info-banner">
         <span class="info-icon">ℹ️</span>
         <div>
-          <strong>{{ 'apiKeys.info.title' | translate }}</strong>
-          <p>{{ 'apiKeys.info.description' | translate }}</p>
+          <strong>Current Plan: {{ currentTier }}</strong>
+          <p>{{ getTierDescription() }}</p>
         </div>
+        <button *ngIf="currentTier !== 'API' && currentTier !== 'TEAM'"
+                class="btn btn-upgrade"
+                (click)="navigateToUpgrade()">
+          Upgrade to API Plan
+        </button>
       </div>
 
       <div class="keys-list" *ngIf="apiKeys.length > 0">
@@ -50,13 +57,23 @@ import { TranslateModule } from '@ngx-translate/core';
             </button>
           </div>
           <div class="key-stats">
-            <div class="stat">
-              <div class="stat-label">{{ 'apiKeys.usage' | translate }}</div>
-              <div class="stat-value">
-                {{ key.usageToday }} / {{ key.dailyLimit }}
+            <div class="stat-row">
+              <div class="stat">
+                <div class="stat-label">Monthly Usage</div>
+                <div class="stat-value">
+                  {{ key.requestsUsed }} / {{ key.requestsPerMonth }}
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill"
+                       [style.width.%]="(key.requestsUsed / key.requestsPerMonth) * 100"
+                       [class.warning]="(key.requestsUsed / key.requestsPerMonth) > 0.8"
+                       [class.danger]="(key.requestsUsed / key.requestsPerMonth) > 0.95"></div>
+                </div>
               </div>
-              <div class="progress-bar">
-                <div class="progress-fill" [style.width.%]="(key.usageToday / key.dailyLimit) * 100"></div>
+              <div class="stat-badge">
+                <span class="tier-badge" [class]="'tier-' + key.tier.toLowerCase()">
+                  {{ key.tier }} Tier
+                </span>
               </div>
             </div>
           </div>
@@ -200,7 +217,8 @@ import { TranslateModule } from '@ngx-translate/core';
     .info-banner {
       display: flex;
       gap: 1rem;
-      padding: 1rem;
+      align-items: center;
+      padding: 1rem 1.5rem;
       background: #3b82f620;
       border: 1px solid #3b82f640;
       border-radius: 8px;
@@ -210,15 +228,34 @@ import { TranslateModule } from '@ngx-translate/core';
         font-size: 1.5rem;
       }
 
+      > div {
+        flex: 1;
+      }
+
       strong {
         display: block;
         margin-bottom: 0.25rem;
+        font-size: 1.125rem;
       }
 
       p {
         margin: 0;
         font-size: 0.875rem;
         color: var(--text-secondary);
+      }
+
+      .btn-upgrade {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        white-space: nowrap;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
       }
     }
 
@@ -276,7 +313,16 @@ import { TranslateModule } from '@ngx-translate/core';
       border-top: 1px solid var(--border-color);
     }
 
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
     .stat {
+      flex: 1;
+
       .stat-label {
         font-size: 0.875rem;
         color: var(--text-secondary);
@@ -290,6 +336,36 @@ import { TranslateModule } from '@ngx-translate/core';
       }
     }
 
+    .stat-badge {
+      .tier-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        &.tier-free {
+          background: #6b728020;
+          color: #6b7280;
+        }
+
+        &.tier-pro {
+          background: #3b82f620;
+          color: #3b82f6;
+        }
+
+        &.tier-api {
+          background: #8b5cf620;
+          color: #8b5cf6;
+        }
+
+        &.tier-team {
+          background: #10b98120;
+          color: #10b981;
+        }
+      }
+    }
+
     .progress-bar {
       height: 8px;
       background: var(--bg-secondary);
@@ -299,7 +375,15 @@ import { TranslateModule } from '@ngx-translate/core';
       .progress-fill {
         height: 100%;
         background: var(--primary-color);
-        transition: width 0.3s;
+        transition: width 0.3s, background 0.3s;
+
+        &.warning {
+          background: #f59e0b;
+        }
+
+        &.danger {
+          background: #ef4444;
+        }
       }
     }
 
@@ -560,14 +644,39 @@ export class ApiKeysComponent implements OnInit {
   keyName = '';
   newApiKey: string | null = null;
   deletingKey: ApiKey | null = null;
+  currentTier: string = 'FREE';
 
   constructor(
     private apiKeyService: ApiKeyService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.loadUserTier();
     this.loadApiKeys();
+  }
+
+  loadUserTier() {
+    const user = this.authService.getCurrentUser();
+    if (user && user.subscriptionTier) {
+      this.currentTier = user.subscriptionTier;
+    }
+  }
+
+  getTierDescription(): string {
+    const limits: Record<string, string> = {
+      'FREE': '100 API requests per month',
+      'PRO': '1,000 API requests per month',
+      'API': '10,000 API requests per month with webhooks support',
+      'TEAM': '50,000 API requests per month with webhooks support'
+    };
+    return limits[this.currentTier] || 'Upgrade to access API features';
+  }
+
+  navigateToUpgrade() {
+    this.router.navigate(['/pricing']);
   }
 
   loadApiKeys() {

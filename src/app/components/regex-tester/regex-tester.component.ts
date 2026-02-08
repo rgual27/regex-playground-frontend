@@ -16,18 +16,23 @@ import { ShareService } from '../../services/share.service';
 import { KeyboardShortcutsService } from '../../services/keyboard-shortcuts.service';
 import { ExportModalComponent } from '../export-modal/export-modal.component';
 import { RegexExplainerComponent } from '../regex-explainer/regex-explainer.component';
+import { RegexOfTheDayWidgetComponent } from '../regex-of-the-day/regex-of-the-day-widget.component';
+import { AdsenseComponent } from '../adsense/adsense.component';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-regex-tester',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, TranslateModule, ExportModalComponent, RegexExplainerComponent],
+  imports: [CommonModule, FormsModule, RouterLink, TranslateModule, ExportModalComponent, RegexExplainerComponent, RegexOfTheDayWidgetComponent, AdsenseComponent],
   template: `
     <div class="container">
       <div class="hero">
         <h1>🔍 {{ 'hero.title' | translate }}</h1>
         <p>{{ 'hero.subtitle' | translate }}</p>
       </div>
+
+      <!-- Regex of the Day Widget -->
+      <app-regex-of-the-day-widget></app-regex-of-the-day-widget>
 
       <!-- Examples Banner -->
       <div class="examples-banner" *ngIf="!pattern && !isAuthenticated">
@@ -203,6 +208,9 @@ import { Router, ActivatedRoute } from '@angular/router';
         [pattern]="pattern"
         [flags]="flagsString">
       </app-regex-explainer>
+
+      <!-- AdSense Ad (FREE users only) -->
+      <app-adsense adSlot="1234567890" adFormat="horizontal"></app-adsense>
 
       <!-- Common Patterns Section -->
       <div class="card common-patterns">

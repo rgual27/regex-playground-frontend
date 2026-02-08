@@ -105,15 +105,11 @@ import { TranslateModule } from '@ngx-translate/core';
               class="form-control"
               placeholder="{{ 'teams.memberEmail' | translate }}"
               [disabled]="addingMember">
-            <select [(ngModel)]="newMemberRole" class="form-control" [disabled]="addingMember">
-              <option value="MEMBER">Member</option>
-              <option value="ADMIN">Admin</option>
-            </select>
             <button
               class="btn btn-primary"
-              (click)="addMember()"
+              (click)="inviteMember()"
               [disabled]="addingMember || !newMemberEmail">
-              {{ addingMember ? ('common.adding' | translate) : ('teams.addMember' | translate) }}
+              {{ addingMember ? 'Sending Invite...' : 'Send Invitation' }}
             </button>
           </div>
 
@@ -375,7 +371,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
     .add-member-section {
       display: grid;
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto;
       gap: 0.75rem;
       margin-bottom: 1.5rem;
       padding-bottom: 1.5rem;
@@ -538,7 +534,6 @@ export class TeamManagerComponent implements OnInit {
   deletingTeam: Team | null = null;
   selectedTeam: Team | null = null;
   newMemberEmail = '';
-  newMemberRole: 'MEMBER' | 'ADMIN' = 'MEMBER';
 
   teamForm: Team = {
     name: '',
@@ -654,21 +649,19 @@ export class TeamManagerComponent implements OnInit {
     });
   }
 
-  addMember() {
+  inviteMember() {
     if (!this.selectedTeam?.id || !this.newMemberEmail.trim()) return;
 
     this.addingMember = true;
-    this.teamService.addMember(this.selectedTeam.id, this.newMemberEmail, this.newMemberRole).subscribe({
+    this.teamService.inviteMember(this.selectedTeam.id, this.newMemberEmail).subscribe({
       next: () => {
-        this.notificationService.success('Member added successfully');
+        this.notificationService.success('Invitation sent successfully');
         this.newMemberEmail = '';
-        this.newMemberRole = 'MEMBER';
-        this.loadMembers(this.selectedTeam!.id!);
         this.addingMember = false;
       },
       error: (error) => {
-        console.error('Error adding member:', error);
-        this.notificationService.error(error.error?.message || 'Failed to add member');
+        console.error('Error sending invitation:', error);
+        this.notificationService.error(error.error?.error || error.error?.message || 'Failed to send invitation');
         this.addingMember = false;
       }
     });

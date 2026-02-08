@@ -6,9 +6,14 @@ import { environment } from '../../environments/environment';
 export interface ApiKey {
   id?: number;
   name: string;
+  tier: string;
+  requestsPerMonth: number;
+  requestsUsed: number;
+  requestsRemaining: number;
   dailyLimit: number;
   usageToday: number;
   lastUsedAt?: Date;
+  lastResetDate?: Date;
   createdAt?: Date;
 }
 
@@ -35,5 +40,9 @@ export class ApiKeyService {
 
   deleteApiKey(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/api/api-keys/${id}`);
+  }
+
+  getApiKeyStats(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/api-keys/${id}/stats`);
   }
 }

@@ -30,6 +30,9 @@ import { filter } from 'rxjs/operators';
                   📚 Learn ▾
                 </button>
                 <div class="dropdown-menu" *ngIf="showLearnMenu">
+                  <a routerLink="/blog" routerLinkActive="active">
+                    ✍️ Blog
+                  </a>
                   <a routerLink="/examples" routerLinkActive="active">
                     📚 Examples
                   </a>
@@ -43,6 +46,12 @@ import { filter } from 'rxjs/operators';
               </div>
               <a routerLink="/library" routerLinkActive="active">
                 {{ 'nav.library' | translate }}
+              </a>
+              <a routerLink="/community" routerLinkActive="active">
+                🌐 Community
+              </a>
+              <a routerLink="/leaderboard" routerLinkActive="active">
+                🏆 Leaderboard
               </a>
               <div class="dropdown" *ngIf="(currentUser$ | async) && userTier === 'PRO'">
                 <button class="dropdown-toggle" (click)="toggleFeaturesMenu()">
