@@ -16,7 +16,7 @@ import { ShareService } from '../../services/share.service';
 import { KeyboardShortcutsService } from '../../services/keyboard-shortcuts.service';
 import { ExportModalComponent } from '../export-modal/export-modal.component';
 import { RegexExplainerComponent } from '../regex-explainer/regex-explainer.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-regex-tester',
@@ -316,7 +316,8 @@ export class RegexTesterComponent implements OnInit {
     private notificationService: NotificationService,
     private shareService: ShareService,
     private keyboardShortcuts: KeyboardShortcutsService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   get isAuthenticated(): boolean {
@@ -334,11 +335,34 @@ export class RegexTesterComponent implements OnInit {
       this.loadFolders();
     }
 
-    // Check if there's a pattern to load from sessionStorage (from library)
-    const patternToLoad = this.patternService.getPatternToLoad();
-    if (patternToLoad) {
-      this.loadPatternFromLibrary(patternToLoad);
-    }
+    // Check for query parameters from examples page
+    this.route.queryParams.subscribe(params => {
+      if (params['pattern']) {
+        this.pattern = params['pattern'];
+        this.testString = params['test'] || '';
+
+        // Parse flags
+        const flags = params['flags'] || '';
+        this.flags.i = flags.includes('i');
+        this.flags.m = flags.includes('m');
+        this.flags.s = flags.includes('s');
+        this.updateFlagsString();
+
+        // Test the pattern after loading
+        setTimeout(() => {
+          this.testPattern();
+          this.notificationService.success('Example pattern loaded successfully!');
+        }, 100);
+
+        return; // Skip sessionStorage check if we have query params
+      }
+
+      // Check if there's a pattern to load from sessionStorage (from library)
+      const patternToLoad = this.patternService.getPatternToLoad();
+      if (patternToLoad) {
+        this.loadPatternFromLibrary(patternToLoad);
+      }
+    });
 
     // Setup keyboard shortcuts
     this.keyboardShortcuts.shortcuts$.subscribe(event => {
