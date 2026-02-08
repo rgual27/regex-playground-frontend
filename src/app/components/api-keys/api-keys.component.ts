@@ -659,7 +659,7 @@ export class ApiKeysComponent implements OnInit {
   }
 
   loadUserTier() {
-    const user = this.authService.getCurrentUser();
+    const user = this.authService.currentUserValue;
     if (user && user.subscriptionTier) {
       this.currentTier = user.subscriptionTier;
     }
