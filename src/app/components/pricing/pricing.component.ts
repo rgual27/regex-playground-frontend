@@ -12,23 +12,8 @@ import { NotificationService } from '../../services/notification.service';
   template: `
     <div class="container">
       <div class="pricing-header">
-        <h1>{{ 'pricing.title' | translate }}</h1>
-        <p>{{ 'pricing.subtitle' | translate }}</p>
-
-        <div class="billing-toggle">
-          <button
-            class="toggle-btn"
-            [class.active]="billingPeriod === 'monthly'"
-            (click)="billingPeriod = 'monthly'">
-            Monthly
-          </button>
-          <button
-            class="toggle-btn"
-            [class.active]="billingPeriod === 'annual'"
-            (click)="billingPeriod = 'annual'">
-            Annual <span class="discount-badge">Save 20%</span>
-          </button>
-        </div>
+        <h1>Support Regex Playground</h1>
+        <p>This tool is 100% free. If you find it useful, consider supporting its development! ❤️</p>
       </div>
 
       <div class="pricing-grid">

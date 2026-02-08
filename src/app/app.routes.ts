@@ -33,8 +33,8 @@ export const routes: Routes = [
   },
   {
     path: 'pricing',
-    loadComponent: () => import('./components/pricing/pricing.component')
-      .then(m => m.PricingComponent)
+    loadComponent: () => import('./components/pricing/pricing-simple.component')
+      .then(m => m.PricingSimpleComponent)
   },
   {
     path: 'account',
