@@ -201,11 +201,69 @@
   "examples": {
     "title": "Libreria di Esempi Regex",
     "subtitle": "Impara con esempi di pattern regex comuni",
-    "tryIt": "Prova"
+    "tryIt": "Prova",
+    "categories": {
+      "all": "Tutti",
+      "validation": "Validazione",
+      "extraction": "Estrazione",
+      "search": "Ricerca",
+      "formatting": "Formattazione"
+    },
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzato"
+    },
+    "items": {
+      "email": { "title": "Validazione Email", "description": "Validare indirizzi email con verifica del formato corretto", "useCases": ["Validazione moduli", "Registrazione utente", "Moduli di contatto", "Iscrizione newsletter"] },
+      "url": { "title": "Estrattore URL/Link", "description": "Estrarre URL HTTP/HTTPS dal testo", "useCases": ["Estrazione link", "Web scraping", "Analisi contenuto", "Strumenti SEO"] },
+      "phoneUs": { "title": "Numero di Telefono US", "description": "Abbinare numeri di telefono US in vari formati", "useCases": ["Moduli di contatto", "Database clienti", "Sistemi CRM", "Servizi SMS"] },
+      "date": { "title": "Formato Data (AAAA-MM-GG)", "description": "Abbinare formato data ISO", "useCases": ["Validazione input data", "Analisi log", "Importazione dati", "Validazione API"] },
+      "hexColor": { "title": "Codice Colore Esadecimale", "description": "Abbinare codici colore esadecimali", "useCases": ["Analisi CSS", "Strumenti di design", "Estrazione colore", "Generazione tema"] },
+      "ipv4": { "title": "Indirizzo IPv4", "description": "Abbinare indirizzi IPv4 validi", "useCases": ["Configurazione rete", "Log server", "Strumenti sicurezza", "Filtraggio IP"] },
+      "creditCard": { "title": "Numero Carta di Credito", "description": "Abbinare numeri di carta di credito (13-19 cifre)", "useCases": ["Moduli di pagamento", "Conformità PCI", "Validazione transazione", "Sistemi finanziari"] },
+      "password": { "title": "Password Forte", "description": "Validare password forti (8+ caratteri, maiuscole, minuscole, numeri, simboli)", "useCases": ["Registrazione utente", "Applicazione sicurezza", "Reset password", "Creazione account"] },
+      "htmlTags": { "title": "Rimozione Tag HTML", "description": "Rimuovere tutti i tag HTML dal testo", "useCases": ["Pulizia testo", "Estrazione contenuto", "Pulizia dati", "Sicurezza"] },
+      "username": { "title": "Nome Utente", "description": "Validare nomi utente (alfanumerico, trattini, 3-16 caratteri)", "useCases": ["Registrazione utente", "Validazione profilo", "Social network", "Sistemi di autenticazione"] },
+      "slug": { "title": "Slug URL", "description": "Validare slug URL compatibili SEO", "useCases": ["Generazione URL", "SEO", "CMS", "Permalink blog"] },
+      "time24h": { "title": "Formato Ora 24h", "description": "Validare ora in formato 24 ore (HH:MM)", "useCases": ["Input ora", "Pianificazione appuntamenti", "Analisi log", "Sistemi di prenotazione"] },
+      "twitterHandle": { "title": "Handle Twitter", "description": "Estrarre handle Twitter/X dal testo", "useCases": ["Analisi social media", "Monitoraggio menzioni", "Estrazione dati", "Marketing"] },
+      "hashtag": { "title": "Hashtag", "description": "Estrarre hashtag dai social media", "useCases": ["Analisi trend", "Categorizzazione contenuto", "Analisi social media", "Marketing"] },
+      "markdownLinks": { "title": "Link Markdown", "description": "Estrarre link in formato Markdown [testo](url)", "useCases": ["Analisi Markdown", "Documentazione", "CMS", "Generatori siti statici"] },
+      "jsonString": { "title": "Stringa JSON", "description": "Estrarre valori stringa dal JSON", "useCases": ["Analisi API", "Lettura file di configurazione", "Estrazione dati", "Analisi log"] },
+      "whitespace": { "title": "Spazi Multipli", "description": "Sostituire spazi multipli con un singolo spazio", "useCases": ["Normalizzazione testo", "Pulizia dati", "Pulizia input", "Correzione formato"] },
+      "fileExtension": { "title": "Estensione File", "description": "Estrarre estensioni file dai nomi file", "useCases": ["Validazione tipo file", "Filtraggio upload", "Organizzazione file", "Rilevamento MIME"] },
+      "semver": { "title": "Versione Semantica", "description": "Abbinare versionamento semantico (maggiore.minore.patch)", "useCases": ["Gestione pacchetti", "Confronto versioni", "Automazione rilasci", "Verifica dipendenze"] },
+      "uuid": { "title": "Validatore UUID", "description": "Abbinare formato UUID v4", "useCases": ["ID database", "Token API", "Identificatori unici", "Sistemi distribuiti"] }
+    }
   },
   "challenges": {
     "title": "Sfide Regex Quotidiane",
-    "subtitle": "Padroneggia regex con sfide progressive"
+    "subtitle": "Padroneggia regex con sfide progressive",
+    "solved": "Risolto",
+    "points": "Punti",
+    "streak": "Serie",
+    "challengeOfDay": "Sfida del Giorno",
+    "tryChallenge": "Prova questa Sfida",
+    "difficulty": { "all": "Tutti", "easy": "Facile", "medium": "Medio", "hard": "Difficile" },
+    "solvedBadge": "Risolto",
+    "solve": "Risolvi",
+    "task": "Compito",
+    "testCases": "Casi di Test",
+    "shouldMatch": "Dovrebbe Corrispondere",
+    "shouldNotMatch": "NON Dovrebbe Corrispondere",
+    "yourSolution": "La Tua Soluzione",
+    "enterPattern": "Inserisci il tuo pattern regex...",
+    "testSolution": "Testa la Soluzione",
+    "showHint": "Mostra Suggerimento",
+    "showSolution": "Mostra Soluzione",
+    "hint": "Suggerimento",
+    "solution": "Soluzione",
+    "pass": "SUPERATO",
+    "fail": "FALLITO",
+    "congratulations": "Congratulazioni!",
+    "challengeSolved": "Hai risolto la sfida!",
+    "earnedPoints": "Punti Guadagnati"
   },
   "cheatSheet": {
     "title": "Guida Rapida Regex",

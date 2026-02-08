@@ -201,11 +201,69 @@
   "examples": {
     "title": "Bibliothèque d'Exemples Regex",
     "subtitle": "Apprenez par l'exemple avec des patterns regex courants",
-    "tryIt": "Essayer"
+    "tryIt": "Essayer",
+    "categories": {
+      "all": "Tous",
+      "validation": "Validation",
+      "extraction": "Extraction",
+      "search": "Recherche",
+      "formatting": "Formatage"
+    },
+    "difficulty": {
+      "beginner": "Débutant",
+      "intermediate": "Intermédiaire",
+      "advanced": "Avancé"
+    },
+    "items": {
+      "email": { "title": "Validation d'Email", "description": "Valider les adresses email avec vérification du format correct", "useCases": ["Validation de formulaire", "Inscription d'utilisateur", "Formulaires de contact", "Inscription newsletter"] },
+      "url": { "title": "Extracteur d'URL/Lien", "description": "Extraire les URLs HTTP/HTTPS du texte", "useCases": ["Extraction de liens", "Web scraping", "Analyse de contenu", "Outils SEO"] },
+      "phoneUs": { "title": "Numéro de Téléphone US", "description": "Faire correspondre les numéros de téléphone US dans divers formats", "useCases": ["Formulaires de contact", "Base de données clients", "Systèmes CRM", "Services SMS"] },
+      "date": { "title": "Format de Date (AAAA-MM-JJ)", "description": "Faire correspondre le format de date ISO", "useCases": ["Validation d'entrée de date", "Analyse de logs", "Import de données", "Validation d'API"] },
+      "hexColor": { "title": "Code Couleur Hexadécimal", "description": "Faire correspondre les codes couleur hexadécimaux", "useCases": ["Analyse CSS", "Outils de design", "Extraction de couleur", "Génération de thème"] },
+      "ipv4": { "title": "Adresse IPv4", "description": "Faire correspondre les adresses IPv4 valides", "useCases": ["Configuration réseau", "Logs serveur", "Outils de sécurité", "Filtrage IP"] },
+      "creditCard": { "title": "Numéro de Carte de Crédit", "description": "Faire correspondre les numéros de carte de crédit (13-19 chiffres)", "useCases": ["Formulaires de paiement", "Conformité PCI", "Validation de transaction", "Systèmes financiers"] },
+      "password": { "title": "Mot de Passe Fort", "description": "Valider les mots de passe forts (8+ caractères, majuscules, minuscules, chiffres, symboles)", "useCases": ["Inscription d'utilisateur", "Application de sécurité", "Réinitialisation de mot de passe", "Création de compte"] },
+      "htmlTags": { "title": "Suppresseur de Balises HTML", "description": "Supprimer toutes les balises HTML du texte", "useCases": ["Nettoyage de texte", "Extraction de contenu", "Nettoyage de données", "Sécurité"] },
+      "username": { "title": "Nom d'Utilisateur", "description": "Valider les noms d'utilisateur (alphanumérique, tirets, 3-16 caractères)", "useCases": ["Inscription d'utilisateur", "Validation de profil", "Réseaux sociaux", "Systèmes d'authentification"] },
+      "slug": { "title": "Slug d'URL", "description": "Valider les slugs d'URL compatibles SEO", "useCases": ["Génération d'URL", "SEO", "CMS", "Permaliens de blog"] },
+      "time24h": { "title": "Format d'Heure 24h", "description": "Valider l'heure au format 24 heures (HH:MM)", "useCases": ["Saisie d'heure", "Planification de rendez-vous", "Analyse de logs", "Systèmes de réservation"] },
+      "twitterHandle": { "title": "Identifiant Twitter", "description": "Extraire les identifiants Twitter/X du texte", "useCases": ["Analyse des médias sociaux", "Suivi des mentions", "Extraction de données", "Marketing"] },
+      "hashtag": { "title": "Hashtags", "description": "Extraire les hashtags des médias sociaux", "useCases": ["Analyse des tendances", "Catégorisation de contenu", "Analyse des médias sociaux", "Marketing"] },
+      "markdownLinks": { "title": "Liens Markdown", "description": "Extraire les liens au format Markdown [texte](url)", "useCases": ["Analyse Markdown", "Documentation", "CMS", "Générateurs de sites statiques"] },
+      "jsonString": { "title": "Chaîne JSON", "description": "Extraire les valeurs de chaîne du JSON", "useCases": ["Analyse d'API", "Lecture de fichiers de configuration", "Extraction de données", "Analyse de logs"] },
+      "whitespace": { "title": "Espaces Multiples", "description": "Remplacer les espaces multiples par un seul espace", "useCases": ["Normalisation de texte", "Nettoyage de données", "Nettoyage d'entrée", "Correction de format"] },
+      "fileExtension": { "title": "Extension de Fichier", "description": "Extraire les extensions de fichier des noms de fichiers", "useCases": ["Validation de type de fichier", "Filtrage de téléchargement", "Organisation de fichiers", "Détection MIME"] },
+      "semver": { "title": "Version Sémantique", "description": "Faire correspondre le versioning sémantique (majeur.mineur.correctif)", "useCases": ["Gestion de paquets", "Comparaison de versions", "Automatisation de versions", "Vérification de dépendances"] },
+      "uuid": { "title": "Validateur UUID", "description": "Faire correspondre le format UUID v4", "useCases": ["IDs de base de données", "Jetons d'API", "Identifiants uniques", "Systèmes distribués"] }
+    }
   },
   "challenges": {
     "title": "Défis Regex Quotidiens",
-    "subtitle": "Maîtrisez regex avec des défis progressifs"
+    "subtitle": "Maîtrisez regex avec des défis progressifs",
+    "solved": "Résolu",
+    "points": "Points",
+    "streak": "Série",
+    "challengeOfDay": "Défi du Jour",
+    "tryChallenge": "Essayer ce Défi",
+    "difficulty": { "all": "Tous", "easy": "Facile", "medium": "Moyen", "hard": "Difficile" },
+    "solvedBadge": "Résolu",
+    "solve": "Résoudre",
+    "task": "Tâche",
+    "testCases": "Cas de Test",
+    "shouldMatch": "Devrait Correspondre",
+    "shouldNotMatch": "Ne Devrait PAS Correspondre",
+    "yourSolution": "Votre Solution",
+    "enterPattern": "Entrez votre pattern regex...",
+    "testSolution": "Tester la Solution",
+    "showHint": "Afficher l'Indice",
+    "showSolution": "Afficher la Solution",
+    "hint": "Indice",
+    "solution": "Solution",
+    "pass": "RÉUSSI",
+    "fail": "ÉCHOUÉ",
+    "congratulations": "Félicitations!",
+    "challengeSolved": "Vous avez résolu le défi!",
+    "earnedPoints": "Points Gagnés"
   },
   "cheatSheet": {
     "title": "Aide-mémoire Regex",

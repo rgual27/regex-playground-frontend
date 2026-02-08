@@ -201,11 +201,69 @@
   "examples": {
     "title": "Biblioteca de Exemplos Regex",
     "subtitle": "Aprenda com exemplos de padrões regex comuns",
-    "tryIt": "Experimentar"
+    "tryIt": "Experimentar",
+    "categories": {
+      "all": "Todos",
+      "validation": "Validação",
+      "extraction": "Extração",
+      "search": "Pesquisa",
+      "formatting": "Formatação"
+    },
+    "difficulty": {
+      "beginner": "Iniciante",
+      "intermediate": "Intermediário",
+      "advanced": "Avançado"
+    },
+    "items": {
+      "email": { "title": "Validação de Email", "description": "Validar endereços de email com verificação de formato correto", "useCases": ["Validação de formulário", "Registro de usuário", "Formulários de contato", "Inscrição em newsletter"] },
+      "url": { "title": "Extrator de URL/Link", "description": "Extrair URLs HTTP/HTTPS do texto", "useCases": ["Extração de links", "Web scraping", "Análise de conteúdo", "Ferramentas SEO"] },
+      "phoneUs": { "title": "Número de Telefone US", "description": "Corresponder números de telefone dos EUA em vários formatos", "useCases": ["Formulários de contato", "Banco de dados de clientes", "Sistemas CRM", "Serviços SMS"] },
+      "date": { "title": "Formato de Data (AAAA-MM-DD)", "description": "Corresponder formato de data ISO", "useCases": ["Validação de entrada de data", "Análise de logs", "Importação de dados", "Validação de API"] },
+      "hexColor": { "title": "Código de Cor Hexadecimal", "description": "Corresponder códigos de cor hexadecimais", "useCases": ["Análise CSS", "Ferramentas de design", "Extração de cor", "Geração de tema"] },
+      "ipv4": { "title": "Endereço IPv4", "description": "Corresponder endereços IPv4 válidos", "useCases": ["Configuração de rede", "Logs de servidor", "Ferramentas de segurança", "Filtragem de IP"] },
+      "creditCard": { "title": "Número de Cartão de Crédito", "description": "Corresponder números de cartão de crédito (13-19 dígitos)", "useCases": ["Formulários de pagamento", "Conformidade PCI", "Validação de transação", "Sistemas financeiros"] },
+      "password": { "title": "Senha Forte", "description": "Validar senhas fortes (8+ caracteres, maiúsculas, minúsculas, números, símbolos)", "useCases": ["Registro de usuário", "Aplicação de segurança", "Redefinição de senha", "Criação de conta"] },
+      "htmlTags": { "title": "Removedor de Tags HTML", "description": "Remover todas as tags HTML do texto", "useCases": ["Limpeza de texto", "Extração de conteúdo", "Limpeza de dados", "Segurança"] },
+      "username": { "title": "Nome de Usuário", "description": "Validar nomes de usuário (alfanumérico, hífens, 3-16 caracteres)", "useCases": ["Registro de usuário", "Validação de perfil", "Redes sociais", "Sistemas de autenticação"] },
+      "slug": { "title": "Slug de URL", "description": "Validar slugs de URL compatíveis com SEO", "useCases": ["Geração de URL", "SEO", "CMS", "Permalinks de blog"] },
+      "time24h": { "title": "Formato de Hora 24h", "description": "Validar hora no formato de 24 horas (HH:MM)", "useCases": ["Entrada de hora", "Agendamento de compromissos", "Análise de logs", "Sistemas de reserva"] },
+      "twitterHandle": { "title": "Identificador do Twitter", "description": "Extrair identificadores do Twitter/X do texto", "useCases": ["Análise de mídia social", "Rastreamento de menções", "Extração de dados", "Marketing"] },
+      "hashtag": { "title": "Hashtags", "description": "Extrair hashtags de mídia social", "useCases": ["Análise de tendências", "Categorização de conteúdo", "Análise de mídia social", "Marketing"] },
+      "markdownLinks": { "title": "Links Markdown", "description": "Extrair links em formato Markdown [texto](url)", "useCases": ["Análise Markdown", "Documentação", "CMS", "Geradores de sites estáticos"] },
+      "jsonString": { "title": "String JSON", "description": "Extrair valores de string do JSON", "useCases": ["Análise de API", "Leitura de arquivo de configuração", "Extração de dados", "Análise de logs"] },
+      "whitespace": { "title": "Espaços Múltiplos", "description": "Substituir espaços múltiplos por um único espaço", "useCases": ["Normalização de texto", "Limpeza de dados", "Limpeza de entrada", "Correção de formato"] },
+      "fileExtension": { "title": "Extensão de Arquivo", "description": "Extrair extensões de arquivo dos nomes de arquivo", "useCases": ["Validação de tipo de arquivo", "Filtragem de upload", "Organização de arquivos", "Detecção MIME"] },
+      "semver": { "title": "Versão Semântica", "description": "Corresponder versionamento semântico (maior.menor.correção)", "useCases": ["Gerenciamento de pacotes", "Comparação de versões", "Automação de lançamento", "Verificação de dependências"] },
+      "uuid": { "title": "Validador UUID", "description": "Corresponder formato UUID v4", "useCases": ["IDs de banco de dados", "Tokens de API", "Identificadores únicos", "Sistemas distribuídos"] }
+    }
   },
   "challenges": {
     "title": "Desafios Diários de Regex",
-    "subtitle": "Domine regex com desafios progressivos"
+    "subtitle": "Domine regex com desafios progressivos",
+    "solved": "Resolvido",
+    "points": "Pontos",
+    "streak": "Sequência",
+    "challengeOfDay": "Desafio do Dia",
+    "tryChallenge": "Experimentar este Desafio",
+    "difficulty": { "all": "Todos", "easy": "Fácil", "medium": "Médio", "hard": "Difícil" },
+    "solvedBadge": "Resolvido",
+    "solve": "Resolver",
+    "task": "Tarefa",
+    "testCases": "Casos de Teste",
+    "shouldMatch": "Deve Corresponder",
+    "shouldNotMatch": "NÃO Deve Corresponder",
+    "yourSolution": "Sua Solução",
+    "enterPattern": "Digite seu padrão regex...",
+    "testSolution": "Testar Solução",
+    "showHint": "Mostrar Dica",
+    "showSolution": "Mostrar Solução",
+    "hint": "Dica",
+    "solution": "Solução",
+    "pass": "APROVADO",
+    "fail": "REPROVADO",
+    "congratulations": "Parabéns!",
+    "challengeSolved": "Você resolveu o desafio!",
+    "earnedPoints": "Pontos Ganhos"
   },
   "cheatSheet": {
     "title": "Guia Rápido de Regex",
