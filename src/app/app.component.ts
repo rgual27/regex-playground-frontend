@@ -18,13 +18,10 @@ import { filter } from 'rxjs/operators';
       <header class="header">
         <div class="container">
           <nav class="nav">
-            <div class="logo">
+            <a routerLink="/" class="logo">
               <h1>🔍 Regex Playground</h1>
-            </div>
+            </a>
             <div class="nav-links">
-              <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                {{ 'nav.tester' | translate }}
-              </a>
               <div class="dropdown">
                 <button class="dropdown-toggle" (click)="toggleLearnMenu()">
                   📚 Learn ▾
@@ -129,6 +126,16 @@ import { filter } from 'rxjs/operators';
       padding: 1rem 0;
     }
 
+    .logo {
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
     .logo h1 {
       font-size: 1.5rem;
       margin: 0;
@@ -137,7 +144,7 @@ import { filter } from 'rxjs/operators';
 
     .nav-links {
       display: flex;
-      gap: 1rem;
+      gap: 0.5rem;
       flex: 1;
       justify-content: center;
       align-items: center;
@@ -147,10 +154,10 @@ import { filter } from 'rxjs/operators';
     .nav-links a {
       color: #334155;
       font-weight: 500;
-      padding: 0.5rem 0.75rem;
+      padding: 0.5rem 0.5rem;
       border-bottom: 2px solid transparent;
       transition: all 0.2s;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       white-space: nowrap;
     }
 
@@ -169,12 +176,12 @@ import { filter } from 'rxjs/operators';
       background: none;
       border: none;
       color: #334155;
-      font-weight: 600;
-      padding: 0.5rem 0;
+      font-weight: 500;
+      padding: 0.5rem 0.5rem;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       transition: all 0.2s;
-      font-size: 1rem;
+      font-size: 0.9rem;
 
       &:hover {
         color: #1E40AF;
