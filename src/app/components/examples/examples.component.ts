@@ -410,7 +410,7 @@ export class ExamplesComponent implements OnInit {
       pattern: '@[A-Za-z0-9_]{1,15}\\b',
       flags: 'g',
       testString: 'Follow @username and @test_user for updates! @a',
-      category: 'Extraction',
+      category: 'Search',
       difficulty: 'beginner',
       explanation: 'Matches @ followed by 1-15 alphanumeric characters or underscores',
       useCases: ['Social media analysis', 'Mention detection', 'User tagging', 'Content monitoring']
@@ -422,7 +422,7 @@ export class ExamplesComponent implements OnInit {
       pattern: '#[A-Za-z0-9_]+\\b',
       flags: 'g',
       testString: 'Check out #coding #webdev #javascript for tips!',
-      category: 'Extraction',
+      category: 'Search',
       difficulty: 'beginner',
       explanation: 'Matches # followed by alphanumeric characters and underscores',
       useCases: ['Trending topics', 'Content categorization', 'Social media analytics', 'Campaign tracking']
@@ -434,7 +434,7 @@ export class ExamplesComponent implements OnInit {
       pattern: '\\[([^\\]]+)\\]\\(([^\\)]+)\\)',
       flags: 'g',
       testString: 'Check [Google](https://google.com) and [GitHub](https://github.com)',
-      category: 'Extraction',
+      category: 'Search',
       difficulty: 'intermediate',
       explanation: 'Captures both link text and URL from markdown format',
       useCases: ['Documentation parsing', 'Link validation', 'Content migration', 'Static site generators']
