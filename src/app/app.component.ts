@@ -33,7 +33,7 @@ import { filter } from 'rxjs/operators';
                 </div>
               </div>
               <a routerLink="/library" routerLinkActive="active">{{ 'nav.library' | translate }}</a>
-              <a routerLink="/pricing" routerLinkActive="active">{{ 'nav.pricing' | translate }}</a>
+              <a routerLink="/pricing" routerLinkActive="active">{{ 'nav.donate' | translate }}</a>
             </div>
             <div class="nav-actions">
               <app-language-switcher></app-language-switcher>
