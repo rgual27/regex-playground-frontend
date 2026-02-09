@@ -24,8 +24,8 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
         <button class="btn btn-primary" (click)="openNewPatternModal()">+ {{ 'library.newPattern' | translate }}</button>
       </div>
 
-      <!-- Folder Filter -->
-      <div class="folder-filter" *ngIf="userTier === 'PRO' && folders.length > 0">
+      <!-- Folder Filter - DISABLED -->
+      <!-- <div class="folder-filter" *ngIf="userTier === 'PRO' && folders.length > 0">
         <label>📁 Filter by folder:</label>
         <div class="folder-chips">
           <button
@@ -49,7 +49,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
             📁 {{ folder.name }} ({{ getPatternsInFolder(folder.id || null).length }})
           </button>
         </div>
-      </div>
+      </div> -->
 
       <!-- New Pattern Modal -->
       <div class="modal-overlay" *ngIf="showNewPatternModal" (click)="closeNewPatternModal()">
@@ -103,7 +103,8 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
                   rows="3"></textarea>
               </div>
 
-              <div class="form-group" *ngIf="userTier === 'PRO' && folders.length > 0">
+              <!-- Folder selector - DISABLED -->
+              <!-- <div class="form-group" *ngIf="userTier === 'PRO' && folders.length > 0">
                 <label for="folder">{{ 'library.folder' | translate }}</label>
                 <select
                   id="folder"
@@ -115,7 +116,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
                     📁 {{ folder.name }}
                   </option>
                 </select>
-              </div>
+              </div> -->
 
               <div class="form-group checkbox-group">
                 <label>
@@ -191,7 +192,8 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
                   rows="3"></textarea>
               </div>
 
-              <div class="form-group" *ngIf="userTier === 'PRO' && folders.length > 0">
+              <!-- Folder selector - DISABLED -->
+              <!-- <div class="form-group" *ngIf="userTier === 'PRO' && folders.length > 0">
                 <label for="editFolder">📁 {{ 'library.folder' | translate }}</label>
                 <select
                   id="editFolder"
@@ -203,7 +205,7 @@ import { VersionHistoryComponent } from '../version-history/version-history.comp
                     📁 {{ folder.name }}
                   </option>
                 </select>
-              </div>
+              </div> -->
 
               <div class="form-group checkbox-group">
                 <label>
