@@ -32,7 +32,7 @@ interface RegexExample {
           *ngFor="let cat of categories"
           class="category-btn"
           [class.active]="selectedCategory === cat"
-          (click)="selectedCategory = cat">
+          (click)="selectedCategory = cat; filterExamples()">
           {{ getCategoryTranslation(cat) | translate }}
         </button>
       </div>
